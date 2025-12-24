@@ -168,7 +168,9 @@ namespace ModelPerson
         {
             // Проверяем только если и имя, и фамилия уже установлены
             if (!string.IsNullOrEmpty(_name)
-                && !string.IsNullOrEmpty(_surname))
+                && !string.IsNullOrEmpty(_surname)
+                 && _name != "Unknown"
+                    && _surname != "Unknown")
             {
                 Language firstNameLanguage = LanguageDetect(_name);
                 Language lastNameLanguage = LanguageDetect(_surname);

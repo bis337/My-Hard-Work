@@ -1,5 +1,6 @@
 ﻿namespace ModelPerson
 {
+    //TODO: WTF?
     /// <summary>
     /// Представляет список персон. 
     /// Наследуется от <see cref="List{Person}"/>.

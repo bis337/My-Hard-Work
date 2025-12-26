@@ -139,7 +139,7 @@ namespace ModelPerson
         /// "mix" или "неизвестный язык").</returns>
         public static Language LanguageDetect(string name)
         {
-
+            //TODO: rewrite
             if (string.IsNullOrEmpty(name) == false)
             {
                 if (_latinSymbols.IsMatch(name))
@@ -198,6 +198,7 @@ namespace ModelPerson
                     $"Свойство {argumentName} должно быть заполнено.");
             }
 
+            //TODO: rewrite
             if (_latinSymbols.IsMatch(name) == false 
                 && _cyrillicSymbols.IsMatch(name) == false)
             {
@@ -207,8 +208,7 @@ namespace ModelPerson
             }
         }
 
-
-
+        //TODO: rewrite
         /// <summary>
         /// Производит валидацию и форматирование имени или фамилии.
         /// </summary>

@@ -3,8 +3,10 @@ using IO;
 
 namespace ConsoleAppLab1
 {
+    //TODO: XML
     internal class Program
     {
+        //TODO: RSDN
         static void Main(string[] args)
         {
             InputOutput.ReadPerson();

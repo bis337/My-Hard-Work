@@ -51,7 +51,9 @@ namespace IO
                         {
                            typeof(ArgumentException),
                         },
+                    //TODO: RSDN
                     () => { string[] sex_male_list = 
+                        //TODO: duplication
                         ["мужчина", "м", "1", "man", "m"];
                             string[] sex_female_list = 
                         ["женщина", "ж", "0", "woman", "w"];
@@ -74,6 +76,7 @@ namespace IO
                             {
                                 throw new ArgumentException(
                                     "Для мужчин значения пола могут иметь " +
+                                    //TODO: duplication
                                     "значения 'мужчина', 'м', '1', 'man', 'm'\n" +
                                     "Для женщин значения пола могут иметь " +
                                     "значения 'женщина', 'ж', '0', 'woman', 'w'");
@@ -109,6 +112,7 @@ namespace IO
                     personAction.Invoke();
                     break;
                 }
+                //TODO: RSDN
                 catch (Exception ex)
                 {
                     if (personTypes.Contains(ex.GetType()))
@@ -167,12 +171,14 @@ namespace IO
         /// <summary>
         /// Преобразует строку в тип перечисления "Пол".
         /// </summary>
+        /// //TODO: RSDN
         /// <param name="strSex"> - пол в формате строки.</param>
         /// <returns>Элемент перечисления <see cref="Sex"/>.</returns>
         public static Sex StringToSex(string strSex)
         {
             switch (strSex.ToLower())
             {
+                //TODO: duplication
                 case "женщина":
                 case "ж":
                 case "female":
@@ -205,6 +211,7 @@ namespace IO
         public static ModelPerson.Person GetRandomPerson(Language language)
         {
             ModelPerson.Person person = new ModelPerson.Person();
+            //TODO: WTF?
             if (language == Language.Ru)
             {
                 var fakerRu = new Faker("ru");
@@ -246,7 +253,7 @@ namespace IO
             return (listName, personList);
         }
 
-
+        //TODO: WTF?
         /// <summary>
         /// Для возможности вывода информации о поле на разных языках 
         /// </summary>

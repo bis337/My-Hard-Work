@@ -195,12 +195,18 @@ namespace ModelPerson
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(
+                    argumentName,
                     $"Свойство {argumentName} должно быть заполнено.");
             }
 
-            //TODO: rewrite
-            if (_latinSymbols.IsMatch(name) == false 
-                && _cyrillicSymbols.IsMatch(name) == false)
+            if (!Regex.IsMatch(name, @"^[a-zA-Zа-яёА-ЯЁ\s\-']+$"))
+            {
+                throw new FormatException(
+                    $"Свойство {argumentName} должно содержать только буквы, пробелы, тире и апострофы.");
+            }
+
+            //TODO: rewrite - исправлено двойное отрицание
+            if (!(_latinSymbols.IsMatch(name)) && !(_cyrillicSymbols.IsMatch(name)))
             {
                 throw new FormatException(
                     $"Свойство {argumentName} должно быть только на кириллице," +

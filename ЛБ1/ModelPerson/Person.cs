@@ -137,27 +137,37 @@ namespace ModelPerson
         /// <param name="name">Имя для анализа.</param>
         /// <returns>Код языка ("ru-RU", "en-EN", 
         /// "mix" или "неизвестный язык").</returns>
+        
         public static Language LanguageDetect(string name)
         {
-            //TODO: rewrite
-            if (string.IsNullOrEmpty(name) == false)
+            //TODO: rewrite - исправлено двойное отрицание
+            if (string.IsNullOrEmpty(name))
             {
-                if (_latinSymbols.IsMatch(name))
-                {
-                    return Language.En;
-                }
-                else if (_cyrillicSymbols.IsMatch(name))
-                {
-                    return Language.Ru;
-                }
-                else
-                {
-                    throw new ArgumentException($"Некорректный ввод." +
-                        $" Пожалуйста, попробуйте снова!");
-                }
+                return Language.Unknown;
             }
 
-            return Language.Unknown;
+            bool hasLatin = _latinSymbols.IsMatch(name);
+            bool hasCyrillic = _cyrillicSymbols.IsMatch(name);
+
+            if (hasLatin && !hasCyrillic)
+            {
+                return Language.En;
+            }
+            else if (hasCyrillic && !hasLatin)
+            {
+                return Language.Ru;
+            }
+            else if (hasLatin && hasCyrillic)
+            {
+                // Смешанный язык
+                return Language.Unknown;
+            }
+            else
+            {
+                // Ни латиница, ни кириллица
+                throw new ArgumentException($"Некорректный ввод." +
+                    $" Пожалуйста, попробуйте снова!");
+            }
         }
 
         /// <summary>
@@ -214,9 +224,9 @@ namespace ModelPerson
             }
         }
 
-        //TODO: rewrite
+        //TODO: rewrite +
         /// <summary>
-        /// Производит валидацию и форматирование имени или фамилии.
+        /// Производит форматирование имени или фамилии.
         /// </summary>
         /// <param name="word">Имя или фамилия пользователя</param>
         /// <returns>Отформатированное имя или фамилия 
@@ -225,8 +235,11 @@ namespace ModelPerson
         {
             word = word.Trim('-');
             word = Regex.Replace(word, "--+", "-");
-            return CultureInfo.CurrentCulture.TextInfo.
-                ToTitleCase(word.ToLower());
+
+            // Вводим локальную переменную для TextInfo
+            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+
+            return textInfo.ToTitleCase(word.ToLower());
         }
     }
 }

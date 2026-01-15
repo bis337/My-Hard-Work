@@ -1,18 +1,22 @@
-﻿namespace ModelPerson
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace ModelPerson
 {
-    //TODO: WTF?
+    //TODO: WTF? - убрано наследование
     /// <summary>
     /// Представляет список персон. 
-    /// Наследуется от <see cref="List{Person}"/>.
     /// </summary>
-    public class PersonList : List<Person>
+    public class PersonList : IEnumerable<Person>
     {
+        private List<Person> _persons = new List<Person>();
+
         /// <summary>
         /// Создает новый экземпляр класса PersonList с указанным именем.
         /// </summary>
-        /// <param name="listName">Имя списка.</param>
         public PersonList()
-        {}
+        { }
 
         /// <summary>
         /// Проверяет, что индекс находится в допустимых пределах.
@@ -22,7 +26,7 @@
         /// Выбрасывается, если индекс вне диапазона.</exception>
         private void ValidateIndex(int index)
         {
-            if (index < 0 || index >= Count)
+            if (index < 0 || index >= _persons.Count)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(index), "Индекс вне диапазона.");
@@ -40,8 +44,7 @@
         public void AddPersonAt(int index, Person person)
         {
             ValidateIndex(index);
-            Insert(index, person);
-            
+            _persons.Insert(index, person);
         }
 
         /// <summary>
@@ -50,7 +53,7 @@
         /// <param name="person">Персона для добавления.</param>
         public void AddPerson(Person person)
         {
-            Add(person);
+            _persons.Add(person);
         }
 
         /// <summary>
@@ -59,7 +62,7 @@
         /// <param name="person">Персона для удаления.</param>
         public void RemovePerson(Person person)
         {
-            Remove(person);
+            _persons.Remove(person);
         }
 
         /// <summary>
@@ -71,7 +74,7 @@
         public void RemovePersonAt(int index)
         {
             ValidateIndex(index);
-            RemoveAt(index);
+            _persons.RemoveAt(index);
         }
 
         /// <summary>
@@ -84,7 +87,7 @@
         public Person GetPersonAt(int index)
         {
             ValidateIndex(index);
-            return this[index];
+            return _persons[index];
         }
 
         /// <summary>
@@ -95,7 +98,7 @@
         /// если персона не найдена.</returns>
         public int GetIndexOf(Person person)
         {
-            return IndexOf(person);
+            return _persons.IndexOf(person);
         }
 
         /// <summary>
@@ -103,16 +106,28 @@
         /// </summary>
         public void ClearList()
         {
-            Clear();
+            _persons.Clear();
         }
 
         /// <summary>
         /// Возвращает количество персон в списке.
         /// </summary>
         /// <returns>Количество персон в списке.</returns>
-        public new int Count
+        public int Count
         {
-            get { return base.Count; }
+            get { return _persons.Count; }
         }
+
+        public IEnumerator<Person> GetEnumerator()
+        {
+            return _persons.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public Person this[int index] => GetPersonAt(index);
     }
 }

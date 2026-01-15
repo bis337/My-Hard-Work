@@ -3,11 +3,21 @@ using IO;
 
 namespace ConsoleAppLab1
 {
-    //TODO: XML
+    //TODO: XML +
+    /// <summary>
+    /// Класс, содержащий точку входа в приложение.
+    /// Демонстрирует работу с классами Person и PersonList.
+    /// </summary>
     internal class Program
     {
-        //TODO: RSDN
-        static void Main(string[] args)
+        //TODO: RSDN +
+        /// <summary>
+        /// Точка входа в приложение.
+        /// Демонстрирует создание списков персон, добавление,
+        /// копирование, удаление и очистку списков.
+        /// </summary>
+        /// <param name="args">Аргументы командной строки.</param>
+        private static void Main(string[] args)
         {
             InputOutput.ReadPerson();
             InputOutput.WriteTextColorful("\na. Создайте программно два списка " +
@@ -18,13 +28,13 @@ namespace ConsoleAppLab1
             Console.ReadKey();
             Language langauageList1 = Language.Ru;
 
-            (string listName, PersonList personList) list1 = 
+            (string listName, PersonList personList) list1 =
                 InputOutput.GetRandomPersonList("list1", langauageList1, 3);
-            (string listName, PersonList personList) list2 = 
+            (string listName, PersonList personList) list2 =
                 InputOutput.GetRandomPersonList("list2", Language.En, 3);
 
             InputOutput.WriteTextColorful("\nb. Выведите содержимое каждого" +
-                " списка на экран с соответствующими подписями списков.", 
+                " списка на экран с соответствующими подписями списков.",
                 ConsoleColor.Green);
             Console.WriteLine("Нажмите любую клавишу, " +
                 "для получения результата\n");

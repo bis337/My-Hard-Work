@@ -49,7 +49,6 @@ namespace IO
                         {
                            typeof(ArgumentException),
                         },
-                    //TODO: RSDN +
                     () => { string inputSex = Console.ReadLine();
                             Sex parsedSex = StringToSex(inputSex);
                             if (string.IsNullOrEmpty(inputSex) && parsedSex == Sex.Unknown)
@@ -66,6 +65,7 @@ namespace IO
                             else
                             {
                                 // Если строка не пустая, но не совпала ни с одной вариацией
+                                //TODO: duplication
                                 throw new ArgumentException(
                                     "Для мужчин значения пола могут иметь " +
                                     "значения 'мужчина', 'м', '1', 'man', 'm'\n" +
@@ -103,7 +103,6 @@ namespace IO
                     personAction.Invoke();
                     break;
                 }
-                //TODO: RSDN +
                 catch (Exception ex)
                 {
                     if (personTypes.Contains(ex.GetType()))
@@ -173,10 +172,12 @@ namespace IO
 
             string lowerStrSex = strSex.ToLower();
 
+            //TODO: {}
             // Проверяем мужские варианты
             if (IsMaleSex(lowerStrSex))
                 return Sex.Male;
 
+            //TODO: {}
             // Проверяем женские варианты
             if (IsFemaleSex(lowerStrSex))
                 return Sex.Female;
@@ -192,7 +193,6 @@ namespace IO
         /// <returns>True, если строка соответствует мужскому полу.</returns>
         private static bool IsMaleSex(string input)
         {
-            //TODO: duplication - список вынесен в метод
             string[] maleValues = ["мужчина", "м", "1", "man", "m"];
             return maleValues.Contains(input);
         }
@@ -204,7 +204,6 @@ namespace IO
         /// <returns>True, если строка соответствует женскому полу.</returns>
         private static bool IsFemaleSex(string input)
         {
-            //TODO: duplication - список вынесен в метод
             string[] femaleValues = ["женщина", "ж", "0", "woman", "w"];
             return femaleValues.Contains(input);
         }
@@ -220,7 +219,7 @@ namespace IO
         public static ModelPerson.Person GetRandomPerson(Language language)
         {
             ModelPerson.Person person = new ModelPerson.Person();
-            //TODO: WTF? что такое faker разобраться +
+            //TODO: WTF? что такое faker разобраться
             if (language == Language.Ru)
             {
                 var fakerRu = new Faker("ru");
@@ -262,7 +261,6 @@ namespace IO
             return (listName, personList);
         }
 
-        //TODO: WTF? +
         /// <summary>
         /// Словарь для перевода значений перечисления <see cref="Sex"/> на разные языки.
         /// </summary>
@@ -300,6 +298,7 @@ namespace IO
         }
     }
 
+    //TODO: remove
     /// <summary>
     /// Внутренний класс для передачи данных обработчикам свойств.
     /// </summary>
@@ -326,6 +325,7 @@ namespace IO
         /// <param name="propertyName">Название свойства.</param>
         /// <param name="exceptionTypes">Типы исключений.</param>
         /// <param name="propertyHandlingAction">Действие для обработки свойства.</param>
+        /// //TODO: RSDN
         public PropertyHandlerDTO(string propertyName, List<Type> exceptionTypes, Action propertyHandlingAction)
         {
             PropertyName = propertyName;

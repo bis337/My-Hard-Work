@@ -140,7 +140,6 @@ namespace ModelPerson
         
         public static Language LanguageDetect(string name)
         {
-            //TODO: rewrite - исправлено двойное отрицание
             if (string.IsNullOrEmpty(name))
             {
                 return Language.Unknown;
@@ -224,7 +223,6 @@ namespace ModelPerson
             }
         }
 
-        //TODO: rewrite +
         /// <summary>
         /// Производит форматирование имени или фамилии.
         /// </summary>
@@ -233,6 +231,7 @@ namespace ModelPerson
         /// с заглавной первой буквой.</returns>
         private static string ToCorrectFormate(string word)
         {
+            //TODO: local variable
             word = word.Trim('-');
             word = Regex.Replace(word, "--+", "-");
 

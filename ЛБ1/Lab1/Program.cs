@@ -3,14 +3,12 @@ using IO;
 
 namespace ConsoleAppLab1
 {
-    //TODO: XML +
     /// <summary>
     /// Класс, содержащий точку входа в приложение.
     /// Демонстрирует работу с классами Person и PersonList.
     /// </summary>
     internal class Program
     {
-        //TODO: RSDN +
         /// <summary>
         /// Точка входа в приложение.
         /// Демонстрирует создание списков персон, добавление,

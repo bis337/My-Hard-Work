@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ModelPerson
 {
-    //TODO: WTF? - убрано наследование
+    //TODO: WTF?
     /// <summary>
     /// Представляет список персон. 
     /// </summary>

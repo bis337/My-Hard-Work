@@ -172,7 +172,7 @@ namespace IO
 
             string lowerStrSex = strSex.ToLower();
 
-            //TODO: {}
+            //TODO: {} +
             // Проверяем мужские варианты
             if (IsMaleSex(lowerStrSex))
                 return Sex.Male;

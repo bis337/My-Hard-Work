@@ -53,18 +53,14 @@ namespace IO
                             Sex parsedSex = StringToSex(inputSex);
                             if (string.IsNullOrEmpty(inputSex) && parsedSex == Sex.Unknown)
                             {
-                                // Если строка пустая, и StringToSex вернул Unknown (не совпало с вариациями)
-                                // то всё равно ставим Unknown
                                 personReader.Sex = Sex.Unknown;
                             }
                             else if (parsedSex != Sex.Unknown)
                             {
-                                // Если строка совпала с одной из вариаций
                                 personReader.Sex = parsedSex;
                             }
                             else
                             {
-                                // Если строка не пустая, но не совпала ни с одной вариацией
                                 //TODO: duplication
                                 throw new ArgumentException(
                                     "Для мужчин значения пола могут иметь " +
@@ -172,7 +168,6 @@ namespace IO
 
             string lowerStrSex = strSex.ToLower();
 
-            //TODO: {} +
             // Проверяем мужские варианты
             if (IsMaleSex(lowerStrSex))
                 return Sex.Male;

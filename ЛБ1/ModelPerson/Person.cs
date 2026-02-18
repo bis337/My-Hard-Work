@@ -214,7 +214,7 @@ namespace ModelPerson
                     $"Свойство {argumentName} должно содержать только буквы, пробелы, тире и апострофы.");
             }
 
-            //TODO: rewrite - исправлено двойное отрицание
+            //TODO: rewrite +  исправлено двойное отрицание
             if (!(_latinSymbols.IsMatch(name)) && !(_cyrillicSymbols.IsMatch(name)))
             {
                 throw new FormatException(
@@ -231,11 +231,9 @@ namespace ModelPerson
         /// с заглавной первой буквой.</returns>
         private static string ToCorrectFormate(string word)
         {
-            //TODO: local variable
             word = word.Trim('-');
             word = Regex.Replace(word, "--+", "-");
 
-            // Вводим локальную переменную для TextInfo
             TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
 
             return textInfo.ToTitleCase(word.ToLower());

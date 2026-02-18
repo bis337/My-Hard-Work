@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace ModelPerson
 {
-    //TODO: WTF?
+    //TODO: WTF? +
     /// <summary>
-    /// Представляет список персон. 
+    /// Представляет список персон.
     /// </summary>
-    public class PersonList : IEnumerable<Person>
+    public class PersonList
     {
         private List<Person> _persons = new List<Person>();
 
@@ -36,10 +36,10 @@ namespace ModelPerson
         /// <summary>
         /// Добавляет персону в список по указанному индексу.
         /// </summary>
-        /// <param name="index">Индекс, 
+        /// <param name="index">Индекс,
         /// по которому нужно добавить персону.</param>
         /// <param name="person">Персона для добавления.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Выбрасывается, 
+        /// <exception cref="ArgumentOutOfRangeException">Выбрасывается,
         /// если индекс вне диапазона.</exception>
         public void AddPersonAt(int index, Person person)
         {
@@ -94,7 +94,7 @@ namespace ModelPerson
         /// Возвращает индекс указанной персоны в списке.
         /// </summary>
         /// <param name="person">Персона, индекс которой нужно найти.</param>
-        /// <returns>Индекс персоны в списке, или -1, 
+        /// <returns>Индекс персоны в списке, или -1,
         /// если персона не найдена.</returns>
         public int GetIndexOf(Person person)
         {
@@ -118,16 +118,26 @@ namespace ModelPerson
             get { return _persons.Count; }
         }
 
+        // Метод, позволяющий использовать foreach без реализации IEnumerable<T>
+        // Компилятор C# ищет метод GetEnumerator(), возвращающий IEnumerator<T>
+        /// <summary>
+        /// Возвращает перечислитель, выполняющий итерацию в коллекции PersonList.
+        /// Используется для foreach.
+        /// </summary>
+        /// <returns>Перечислитель для коллекции PersonList.</returns>
         public IEnumerator<Person> GetEnumerator()
         {
+            // Возвращаем IEnumerator от внутреннего списка
+            // Это позволяет использовать foreach по PersonList
+            // без явной реализации IEnumerable<T>
             return _persons.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
+        /// <summary>
+        /// Позволяет обращаться к элементам списка по индексу.
+        /// </summary>
+        /// <param name="index">Индекс элемента.</param>
+        /// <returns>Элемент списка по указанному индексу.</returns>
         public Person this[int index] => GetPersonAt(index);
     }
 }

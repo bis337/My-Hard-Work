@@ -44,7 +44,7 @@ namespace IO
                         personReader.Age = string.IsNullOrEmpty(input)
                         ? null
                         : Convert.ToInt32(input); }),
-                   new PropertyHandlerDTO("пол",
+                                     new PropertyHandlerDTO("пол",
                     new List<Type>
                         {
                            typeof(ArgumentException),
@@ -53,22 +53,29 @@ namespace IO
                             Sex parsedSex = StringToSex(inputSex);
                             if (string.IsNullOrEmpty(inputSex) && parsedSex == Sex.Unknown)
                             {
+                                
                                 personReader.Sex = Sex.Unknown;
                             }
                             else if (parsedSex != Sex.Unknown)
                             {
+                            
                                 personReader.Sex = parsedSex;
                             }
                             else
                             {
-                                //TODO: duplication
+                              
+                                //TODO: duplication +
+                                string maleValuesStr = string.Join(", ", GetMaleSexValues().Select(v => $"'{v}'"));
+                                string femaleValuesStr = string.Join(", ", GetFemaleSexValues().Select(v => $"'{v}'"));
+
                                 throw new ArgumentException(
-                                    "Для мужчин значения пола могут иметь " +
-                                    "значения 'мужчина', 'м', '1', 'man', 'm'\n" +
-                                    "Для женщин значения пола могут иметь " +
-                                    "значения 'женщина', 'ж', '0', 'woman', 'w'");
+                                    $"Для мужчин значения пола могут иметь " +
+                                    $"значения {maleValuesStr}\n" +
+                                    $"Для женщин значения пола могут иметь " +
+                                    $"значения {femaleValuesStr}");
                             }
                             })
+
 
             };
 
@@ -162,24 +169,25 @@ namespace IO
         /// <returns>Элемент перечисления <see cref="Sex"/>.</returns>
         public static Sex StringToSex(string strSex)
         {
-            // Используем словарь для определения пола, чтобы избежать дублирования
+
             if (string.IsNullOrEmpty(strSex))
                 return Sex.Unknown;
 
             string lowerStrSex = strSex.ToLower();
 
             //TODO: {}+
-            // Проверяем мужские варианты
-            if (IsMaleSex(lowerStrSex))
+                       if (IsMaleSex(lowerStrSex))
+            {
                 return Sex.Male;
+            }
 
-            //TODO: {}
-            // Проверяем женские варианты
-            if (IsFemaleSex(lowerStrSex))
+            //TODO: {}+
+                       if (IsFemaleSex(lowerStrSex))
+            {
                 return Sex.Female;
+            }
 
-            // Если не подошло ни одно, возвращаем Unknown
-            return Sex.Unknown;
+                       return Sex.Unknown;
         }
 
         /// <summary>
@@ -189,8 +197,7 @@ namespace IO
         /// <returns>True, если строка соответствует мужскому полу.</returns>
         private static bool IsMaleSex(string input)
         {
-            string[] maleValues = ["мужчина", "м", "1", "man", "m"];
-            return maleValues.Contains(input);
+            return GetMaleSexValues().Contains(input);
         }
 
         /// <summary>
@@ -200,8 +207,25 @@ namespace IO
         /// <returns>True, если строка соответствует женскому полу.</returns>
         private static bool IsFemaleSex(string input)
         {
-            string[] femaleValues = ["женщина", "ж", "0", "woman", "w"];
-            return femaleValues.Contains(input);
+            return GetFemaleSexValues().Contains(input);
+        }
+
+        /// <summary>
+        /// Возвращает массив допустимых строк для мужского пола.
+        /// </summary>
+        /// <returns>Массив строк.</returns>
+        private static string[] GetMaleSexValues()
+        {
+            return ["мужчина", "м", "1", "man", "m"];
+        }
+
+        /// <summary>
+        /// Возвращает массив допустимых строк для женского пола.
+        /// </summary>
+        /// <returns>Массив строк.</returns>
+        private static string[] GetFemaleSexValues()
+        {
+            return ["женщина", "ж", "0", "woman", "w"];
         }
 
 
@@ -215,7 +239,7 @@ namespace IO
         public static ModelPerson.Person GetRandomPerson(Language language)
         {
             ModelPerson.Person person = new ModelPerson.Person();
-            //TODO: WTF? что такое faker разобраться
+            //TODO: WTF? что такое faker разобраться +
             if (language == Language.Ru)
             {
                 var fakerRu = new Faker("ru");
@@ -294,39 +318,4 @@ namespace IO
         }
     }
 
-    //TODO: remove
-    /// <summary>
-    /// Внутренний класс для передачи данных обработчикам свойств.
-    /// </summary>
-    internal class PropertyHandlerDTO
-    {
-        /// <summary>
-        /// Название свойства.
-        /// </summary>
-        public string PropertyName { get; }
-
-        /// <summary>
-        /// Типы исключений, которые обрабатываются.
-        /// </summary>
-        public List<Type> ExceptionTypes { get; }
-
-        /// <summary>
-        /// Действие, выполняемое для обработки свойства.
-        /// </summary>
-        public Action PropertyHandlingAction { get; }
-
-        /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="PropertyHandlerDTO"/>.
-        /// </summary>
-        /// <param name="propertyName">Название свойства.</param>
-        /// <param name="exceptionTypes">Типы исключений.</param>
-        /// <param name="propertyHandlingAction">Действие для обработки свойства.</param>
-        /// //TODO: RSDN
-        public PropertyHandlerDTO(string propertyName, List<Type> exceptionTypes, Action propertyHandlingAction)
-        {
-            PropertyName = propertyName;
-            ExceptionTypes = exceptionTypes;
-            PropertyHandlingAction = propertyHandlingAction;
-        }
-    }
-}
+   }

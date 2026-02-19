@@ -130,6 +130,7 @@ namespace ModelPerson
         /// Регулярное выражение для проверки допустимых символов 
         /// Также используется для определения латиницы и кириллицы.
         /// </summary>
+        /// //TODO: duplication
         private static readonly Regex _validNamePattern = new Regex(@"^[a-zA-Zа-яёА-ЯЁ\s\-']+$");
 
 
@@ -142,7 +143,6 @@ namespace ModelPerson
         private static (bool hasLatin,
             bool hasCyrillic) ContainsLatinOrCyrillic(string name)
         {
-            //TODO: duplication +
             bool hasLatin = Regex.IsMatch(name, @"[a-zA-Z]");
             bool hasCyrillic = Regex.IsMatch(name, @"[а-яёА-ЯЁ]");
             return (hasLatin, hasCyrillic);

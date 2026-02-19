@@ -31,7 +31,6 @@ namespace ModelPerson
         /// <param name="exceptionTypes">Типы исключений.</param>
         /// <param name="propertyHandlingAction">
         /// Действие для обработки свойства.</param>
-        /// //TODO: RSDN+
            public PropertyHandlerDTO(string propertyName, 
                List<Type> exceptionTypes, Action propertyHandlingAction) 
         {

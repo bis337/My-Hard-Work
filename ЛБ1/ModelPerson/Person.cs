@@ -161,8 +161,9 @@ namespace ModelPerson
                     $"заполнено. ");
             }
 
-            // TODO:duplication +
-            if (!Regex.IsMatch(name, @"^[a-zA-Zа-яёА-ЯЁ\s\-']*$"))
+            const string latinRegex = "a-zA-Z";
+            const string cyrillicRegex = "а-яёА-ЯЁ";
+            if (!Regex.IsMatch(name, @$"^[{latinRegex}{cyrillicRegex}\s\-']*$"))
             {
                 throw new FormatException(
                     $"Свойство {argumentName} должно " +
@@ -170,8 +171,8 @@ namespace ModelPerson
                     $" буквы, пробелы, тире и апострофы. ");
             }
 
-            bool hasLatin = Regex.IsMatch(name, @"[a-zA-Z]");
-            bool hasCyrillic = Regex.IsMatch(name, @"[а-яёА-ЯЁ]");
+            bool hasLatin = Regex.IsMatch(name, @$"[{latinRegex}]");
+            bool hasCyrillic = Regex.IsMatch(name, @$"[{cyrillicRegex}]");
 
             if (!hasLatin && !hasCyrillic)
             {

@@ -130,8 +130,23 @@ namespace ModelPerson
         /// Регулярное выражение для проверки допустимых символов 
         /// Также используется для определения латиницы и кириллицы.
         /// </summary>
-        /// 
         private static readonly Regex _validNamePattern = new Regex(@"^[a-zA-Zа-яёА-ЯЁ\s\-']+$");
+
+
+        /// <summary>
+        /// Проверяет, содержит ли строка латинские и/или кириллические буквы.
+        /// </summary>
+        /// <param name="name">Строка для проверки.</param>
+        /// <returns>Кортеж с флагами: Item1 - содержит латиницу, 
+        /// Item2 - содержит кириллицу.</returns>
+        private static (bool hasLatin,
+            bool hasCyrillic) ContainsLatinOrCyrillic(string name)
+        {
+            //TODO: duplication +
+            bool hasLatin = Regex.IsMatch(name, @"[a-zA-Z]");
+            bool hasCyrillic = Regex.IsMatch(name, @"[а-яёА-ЯЁ]");
+            return (hasLatin, hasCyrillic);
+        }
 
         /// <summary>
         /// Метод для определения языка на основе имени
@@ -146,9 +161,7 @@ namespace ModelPerson
                 return Language.Unknown;
             }
 
-            //TODO: duplication
-            bool hasLatin = System.Text.RegularExpressions.Regex.IsMatch(name, @"[a-zA-Z]");
-            bool hasCyrillic = System.Text.RegularExpressions.Regex.IsMatch(name, @"[а-яёА-ЯЁ]");
+            var (hasLatin, hasCyrillic) = ContainsLatinOrCyrillic(name);
 
             if (hasLatin && !hasCyrillic)
             {
@@ -160,7 +173,7 @@ namespace ModelPerson
             }
             else if (hasLatin && hasCyrillic)
             {
-    
+
                 return Language.Unknown;
             }
             else
@@ -171,7 +184,7 @@ namespace ModelPerson
                     throw new ArgumentException($"Некорректный ввод. " +
                         $" Пожалуйста, попробуйте снова! ");
                 }
-              
+
                 return Language.Unknown;
             }
         }
@@ -220,9 +233,7 @@ namespace ModelPerson
                     $" буквы, пробелы, тире и апострофы. ");
             }
 
-            //TODO: duplication
-            bool hasLatin = System.Text.RegularExpressions.Regex.IsMatch(name, @"[a-zA-Z]");
-            bool hasCyrillic = System.Text.RegularExpressions.Regex.IsMatch(name, @"[а-яёА-ЯЁ]");
+            var (hasLatin, hasCyrillic) = ContainsLatinOrCyrillic(name);
 
             if ((hasLatin && hasCyrillic) || (!hasLatin && !hasCyrillic))
             {

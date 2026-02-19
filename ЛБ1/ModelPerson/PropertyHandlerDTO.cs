@@ -24,13 +24,16 @@ namespace ModelPerson
         public Action PropertyHandlingAction { get; } 
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="PropertyHandlerDTO"/>.
+        /// Инициализирует новый экземпляр класса 
+        /// <see cref="PropertyHandlerDTO"/>.
         /// </summary>
         /// <param name="propertyName">Название свойства.</param>
         /// <param name="exceptionTypes">Типы исключений.</param>
-        /// <param name="propertyHandlingAction">Действие для обработки свойства.</param>
-        /// //TODO: RSDN
-           public PropertyHandlerDTO(string propertyName, List<Type> exceptionTypes, Action propertyHandlingAction) 
+        /// <param name="propertyHandlingAction">
+        /// Действие для обработки свойства.</param>
+        /// //TODO: RSDN+
+           public PropertyHandlerDTO(string propertyName, 
+               List<Type> exceptionTypes, Action propertyHandlingAction) 
         {
             PropertyName = propertyName;
             ExceptionTypes = exceptionTypes;

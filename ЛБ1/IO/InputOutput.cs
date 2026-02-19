@@ -176,18 +176,18 @@ namespace IO
                 return Sex.Unknown;
 
             string lowerStrSex = strSex.ToLower();
-            //TOOD: отступы
+            //TODO: отступы +
            if (IsMaleSex(lowerStrSex))
-            {
-                return Sex.Male;
-            }
+               {
+                  return Sex.Male;
+               }
 
            if (IsFemaleSex(lowerStrSex))
-            {
-                return Sex.Female;
-            }
+               {
+                   return Sex.Female;
+               }
 
-                       return Sex.Unknown;
+                   return Sex.Unknown;
         }
 
         /// <summary>
@@ -232,18 +232,21 @@ namespace IO
         /// <summary>
         /// Генерирует случайного человека с заданной локализацией.
         /// </summary>
+        /// //TODO: RSDN+
         /// <param name="language">Код локализации 
         /// ("ru" для русского, иначе для английского).</param>
         /// <returns>Созданный объект <see cref="Person"/> 
-        /// со случайными данными.</returns>
+        /// с случайными данными.</returns>
         /// <exception cref="ArgumentException">Выбрасывается, 
         /// если данные не могут быть сгенерированы.</exception>
-        /// <remarks>Использует библиотеку Bogus для генерации случайных данных</remarks>
+        /// <remarks>Использует библиотеку Bogus для генерации 
+        /// случайных данных</remarks>
         public static ModelPerson.Person GetRandomPerson(Language language)
         {
             ModelPerson.Person person = new ModelPerson.Person();
-            //TOOD: отступы
-                var faker = language == Language.Ru ? new Faker("ru") : new Faker();
+
+            //TODO: отступы +
+            var faker = language == Language.Ru ? new Faker("ru") : new Faker();
 
             FillPersonWithFakerData(person, faker);
 
@@ -255,13 +258,15 @@ namespace IO
         /// </summary>
         /// <param name="person">Объект Person для заполнения.</param>
         /// <param name="faker">Объект Faker, из которого берутся данные.</param>
-        /// //TODO: RSDN
-        private static void FillPersonWithFakerData(ModelPerson.Person person, Faker faker)
+        /// //TODO: RSDN+
+        private static void FillPersonWithFakerData(ModelPerson.Person person,
+            Faker faker)
         {
             person.Name = faker.Person.FirstName;
             person.Surname = faker.Person.LastName;
-            //TODO: RSDN
-            person.Age = faker.Random.Int(ModelPerson.Person.MinAge, ModelPerson.Person.MaxAge);
+            //TODO: RSDN+
+            person.Age = faker.Random.Int(ModelPerson.Person.MinAge, 
+                ModelPerson.Person.MaxAge);
             person.Sex = StringToSex(faker.Person.Gender.ToString());
         }
 

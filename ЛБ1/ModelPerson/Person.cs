@@ -101,6 +101,7 @@ namespace ModelPerson
         /// <summary>
         /// Конструктор класса Person с параметрами по умолчанию.
         /// </summary>
+        /// //TODO: duplication
         public Person() : this("Unknown",
                                "Unknown",
                                99, Sex.Unknown)
@@ -126,6 +127,7 @@ namespace ModelPerson
         /// </summary>
         private static readonly Regex _latinSymbols = new Regex(@"[A-z]+");
 
+        //TODO: ё
         /// <summary>
         /// Регулярное выражение для определения кириллицы
         /// </summary>
@@ -178,6 +180,7 @@ namespace ModelPerson
             // Проверяем только если и имя, и фамилия уже установлены
             if (!string.IsNullOrEmpty(_name)
                 && !string.IsNullOrEmpty(_surname)
+                //TODO: duplication
                  && _name != "Unknown"
                     && _surname != "Unknown")
             {
@@ -208,19 +211,22 @@ namespace ModelPerson
                     $"Свойство {argumentName} должно быть заполнено.");
             }
 
+            //TODO: duplication
             if (!Regex.IsMatch(name, @"^[a-zA-Zа-яёА-ЯЁ\s\-']+$"))
             {
                 throw new FormatException(
+                    //TODO: RSDN
                     $"Свойство {argumentName} должно содержать только буквы, пробелы, тире и апострофы.");
             }
 
-            //TODO: rewrite +  исправлено двойное отрицание
-            if (!(_latinSymbols.IsMatch(name)) && !(_cyrillicSymbols.IsMatch(name)))
+            if (_latinSymbols.IsMatch(name) || _cyrillicSymbols.IsMatch(name))
             {
-                throw new FormatException(
-                    $"Свойство {argumentName} должно быть только на кириллице," +
-                    $" либо только на латинице.");
+                return;
             }
+
+            throw new FormatException(
+                $"Свойство {argumentName} должно быть только на кириллице," +
+                $" либо только на латинице.");
         }
 
         /// <summary>

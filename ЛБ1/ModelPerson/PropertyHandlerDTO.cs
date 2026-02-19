@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace ModelPerson
 {
-    //TODO: remove + (убрали из IO)
     /// <summary>
     /// Внутренний класс для передачи данных обработчикам свойств.
     /// </summary>

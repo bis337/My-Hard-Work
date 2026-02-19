@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 namespace ModelPerson
 {
-    //TODO: WTF? +
     /// <summary>
     /// Представляет список персон.
     /// </summary>
     public class PersonList
     {
+        //TODO: XML
         private List<Person> _persons = new List<Person>();
 
         /// <summary>
@@ -118,6 +118,7 @@ namespace ModelPerson
             get { return _persons.Count; }
         }
 
+        //TODO: WTF?
         // Метод, позволяющий использовать foreach без реализации IEnumerable<T>
         // Компилятор C# ищет метод GetEnumerator(), возвращающий IEnumerator<T>
         /// <summary>
@@ -133,6 +134,7 @@ namespace ModelPerson
             return _persons.GetEnumerator();
         }
 
+        //TODO: WTF?
         /// <summary>
         /// Позволяет обращаться к элементам списка по индексу.
         /// </summary>

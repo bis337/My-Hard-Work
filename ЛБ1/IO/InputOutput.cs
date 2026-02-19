@@ -1,4 +1,5 @@
-﻿using Bogus;
+﻿//TODO: WTF?
+using Bogus;
 using ModelPerson;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -11,8 +12,10 @@ namespace IO
     public class InputOutput
     {
         /// <summary>
+        /// //TODO: RSDN
         /// Читает информацию о персоне с консоли и возвращает объект <see cref="ModelPerson.Person"/>.
         /// </summary>
+        /// //TODO: RSDN
         /// <returns>Объект <see cref="ModelPerson.Person"/> с данными, введёнными пользователем.</returns>
         public static ModelPerson.Person ReadPerson()
         {
@@ -64,7 +67,7 @@ namespace IO
                             else
                             {
                               
-                                //TODO: duplication +
+                                //TODO: RSDN
                                 string maleValuesStr = string.Join(", ", GetMaleSexValues().Select(v => $"'{v}'"));
                                 string femaleValuesStr = string.Join(", ", GetFemaleSexValues().Select(v => $"'{v}'"));
 
@@ -106,6 +109,7 @@ namespace IO
                     personAction.Invoke();
                     break;
                 }
+                //TODO: RSDN
                 catch (Exception ex)
                 {
                     if (personTypes.Contains(ex.GetType()))
@@ -175,13 +179,13 @@ namespace IO
 
             string lowerStrSex = strSex.ToLower();
 
-            //TODO: {}+
+            //TODO: RSDN
                        if (IsMaleSex(lowerStrSex))
             {
                 return Sex.Male;
             }
 
-            //TODO: {}+
+            //TODO: RSDN
                        if (IsFemaleSex(lowerStrSex))
             {
                 return Sex.Female;
@@ -232,6 +236,7 @@ namespace IO
         /// <summary>
         /// Генерирует случайного человека с заданной локализацией.
         /// </summary>
+        /// //TODO: RSDN
         /// <param name="language">Код локализации ("ru" для русского, иначе для английского).</param>
         /// <returns>Созданный объект <see cref="Person"/> с случайными данными.</returns>
         /// <exception cref="ArgumentException">Выбрасывается, если данные не могут быть сгенерированы.</exception>
@@ -239,11 +244,10 @@ namespace IO
         public static ModelPerson.Person GetRandomPerson(Language language)
         {
             ModelPerson.Person person = new ModelPerson.Person();
-            //TODO: WTF? что такое faker разобраться +
             if (language == Language.Ru)
             {
                 var fakerRu = new Faker("ru");
-
+                //TODO: duplication
                 person.Name = fakerRu.Person.FirstName;
                 person.Surname = fakerRu.Person.LastName;
                 person.Age = fakerRu.Random.Int(ModelPerson.Person.MinAge,
@@ -253,7 +257,7 @@ namespace IO
             else
             {
                 var fakerEn = new Faker();
-
+                //TODO: duplication
                 person.Name = fakerEn.Person.FirstName;
                 person.Surname = fakerEn.Person.LastName;
                 person.Age = fakerEn.Random.Int(ModelPerson.Person.MinAge,
@@ -317,5 +321,4 @@ namespace IO
             Console.ResetColor();
         }
     }
-
-   }
+}

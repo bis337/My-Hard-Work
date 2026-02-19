@@ -9,7 +9,10 @@ namespace ModelPerson
     /// </summary>
     public class PersonList
     {
-        //TODO: XML
+        //TODO: XML+
+        /// <summary>
+        /// Хранилище для объектов типа <see cref="Person"/>.
+        /// </summary>
         private List<Person> _persons = new List<Person>();
 
         /// <summary>
@@ -118,9 +121,7 @@ namespace ModelPerson
             get { return _persons.Count; }
         }
 
-        //TODO: WTF?
-        // Метод, позволяющий использовать foreach без реализации IEnumerable<T>
-        // Компилятор C# ищет метод GetEnumerator(), возвращающий IEnumerator<T>
+        //TODO: WTF?+
         /// <summary>
         /// Возвращает перечислитель, выполняющий итерацию в коллекции PersonList.
         /// Используется для foreach.
@@ -128,13 +129,10 @@ namespace ModelPerson
         /// <returns>Перечислитель для коллекции PersonList.</returns>
         public IEnumerator<Person> GetEnumerator()
         {
-            // Возвращаем IEnumerator от внутреннего списка
-            // Это позволяет использовать foreach по PersonList
-            // без явной реализации IEnumerable<T>
             return _persons.GetEnumerator();
         }
 
-        //TODO: WTF?
+        //TODO: WTF?+
         /// <summary>
         /// Позволяет обращаться к элементам списка по индексу.
         /// </summary>

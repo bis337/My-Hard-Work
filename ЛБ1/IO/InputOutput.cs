@@ -1,5 +1,4 @@
-﻿//TODO: WTF?
-using Bogus;
+﻿using Bogus;
 using ModelPerson;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -12,11 +11,13 @@ namespace IO
     public class InputOutput
     {
         /// <summary>
-        /// //TODO: RSDN
-        /// Читает информацию о персоне с консоли и возвращает объект <see cref="ModelPerson.Person"/>.
+        /// //TODO: RSDN+
+        /// Читает информацию о персоне с консоли и возвращает 
+        /// объект <see cref="ModelPerson.Person"/>.
         /// </summary>
-        /// //TODO: RSDN
-        /// <returns>Объект <see cref="ModelPerson.Person"/> с данными, введёнными пользователем.</returns>
+        /// //TODO: RSDN+
+        /// <returns>Объект <see cref="ModelPerson.Person"/> 
+        /// с данными, введёнными пользователем.</returns>
         public static ModelPerson.Person ReadPerson()
         {
             ModelPerson.Person personReader = new ModelPerson.Person();
@@ -67,9 +68,11 @@ namespace IO
                             else
                             {
                               
-                                //TODO: RSDN
-                                string maleValuesStr = string.Join(", ", GetMaleSexValues().Select(v => $"'{v}'"));
-                                string femaleValuesStr = string.Join(", ", GetFemaleSexValues().Select(v => $"'{v}'"));
+                                //TODO: RSDN+
+                                string maleValuesStr = string.Join(", ",
+                                    GetMaleSexValues().Select(v => $"'{v}'"));
+                                string femaleValuesStr = string.Join(", ",
+                                    GetFemaleSexValues().Select(v => $"'{v}'"));
 
                                 throw new ArgumentException(
                                     $"Для мужчин значения пола могут иметь " +
@@ -109,7 +112,6 @@ namespace IO
                     personAction.Invoke();
                     break;
                 }
-                //TODO: RSDN
                 catch (Exception ex)
                 {
                     if (personTypes.Contains(ex.GetType()))
@@ -179,14 +181,14 @@ namespace IO
 
             string lowerStrSex = strSex.ToLower();
 
-            //TODO: RSDN
-                       if (IsMaleSex(lowerStrSex))
+            //TODO: RSDN+
+           if (IsMaleSex(lowerStrSex))
             {
                 return Sex.Male;
             }
 
-            //TODO: RSDN
-                       if (IsFemaleSex(lowerStrSex))
+            //TODO: RSDN+
+           if (IsFemaleSex(lowerStrSex))
             {
                 return Sex.Female;
             }
@@ -236,35 +238,36 @@ namespace IO
         /// <summary>
         /// Генерирует случайного человека с заданной локализацией.
         /// </summary>
-        /// //TODO: RSDN
-        /// <param name="language">Код локализации ("ru" для русского, иначе для английского).</param>
-        /// <returns>Созданный объект <see cref="Person"/> с случайными данными.</returns>
-        /// <exception cref="ArgumentException">Выбрасывается, если данные не могут быть сгенерированы.</exception>
+        /// //TODO: RSDN+
+        /// <param name="language">Код локализации 
+        /// ("ru" для русского, иначе для английского).</param>
+        /// <returns>Созданный объект <see cref="Person"/> 
+        /// со случайными данными.</returns>
+        /// <exception cref="ArgumentException">Выбрасывается, 
+        /// если данные не могут быть сгенерированы.</exception>
         /// <remarks>Использует библиотеку Bogus для генерации случайных данных</remarks>
         public static ModelPerson.Person GetRandomPerson(Language language)
         {
             ModelPerson.Person person = new ModelPerson.Person();
-            if (language == Language.Ru)
-            {
-                var fakerRu = new Faker("ru");
-                //TODO: duplication
-                person.Name = fakerRu.Person.FirstName;
-                person.Surname = fakerRu.Person.LastName;
-                person.Age = fakerRu.Random.Int(ModelPerson.Person.MinAge,
-                    ModelPerson.Person.MaxAge);
-                person.Sex = StringToSex(fakerRu.Person.Gender.ToString());
-            }
-            else
-            {
-                var fakerEn = new Faker();
-                //TODO: duplication
-                person.Name = fakerEn.Person.FirstName;
-                person.Surname = fakerEn.Person.LastName;
-                person.Age = fakerEn.Random.Int(ModelPerson.Person.MinAge,
-                    ModelPerson.Person.MaxAge);
-                person.Sex = StringToSex(fakerEn.Person.Gender.ToString());
-            }
+
+                var faker = language == Language.Ru ? new Faker("ru") : new Faker();
+
+            FillPersonWithFakerData(person, faker);
+
             return person;
+        }
+
+        /// <summary>
+        /// Заполняет объект Person данными из Faker.
+        /// </summary>
+        /// <param name="person">Объект Person для заполнения.</param>
+        /// <param name="faker">Объект Faker, из которого берутся данные.</param>
+        private static void FillPersonWithFakerData(ModelPerson.Person person, Faker faker)
+        {
+            person.Name = faker.Person.FirstName;
+            person.Surname = faker.Person.LastName;
+            person.Age = faker.Random.Int(ModelPerson.Person.MinAge, ModelPerson.Person.MaxAge);
+            person.Sex = StringToSex(faker.Person.Gender.ToString());
         }
 
         /// <summary>

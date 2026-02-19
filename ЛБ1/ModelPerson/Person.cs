@@ -26,6 +26,11 @@ namespace ModelPerson
         private int? _age;
 
         /// <summary>
+        /// Значение по умолчанию для неизвестного имени/фамилии.
+        /// </summary>
+        private const string DefaultUnknownValue = "Unknown";
+
+        /// <summary>
         /// Имя человека.
         /// </summary>
         public string Name
@@ -68,7 +73,7 @@ namespace ModelPerson
         /// </summary>
         /// <exception cref="ArgumentException">
         /// Выбрасывается, если значение возраста находится 
-        /// вне допустимого диапазона (0-125).</exception>
+        /// в диапазоне от {MinAge} до {MaxAge}. </exception >
         public int? Age
         {
             get { return _age; }
@@ -78,12 +83,12 @@ namespace ModelPerson
                 {
                     _age = null;
                 }
-                else if ((value <= MinAge) || 
-                    (value >= MaxAge))
+                else if ((value < MinAge) ||
+                    (value > MaxAge))
                 {
                     throw new ArgumentException(
-                        $"Возраст должен быть " +
-                        $"в диапазоне от {MinAge} до {MaxAge}");
+                        $"Возраст должен быть  " +
+                        $"в диапазоне от {MinAge} до {MaxAge} ");
                 }
                 else
                 {
@@ -101,9 +106,9 @@ namespace ModelPerson
         /// <summary>
         /// Конструктор класса Person с параметрами по умолчанию.
         /// </summary>
-        /// //TODO: duplication
-        public Person() : this("Unknown",
-                               "Unknown",
+        /// //TODO: duplication +
+        public Person() : this(DefaultUnknownValue,
+                               DefaultUnknownValue,
                                99, Sex.Unknown)
         { }
 
@@ -123,15 +128,10 @@ namespace ModelPerson
         }
 
         /// <summary>
-        /// Регулярное выражение для определения латиницы
+        /// Регулярное выражение для проверки допустимых символов 
+        /// Также используется для определения латиницы и кириллицы.
         /// </summary>
-        private static readonly Regex _latinSymbols = new Regex(@"[A-z]+");
-
-        //TODO: ё
-        /// <summary>
-        /// Регулярное выражение для определения кириллицы
-        /// </summary>
-        private static readonly Regex _cyrillicSymbols = new Regex(@"[А-я]+");
+        private static readonly Regex _validNamePattern = new Regex(@"^[a-zA-Zа-яёА-ЯЁ\s\-']+$");
 
         /// <summary>
         /// Метод для определения языка на основе имени
@@ -139,16 +139,16 @@ namespace ModelPerson
         /// <param name="name">Имя для анализа.</param>
         /// <returns>Код языка ("ru-RU", "en-EN", 
         /// "mix" или "неизвестный язык").</returns>
-        
-        public static Language LanguageDetect(string name)
+                public static Language LanguageDetect(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
                 return Language.Unknown;
             }
 
-            bool hasLatin = _latinSymbols.IsMatch(name);
-            bool hasCyrillic = _cyrillicSymbols.IsMatch(name);
+
+            bool hasLatin = System.Text.RegularExpressions.Regex.IsMatch(name, @"[a-zA-Z]");
+            bool hasCyrillic = System.Text.RegularExpressions.Regex.IsMatch(name, @"[а-яёА-ЯЁ]");
 
             if (hasLatin && !hasCyrillic)
             {
@@ -160,29 +160,33 @@ namespace ModelPerson
             }
             else if (hasLatin && hasCyrillic)
             {
-                // Смешанный язык
+    
                 return Language.Unknown;
             }
             else
             {
-                // Ни латиница, ни кириллица
-                throw new ArgumentException($"Некорректный ввод." +
-                    $" Пожалуйста, попробуйте снова!");
+
+                if (!_validNamePattern.IsMatch(name))
+                {
+                    throw new ArgumentException($"Некорректный ввод. " +
+                        $" Пожалуйста, попробуйте снова! ");
+                }
+              
+                return Language.Unknown;
             }
         }
 
         /// <summary>
         /// Метод проверки на язык
         /// </summary>
-        /// <exception cref="FormatException"></exception>
+        /// <exception cref="FormatException"> </exception>
         private void LanguageVerification()
         {
-            // Проверяем только если и имя, и фамилия уже установлены
             if (!string.IsNullOrEmpty(_name)
                 && !string.IsNullOrEmpty(_surname)
-                //TODO: duplication
-                 && _name != "Unknown"
-                    && _surname != "Unknown")
+                 //TODO: duplication +
+                 && _name != DefaultUnknownValue
+                    && _surname != DefaultUnknownValue)
             {
                 Language firstNameLanguage = LanguageDetect(_name);
                 Language lastNameLanguage = LanguageDetect(_surname);
@@ -191,8 +195,8 @@ namespace ModelPerson
                     && lastNameLanguage != Language.Unknown
                     && firstNameLanguage != lastNameLanguage)
                 {
-                    throw new FormatException("Имя и фамилия " +
-                        "должны быть на одном языке.");
+                    throw new FormatException("Имя и фамилия  " +
+                        "должны быть на одном языке. ");
                 }
             }
         }
@@ -208,25 +212,25 @@ namespace ModelPerson
             {
                 throw new ArgumentNullException(
                     argumentName,
-                    $"Свойство {argumentName} должно быть заполнено.");
+                    $"Свойство {argumentName} должно быть заполнено. ");
             }
-
-            //TODO: duplication
-            if (!Regex.IsMatch(name, @"^[a-zA-Zа-яёА-ЯЁ\s\-']+$"))
+            if (!_validNamePattern.IsMatch(name))
             {
                 throw new FormatException(
-                    //TODO: RSDN
-                    $"Свойство {argumentName} должно содержать только буквы, пробелы, тире и апострофы.");
+                    //TODO: RSDN+
+                    $"Свойство {argumentName} должно содержать только" +
+                    $" буквы, пробелы, тире и апострофы. ");
             }
 
-            if (_latinSymbols.IsMatch(name) || _cyrillicSymbols.IsMatch(name))
+            bool hasLatin = System.Text.RegularExpressions.Regex.IsMatch(name, @"[a-zA-Z]");
+            bool hasCyrillic = System.Text.RegularExpressions.Regex.IsMatch(name, @"[а-яёА-ЯЁ]");
+
+            if ((hasLatin && hasCyrillic) || (!hasLatin && !hasCyrillic))
             {
-                return;
+                throw new FormatException(
+                    $"Свойство {argumentName} должно быть только на кириллице, " +
+                    $" либо только на латинице. ");
             }
-
-            throw new FormatException(
-                $"Свойство {argumentName} должно быть только на кириллице," +
-                $" либо только на латинице.");
         }
 
         /// <summary>
@@ -238,7 +242,7 @@ namespace ModelPerson
         private static string ToCorrectFormate(string word)
         {
             word = word.Trim('-');
-            word = Regex.Replace(word, "--+", "-");
+            word = System.Text.RegularExpressions.Regex.Replace(word, "--+", "-");
 
             TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
 

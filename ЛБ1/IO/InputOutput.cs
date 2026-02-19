@@ -11,11 +11,9 @@ namespace IO
     public class InputOutput
     {
         /// <summary>
-        /// //TODO: RSDN+
         /// Читает информацию о персоне с консоли и возвращает 
         /// объект <see cref="ModelPerson.Person"/>.
         /// </summary>
-        /// //TODO: RSDN+
         /// <returns>Объект <see cref="ModelPerson.Person"/> 
         /// с данными, введёнными пользователем.</returns>
         public static ModelPerson.Person ReadPerson()
@@ -67,8 +65,6 @@ namespace IO
                             }
                             else
                             {
-                              
-                                //TODO: RSDN+
                                 string maleValuesStr = string.Join(", ",
                                     GetMaleSexValues().Select(v => $"'{v}'"));
                                 string femaleValuesStr = string.Join(", ",
@@ -180,14 +176,12 @@ namespace IO
                 return Sex.Unknown;
 
             string lowerStrSex = strSex.ToLower();
-
-            //TODO: RSDN+
+            //TOOD: отступы
            if (IsMaleSex(lowerStrSex))
             {
                 return Sex.Male;
             }
 
-            //TODO: RSDN+
            if (IsFemaleSex(lowerStrSex))
             {
                 return Sex.Female;
@@ -238,7 +232,6 @@ namespace IO
         /// <summary>
         /// Генерирует случайного человека с заданной локализацией.
         /// </summary>
-        /// //TODO: RSDN+
         /// <param name="language">Код локализации 
         /// ("ru" для русского, иначе для английского).</param>
         /// <returns>Созданный объект <see cref="Person"/> 
@@ -249,7 +242,7 @@ namespace IO
         public static ModelPerson.Person GetRandomPerson(Language language)
         {
             ModelPerson.Person person = new ModelPerson.Person();
-
+            //TOOD: отступы
                 var faker = language == Language.Ru ? new Faker("ru") : new Faker();
 
             FillPersonWithFakerData(person, faker);
@@ -262,10 +255,12 @@ namespace IO
         /// </summary>
         /// <param name="person">Объект Person для заполнения.</param>
         /// <param name="faker">Объект Faker, из которого берутся данные.</param>
+        /// //TODO: RSDN
         private static void FillPersonWithFakerData(ModelPerson.Person person, Faker faker)
         {
             person.Name = faker.Person.FirstName;
             person.Surname = faker.Person.LastName;
+            //TODO: RSDN
             person.Age = faker.Random.Int(ModelPerson.Person.MinAge, ModelPerson.Person.MaxAge);
             person.Sex = StringToSex(faker.Person.Gender.ToString());
         }

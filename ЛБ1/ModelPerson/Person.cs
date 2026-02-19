@@ -106,7 +106,6 @@ namespace ModelPerson
         /// <summary>
         /// Конструктор класса Person с параметрами по умолчанию.
         /// </summary>
-        /// //TODO: duplication +
         public Person() : this(DefaultUnknownValue,
                                DefaultUnknownValue,
                                99, Sex.Unknown)
@@ -131,6 +130,7 @@ namespace ModelPerson
         /// Регулярное выражение для проверки допустимых символов 
         /// Также используется для определения латиницы и кириллицы.
         /// </summary>
+        /// 
         private static readonly Regex _validNamePattern = new Regex(@"^[a-zA-Zа-яёА-ЯЁ\s\-']+$");
 
         /// <summary>
@@ -139,14 +139,14 @@ namespace ModelPerson
         /// <param name="name">Имя для анализа.</param>
         /// <returns>Код языка ("ru-RU", "en-EN", 
         /// "mix" или "неизвестный язык").</returns>
-                public static Language LanguageDetect(string name)
+        public static Language LanguageDetect(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
                 return Language.Unknown;
             }
 
-
+            //TODO: duplication
             bool hasLatin = System.Text.RegularExpressions.Regex.IsMatch(name, @"[a-zA-Z]");
             bool hasCyrillic = System.Text.RegularExpressions.Regex.IsMatch(name, @"[а-яёА-ЯЁ]");
 
@@ -184,7 +184,6 @@ namespace ModelPerson
         {
             if (!string.IsNullOrEmpty(_name)
                 && !string.IsNullOrEmpty(_surname)
-                 //TODO: duplication +
                  && _name != DefaultUnknownValue
                     && _surname != DefaultUnknownValue)
             {
@@ -217,11 +216,11 @@ namespace ModelPerson
             if (!_validNamePattern.IsMatch(name))
             {
                 throw new FormatException(
-                    //TODO: RSDN+
                     $"Свойство {argumentName} должно содержать только" +
                     $" буквы, пробелы, тире и апострофы. ");
             }
 
+            //TODO: duplication
             bool hasLatin = System.Text.RegularExpressions.Regex.IsMatch(name, @"[a-zA-Z]");
             bool hasCyrillic = System.Text.RegularExpressions.Regex.IsMatch(name, @"[а-яёА-ЯЁ]");
 

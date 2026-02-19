@@ -9,7 +9,6 @@ namespace ModelPerson
     /// </summary>
     public class PersonList
     {
-        //TODO: XML+
         /// <summary>
         /// Хранилище для объектов типа <see cref="Person"/>.
         /// </summary>
@@ -121,7 +120,6 @@ namespace ModelPerson
             get { return _persons.Count; }
         }
 
-        //TODO: WTF?+
         /// <summary>
         /// Возвращает перечислитель, выполняющий итерацию в коллекции PersonList.
         /// Используется для foreach.
@@ -132,7 +130,6 @@ namespace ModelPerson
             return _persons.GetEnumerator();
         }
 
-        //TODO: WTF?+
         /// <summary>
         /// Позволяет обращаться к элементам списка по индексу.
         /// </summary>

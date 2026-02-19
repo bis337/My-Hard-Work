@@ -26,7 +26,8 @@ namespace ModelPerson
         private int? _age;
 
         /// <summary>
-        /// Значение по умолчанию для неизвестного имени/фамилии.
+        /// Значение по умолчанию для неизвестного
+        /// имени/фамилии.
         /// </summary>
         private const string DefaultUnknownValue = "Unknown";
 
@@ -69,11 +70,13 @@ namespace ModelPerson
         public const int MaxAge = 125;
 
         /// <summary>
-        /// Возраст человека. Может быть null, если информация отсутствует.
+        /// Возраст человека. Может быть null, если
+        /// информация отсутствует.
         /// </summary>
         /// <exception cref="ArgumentException">
-        /// Выбрасывается, если значение возраста находится 
-        /// в диапазоне от {MinAge} до {MaxAge}. </exception >
+        /// Выбрасывается, если значение возраста
+        /// находится в диапазоне от {MinAge} до
+        /// {MaxAge}. </exception >
         public int? Age
         {
             get { return _age; }
@@ -83,11 +86,14 @@ namespace ModelPerson
                 {
                     _age = null;
                 }
+                // Исправлено: теперь (value < MinAge) и
+                // (value > MaxAge) - ошибка, т.е. 0 и 125
+                // включены
                 else if ((value < MinAge) ||
                     (value > MaxAge))
                 {
                     throw new ArgumentException(
-                        $"Возраст должен быть  " +
+                        $"Возраст должен быть " +
                         $"в диапазоне от {MinAge} до {MaxAge} ");
                 }
                 else
@@ -104,7 +110,8 @@ namespace ModelPerson
         public Sex Sex { get; set; }
 
         /// <summary>
-        /// Конструктор класса Person с параметрами по умолчанию.
+        /// Конструктор класса Person с параметрами
+        /// по умолчанию.
         /// </summary>
         public Person() : this(DefaultUnknownValue,
                                DefaultUnknownValue,
@@ -126,25 +133,54 @@ namespace ModelPerson
             Sex = sex;
         }
 
-        /// <summary>
-        /// Регулярное выражение для проверки допустимых символов 
-        /// Также используется для определения латиницы и кириллицы.
-        /// </summary>
-        /// //TODO: duplication
-        private static readonly Regex _validNamePattern = new Regex(@"^[a-zA-Zа-яёА-ЯЁ\s\-']+$");
-
 
         /// <summary>
-        /// Проверяет, содержит ли строка латинские и/или кириллические буквы.
+        /// Проверяет имя на допустимые символы и
+        /// определяет, содержит ли оно латиницу и/или
+        /// кириллицу.
         /// </summary>
-        /// <param name="name">Строка для проверки.</param>
-        /// <returns>Кортеж с флагами: Item1 - содержит латиницу, 
-        /// Item2 - содержит кириллицу.</returns>
-        private static (bool hasLatin,
-            bool hasCyrillic) ContainsLatinOrCyrillic(string name)
+        /// <param name="name">Имя для проверки.</param>
+        /// <param name="argumentName">Имя параметра для
+        /// исключения.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Выбрасывается, если имя null или пустое.</exception>
+        /// <exception cref="FormatException">
+        /// Выбрасывается, если имя содержит
+        /// недопустимые символы.</exception>
+        /// <returns>Кортеж с флагами: Item1 - содержит
+        /// латиницу, Item2 - содержит кириллицу.</returns>
+        private static (bool hasLatin, bool hasCyrillic)
+            ValidateAndAnalyzeName(string name, string argumentName = "")
         {
+            if (string.IsNullOrEmpty(name))
+            {
+
+                throw new ArgumentNullException(
+                    argumentName,
+                    $"Свойство {argumentName} должно быть " +
+                    $"заполнено. ");
+            }
+
+            // TODO:duplication +
+            if (!Regex.IsMatch(name, @"^[a-zA-Zа-яёА-ЯЁ\s\-']*$"))
+            {
+                throw new FormatException(
+                    $"Свойство {argumentName} должно " +
+                    $"содержать только" +
+                    $" буквы, пробелы, тире и апострофы. ");
+            }
+
             bool hasLatin = Regex.IsMatch(name, @"[a-zA-Z]");
             bool hasCyrillic = Regex.IsMatch(name, @"[а-яёА-ЯЁ]");
+
+            if (!hasLatin && !hasCyrillic)
+            {
+                throw new FormatException(
+                    $"Свойство {argumentName} должно " +
+                    $"содержать хотя бы одну" +
+                    $" букву (латиницу или кириллицу). ");
+            }
+
             return (hasLatin, hasCyrillic);
         }
 
@@ -152,7 +188,7 @@ namespace ModelPerson
         /// Метод для определения языка на основе имени
         /// </summary>
         /// <param name="name">Имя для анализа.</param>
-        /// <returns>Код языка ("ru-RU", "en-EN", 
+        /// <returns>Код языка ("ru-RU", "en-EN",
         /// "mix" или "неизвестный язык").</returns>
         public static Language LanguageDetect(string name)
         {
@@ -161,7 +197,7 @@ namespace ModelPerson
                 return Language.Unknown;
             }
 
-            var (hasLatin, hasCyrillic) = ContainsLatinOrCyrillic(name);
+            var (hasLatin, hasCyrillic) = ValidateAndAnalyzeName(name);
 
             if (hasLatin && !hasCyrillic)
             {
@@ -173,19 +209,13 @@ namespace ModelPerson
             }
             else if (hasLatin && hasCyrillic)
             {
-
+                // Смешанный язык
                 return Language.Unknown;
             }
             else
             {
-
-                if (!_validNamePattern.IsMatch(name))
-                {
-                    throw new ArgumentException($"Некорректный ввод. " +
-                        $" Пожалуйста, попробуйте снова! ");
-                }
-
-                return Language.Unknown;
+                 throw new ArgumentException($"Некорректный ввод. " +
+                    $" Пожалуйста, попробуйте снова! ");
             }
         }
 
@@ -195,6 +225,8 @@ namespace ModelPerson
         /// <exception cref="FormatException"> </exception>
         private void LanguageVerification()
         {
+            // Проверяем только если и имя, и фамилия
+            // уже установлены
             if (!string.IsNullOrEmpty(_name)
                 && !string.IsNullOrEmpty(_surname)
                  && _name != DefaultUnknownValue
@@ -220,39 +252,28 @@ namespace ModelPerson
         /// <param name="name">Имя в формате строки</param>
         private void CheckName(string name, string argumentName)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException(
-                    argumentName,
-                    $"Свойство {argumentName} должно быть заполнено. ");
-            }
-            if (!_validNamePattern.IsMatch(name))
+            var (hasLatin, hasCyrillic) = ValidateAndAnalyzeName(name, argumentName);
+
+            if (hasLatin && hasCyrillic)
             {
                 throw new FormatException(
-                    $"Свойство {argumentName} должно содержать только" +
-                    $" буквы, пробелы, тире и апострофы. ");
-            }
-
-            var (hasLatin, hasCyrillic) = ContainsLatinOrCyrillic(name);
-
-            if ((hasLatin && hasCyrillic) || (!hasLatin && !hasCyrillic))
-            {
-                throw new FormatException(
-                    $"Свойство {argumentName} должно быть только на кириллице, " +
+                    $"Свойство {argumentName} должно быть " +
+                    $"только на кириллице, " +
                     $" либо только на латинице. ");
             }
+
         }
 
         /// <summary>
         /// Производит форматирование имени или фамилии.
         /// </summary>
         /// <param name="word">Имя или фамилия пользователя</param>
-        /// <returns>Отформатированное имя или фамилия 
+        /// <returns>Отформатированное имя или фамилия
         /// с заглавной первой буквой.</returns>
         private static string ToCorrectFormate(string word)
         {
             word = word.Trim('-');
-            word = System.Text.RegularExpressions.Regex.Replace(word, "--+", "-");
+            word = Regex.Replace(word, "--+", "-");
 
             TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
 

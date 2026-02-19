@@ -11,6 +11,13 @@ namespace ModelPerson
     public class Person
     {
         /// <summary>
+        /// Регулярное выражение для проверки
+        /// допустимых символов.
+        /// </summary>
+        //TODO: duplication
+        private const string ValidNamePattern =@"^[a-zA-Zа-яёА-ЯЁ\s\-']*$";
+
+        /// <summary>
         /// Имя человека.
         /// </summary>
         private string _name;
@@ -86,9 +93,6 @@ namespace ModelPerson
                 {
                     _age = null;
                 }
-                // Исправлено: теперь (value < MinAge) и
-                // (value > MaxAge) - ошибка, т.е. 0 и 125
-                // включены
                 else if ((value < MinAge) ||
                     (value > MaxAge))
                 {
@@ -154,15 +158,13 @@ namespace ModelPerson
         {
             if (string.IsNullOrEmpty(name))
             {
-
                 throw new ArgumentNullException(
                     argumentName,
                     $"Свойство {argumentName} должно быть " +
                     $"заполнено. ");
             }
 
-            // TODO:duplication +
-            if (!Regex.IsMatch(name, @"^[a-zA-Zа-яёА-ЯЁ\s\-']*$"))
+            if (!Regex.IsMatch(name, ValidNamePattern))
             {
                 throw new FormatException(
                     $"Свойство {argumentName} должно " +
@@ -170,8 +172,26 @@ namespace ModelPerson
                     $" буквы, пробелы, тире и апострофы. ");
             }
 
-            bool hasLatin = Regex.IsMatch(name, @"[a-zA-Z]");
-            bool hasCyrillic = Regex.IsMatch(name, @"[а-яёА-ЯЁ]");
+            bool hasLatin = false;
+            bool hasCyrillic = false;
+
+            foreach (char c in name)
+            {
+                if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+                {
+                    hasLatin = true;
+                }
+                else if ((c >= 'А' && c <= 'Я') || (c >= 'а' && c <= 'я')
+                         || c == 'ё' || c == 'Ё')
+                {
+                    hasCyrillic = true;
+                }
+
+                if (hasLatin && hasCyrillic)
+                {
+                    break;
+                }
+            }
 
             if (!hasLatin && !hasCyrillic)
             {
@@ -209,13 +229,12 @@ namespace ModelPerson
             }
             else if (hasLatin && hasCyrillic)
             {
-                // Смешанный язык
                 return Language.Unknown;
             }
             else
             {
-                 throw new ArgumentException($"Некорректный ввод. " +
-                    $" Пожалуйста, попробуйте снова! ");
+                throw new ArgumentException($"Некорректный ввод. " +
+                   $" Пожалуйста, попробуйте снова! ");
             }
         }
 
@@ -225,8 +244,6 @@ namespace ModelPerson
         /// <exception cref="FormatException"> </exception>
         private void LanguageVerification()
         {
-            // Проверяем только если и имя, и фамилия
-            // уже установлены
             if (!string.IsNullOrEmpty(_name)
                 && !string.IsNullOrEmpty(_surname)
                  && _name != DefaultUnknownValue
@@ -252,7 +269,8 @@ namespace ModelPerson
         /// <param name="name">Имя в формате строки</param>
         private void CheckName(string name, string argumentName)
         {
-            var (hasLatin, hasCyrillic) = ValidateAndAnalyzeName(name, argumentName);
+            var (hasLatin, hasCyrillic) = ValidateAndAnalyzeName(name,
+                argumentName);
 
             if (hasLatin && hasCyrillic)
             {

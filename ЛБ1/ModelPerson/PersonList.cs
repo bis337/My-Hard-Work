@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace ModelPerson
+﻿namespace ModelPerson
 {
     /// <summary>
-    /// Представляет список персон.
+    /// Представляет список персон. 
+    /// Наследуется от <see cref="List{Person}"/>.
     /// </summary>
-    public class PersonList
+    public class PersonList : List<PersonBase>
     {
-        /// <summary>
-        /// Хранилище для объектов типа <see cref="Person"/>.
-        /// </summary>
-        private List<Person> _persons = new List<Person>();
-
         /// <summary>
         /// Создает новый экземпляр класса PersonList с указанным именем.
         /// </summary>
+        /// <param name="listName">Имя списка.</param>
         public PersonList()
-        { }
+        {}
 
         /// <summary>
         /// Проверяет, что индекс находится в допустимых пределах.
@@ -28,7 +21,7 @@ namespace ModelPerson
         /// Выбрасывается, если индекс вне диапазона.</exception>
         private void ValidateIndex(int index)
         {
-            if (index < 0 || index >= _persons.Count)
+            if (index < 0 || index >= Count)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(index), "Индекс вне диапазона.");
@@ -38,33 +31,33 @@ namespace ModelPerson
         /// <summary>
         /// Добавляет персону в список по указанному индексу.
         /// </summary>
-        /// <param name="index">Индекс,
+        /// <param name="index">Индекс, 
         /// по которому нужно добавить персону.</param>
         /// <param name="person">Персона для добавления.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Выбрасывается,
+        /// <exception cref="ArgumentOutOfRangeException">Выбрасывается, 
         /// если индекс вне диапазона.</exception>
-        public void AddPersonAt(int index, Person person)
+        public void AddPersonAt(int index, PersonBase person)
         {
             ValidateIndex(index);
-            _persons.Insert(index, person);
+            Insert(index, person);            
         }
 
         /// <summary>
         /// Добавляет персону в конец списка.
         /// </summary>
         /// <param name="person">Персона для добавления.</param>
-        public void AddPerson(Person person)
+        public void AddPerson(PersonBase person)
         {
-            _persons.Add(person);
+            Add(person);
         }
 
         /// <summary>
         /// Удаляет персону из списка.
         /// </summary>
         /// <param name="person">Персона для удаления.</param>
-        public void RemovePerson(Person person)
+        public void RemovePerson(PersonBase person)
         {
-            _persons.Remove(person);
+            Remove(person);
         }
 
         /// <summary>
@@ -76,7 +69,7 @@ namespace ModelPerson
         public void RemovePersonAt(int index)
         {
             ValidateIndex(index);
-            _persons.RemoveAt(index);
+            RemoveAt(index);
         }
 
         /// <summary>
@@ -86,21 +79,21 @@ namespace ModelPerson
         /// <returns>Персона по указанному индексу.</returns>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Выбрасывается, если индекс вне диапазона.</exception>
-        public Person GetPersonAt(int index)
+        public PersonBase GetPersonAt(int index)
         {
             ValidateIndex(index);
-            return _persons[index];
+            return this[index];
         }
 
         /// <summary>
         /// Возвращает индекс указанной персоны в списке.
         /// </summary>
         /// <param name="person">Персона, индекс которой нужно найти.</param>
-        /// <returns>Индекс персоны в списке, или -1,
+        /// <returns>Индекс персоны в списке, или -1, 
         /// если персона не найдена.</returns>
-        public int GetIndexOf(Person person)
+        public int GetIndexOf(PersonBase person)
         {
-            return _persons.IndexOf(person);
+            return IndexOf(person);
         }
 
         /// <summary>
@@ -108,33 +101,13 @@ namespace ModelPerson
         /// </summary>
         public void ClearList()
         {
-            _persons.Clear();
+            Clear();
         }
 
         /// <summary>
         /// Возвращает количество персон в списке.
         /// </summary>
         /// <returns>Количество персон в списке.</returns>
-        public int Count
-        {
-            get { return _persons.Count; }
-        }
-
-        /// <summary>
-        /// Возвращает перечислитель, выполняющий итерацию в коллекции PersonList.
-        /// Используется для foreach.
-        /// </summary>
-        /// <returns>Перечислитель для коллекции PersonList.</returns>
-        public IEnumerator<Person> GetEnumerator()
-        {
-            return _persons.GetEnumerator();
-        }
-
-        /// <summary>
-        /// Позволяет обращаться к элементам списка по индексу.
-        /// </summary>
-        /// <param name="index">Индекс элемента.</param>
-        /// <returns>Элемент списка по указанному индексу.</returns>
-        public Person this[int index] => GetPersonAt(index);
+        public new int Count => base.Count;
     }
 }

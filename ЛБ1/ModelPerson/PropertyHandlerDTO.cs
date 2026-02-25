@@ -1,42 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ModelPerson
+﻿namespace ModelPerson
 {
     /// <summary>
-    /// Внутренний класс для передачи данных обработчикам свойств.
+    /// Класс параметров атрибутов для персон
     /// </summary>
-    public class PropertyHandlerDTO 
+    public class PropertyHandlerDTO
     {
         /// <summary>
-        /// Название свойства.
+        /// Делегат для выполнения ввода атрибутов
         /// </summary>
-        public string PropertyName { get; } 
+        public Action PropertyHandlingAction { get; }
 
         /// <summary>
-        /// Типы исключений, которые обрабатываются.
+        /// Список исключений атрибутов
         /// </summary>
-        public List<Type> ExceptionTypes { get; } 
+        public List<Type> ExceptionTypes { get; }
 
         /// <summary>
-        /// Действие, выполняемое для обработки свойства.
+        /// Значение атрибута
         /// </summary>
-        public Action PropertyHandlingAction { get; } 
+        public string PropertyName { get; }
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса 
-        /// <see cref="PropertyHandlerDTO"/>.
+        /// Конструктор класса
         /// </summary>
-        /// <param name="propertyName">Название свойства.</param>
-        /// <param name="exceptionTypes">Типы исключений.</param>
-        /// <param name="propertyHandlingAction">
-        /// Действие для обработки свойства.</param>
-           public PropertyHandlerDTO(string propertyName, 
-               List<Type> exceptionTypes, Action propertyHandlingAction) 
+        /// <param name="properyName">Значение атрибута</param>
+        /// <param name="exceptionTypes">Список исключений атрибутов</param>
+        /// <param name="propertyHandlingAction"> 
+        /// Делегат для выполнения ввода атрибутов</param>
+        public PropertyHandlerDTO(string properyName, 
+            List<Type> exceptionTypes, Action propertyHandlingAction)
         {
-            PropertyName = propertyName;
-            ExceptionTypes = exceptionTypes;
+            PropertyName = properyName;
             PropertyHandlingAction = propertyHandlingAction;
+            ExceptionTypes = exceptionTypes;
         }
     }
 }

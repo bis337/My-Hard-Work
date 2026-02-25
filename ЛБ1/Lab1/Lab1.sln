@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab1", "Lab1.csproj", "{8E9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelPerson", "..\ModelPerson\ModelPerson.csproj", "{923B2409-EE4B-46FF-A4B5-DFCDCED5BB44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IO", "..\IO\IO.csproj", "{42AFA8A1-EB1E-47DA-A239-C4C212078E33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IO", "..\IO\IO.csproj", "{42AFA8A1-EB1E-47DA-A239-C4C212078E33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

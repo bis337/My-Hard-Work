@@ -36,7 +36,7 @@
         /// <summary>
         /// Максимальный возраст ребенка.
         /// </summary>
-        private new const int MaxAge = 17;       
+        private new const int MaxAge = 17;
 
         /// <summary>
         /// Отец ребенка.
@@ -72,6 +72,7 @@
             get => _school;
             set
             {
+                //TODO: magic (to const)
                 if (!(string.IsNullOrWhiteSpace(value)) && Age < 6) 
                 {
                     throw new ArgumentException("Ребенок младше " +
@@ -89,6 +90,7 @@
             get => _kinderGarten;
             set
             {
+                //TODO: magic (to const)
                 if (!(string.IsNullOrWhiteSpace(value)) && Age >= 6)
                 {
                     throw new ArgumentException("Ребенок старше " +
@@ -164,6 +166,7 @@
                 ModelPerson.Child.MaxAge);
             child.Sex = (Sex)Enum.Parse(typeof(Sex), 
                 faker.Person.Gender.ToString());
+            //TODO: magic (to const)
             if (child.Age < 6)
             {
                 child.KinderGarten = Locale.FieldLocale[language]["KinderGarten"] 
@@ -215,6 +218,7 @@
         public override string GetInfo()
         {
             var language = LanguageDetect(Name);
+            //TODO: RSDN
             var loc = Locale.FieldLocale[language];
 
             var fatherStatus = Father != null

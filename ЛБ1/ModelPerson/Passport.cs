@@ -80,6 +80,7 @@
             Number = number;
         }
 
+        //TODO: duplication
         /// <summary>
         /// Проверить серию паспорта человека.
         /// </summary>
@@ -95,6 +96,7 @@
             }
         }
 
+        //TODO: duplication
         /// <summary>
         /// Проверить номер паспорта человека.
         /// </summary>

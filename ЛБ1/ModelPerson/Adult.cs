@@ -22,12 +22,10 @@ namespace ModelPerson
         /// </summary>
         public new const int MaxAge = 125;
 
-
         /// <summary>
         /// Паспорт взрослого.
         /// </summary>
         public Passport Passport { get; set; }
-
 
         /// <summary>
         /// Работодатель.
@@ -176,6 +174,7 @@ namespace ModelPerson
 
         }
 
+        //TODO: redo
         /// <summary>
         /// Поныть
         /// </summary>

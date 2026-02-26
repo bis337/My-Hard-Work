@@ -37,6 +37,7 @@
         public static Dictionary<Language, Dictionary<string, string>> FieldLocale =
             new() 
             {
+                //TOOD: отступы
                 { Language.Ru, 
                     new() 
                     {

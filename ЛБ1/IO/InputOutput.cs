@@ -98,12 +98,14 @@ namespace IO
         {
             switch (strSex.ToLower())
             {
+                //TODO: duplication
                 case "женщина":
                 case "ж":
                 case "female":
                 case "f":
                 case "0":
                     return Sex.Female;
+                //TODO: duplication
                 case "мужчина":
                 case "м":
                 case "male":
@@ -129,6 +131,7 @@ namespace IO
             while (personList.Count < count)
             {
                 Random random = new Random();
+                //TODO: refactor
                 bool isAdult = random.Next(2) == 0;
                 if (isAdult)
                 {
@@ -192,9 +195,13 @@ namespace IO
                         {
                            typeof(ArgumentException),
                         },
+                    //TODO: RSDN
                     () => { string[] sex_male_list =
+                        //TODO: duplication
                         ["мужчина", "м", "1", "man", "m"];
+                        //TODO: RSDN
                             string[] sex_female_list =
+                        //TODO: duplication
                         ["женщина", "ж", "0", "woman", "w"];
                             string ReadSexPerson = Console.ReadLine();
                             if (string.IsNullOrEmpty(ReadSexPerson))
@@ -215,8 +222,10 @@ namespace IO
                             {
                                 throw new ArgumentException(
                                     "Для мужчин значения пола могут иметь " +
+                                    //TODO: duplication
                                     "значения 'мужчина', 'м', '1', 'man', 'm'\n" +
                                     "Для женщин значения пола могут иметь " +
+                                    //TODO: duplication
                                     "значения 'женщина', 'ж', '0', 'woman', 'w'");
                             }
                             }),
@@ -262,6 +271,7 @@ namespace IO
                     () => adult.Employer = Console.ReadLine()),
                 new PropertyHandlerDTO(
                     "серию паспорта",
+                    //TOOD: отступы
                     new List<Type>
                             {
                                typeof(ArgumentException),
@@ -270,6 +280,7 @@ namespace IO
                     () => { adult.Passport.Series = IntParse("Серия паспорта"); }),
                 new PropertyHandlerDTO(
                     "номер паспорта",
+                    //TOOD: отступы
                     new List<Type>
                             {
                                typeof(ArgumentException),
@@ -316,6 +327,7 @@ namespace IO
                         new List<Type> { typeof(ArgumentException) },
                         () => child.School = Console.ReadLine()
                     ),
+                //TOOD: отступы
                 new PropertyHandlerDTO(
                         "данные отца. Нажмите enter, чтобы пропустить",
                         new List<Type> { typeof(ArgumentException) },
@@ -333,6 +345,7 @@ namespace IO
                             }
                         }
                     ),
+                //TOOD: отступы
                 new PropertyHandlerDTO(
                         "данные матери. Нажмите enter, чтобы пропустить",
                         new List<Type> { typeof(ArgumentException) },
@@ -351,6 +364,7 @@ namespace IO
                         }
                     ),
             };
+            //TODO: duplication
             if (child.Age < 6)
             {
                 actionList.RemoveAt(1);
@@ -384,6 +398,7 @@ namespace IO
                     personAction.Invoke();
                     break;
                 }
+                //TODO: RSDN
                 catch (Exception ex)
                 {
                     if (personTypes.Contains(ex.GetType()))

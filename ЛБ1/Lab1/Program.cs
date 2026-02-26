@@ -46,6 +46,8 @@ namespace ConsoleAppLab1
                 "из методов, присущий этому классу.",
                 ConsoleColor.Green);
 
+            //TODO: polymorphism
+            //TODO: magic (to const)
             Console.WriteLine(list1.personList[3].GetType());
             Console.WriteLine(list1.personList[3].GetInfo());
 

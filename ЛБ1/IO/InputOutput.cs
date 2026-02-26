@@ -8,6 +8,18 @@ namespace IO
     public class InputOutput
     {
         /// <summary>
+        /// Значения пола для мужчин.
+        /// </summary>
+        private static readonly string[] SexMaleList =
+            ["мужчина", "м", "1", "man", "m"];
+
+        /// <summary>
+        /// Значения пола для женщин.
+        /// </summary>
+        private static readonly string[] SexFemaleList =
+            ["женщина", "ж", "0", "woman", "w"];
+
+        /// <summary>
         /// Метод для чтения информаации о человеке с консоли
         /// </summary>
         /// <param name="person"></param>
@@ -96,25 +108,40 @@ namespace IO
         /// <returns>Элемент перечисления <see cref="Sex"/>.</returns>
         public static Sex StringToSex(string strSex)
         {
-            switch (strSex.ToLower())
+            //TODO: duplication +
+            return ParseSex(strSex);
+        }
+
+        /// <summary>
+        /// Преобразует строку в тип перечисления "Пол" или возвращает Unknown.
+        /// </summary>
+        /// <param name="input">Введённое значение.</param>
+        /// <returns>Элемент перечисления <see cref="Sex"/>.</returns>
+        private static Sex ParseSex(string input)
+        {
+            if (string.IsNullOrEmpty(input))
             {
-                //TODO: duplication
-                case "женщина":
-                case "ж":
-                case "female":
-                case "f":
-                case "0":
-                    return Sex.Female;
-                //TODO: duplication
-                case "мужчина":
-                case "м":
-                case "male":
-                case "m":
-                case "1":
-                    return Sex.Male;
-                default:
-                    return Sex.Unknown;
+                return Sex.Unknown;
             }
+
+            var lowerInput = input.ToLower();
+            if (SexMaleList.Contains(lowerInput))
+            {
+                return Sex.Male;
+            }
+
+            if (SexFemaleList.Contains(lowerInput))
+            {
+                return Sex.Female;
+            }
+
+            throw new ArgumentException(
+                "Для мужчин значения пола могут иметь " +
+                //TODO: duplication +
+                $"значения '{string.Join("', '", SexMaleList)}'\n" +
+                "Для женщин значения пола могут иметь " +
+                //TODO: duplication +
+                $"значения '{string.Join("', '", SexFemaleList)}'");
         }
         
         /// <summary>
@@ -128,21 +155,27 @@ namespace IO
             string listName, Language language, int count)
         {
             PersonList personList = new PersonList();
+            var random = new Random();
             while (personList.Count < count)
             {
-                Random random = new Random();
-                //TODO: refactor
-                bool isAdult = random.Next(2) == 0;
-                if (isAdult)
-                {
-                    personList.AddPerson(Adult.GetRandomAdult(language));
-                }
-                else
-                {
-                    personList.AddPerson(Child.GetRandomChild(language));
-                }
+                var person = GetRandomPerson(language, random);
+                personList.AddPerson(person);
             }
             return (listName, personList);
+        }
+
+        /// <summary>
+        /// Возвращает случайную персону (взрослого или ребёнка).
+        /// </summary>
+        /// <param name="language">Локаль для генерации случайных данных.</param>
+        /// <param name="random">Генератор случайных чисел.</param>
+        /// <returns>Случайная персона.</returns>
+        private static PersonBase GetRandomPerson(Language language, Random random)
+        {
+            //TODO: refactor +
+            return random.Next(2) == 0
+                ? Adult.GetRandomAdult(language)
+                : Child.GetRandomChild(language);
         }
 
         /// <summary>
@@ -195,40 +228,13 @@ namespace IO
                         {
                            typeof(ArgumentException),
                         },
-                    //TODO: RSDN
-                    () => { string[] sex_male_list =
-                        //TODO: duplication
-                        ["мужчина", "м", "1", "man", "m"];
-                        //TODO: RSDN
-                            string[] sex_female_list =
-                        //TODO: duplication
-                        ["женщина", "ж", "0", "woman", "w"];
-                            string ReadSexPerson = Console.ReadLine();
-                            if (string.IsNullOrEmpty(ReadSexPerson))
-                            {
-                                personReader.Sex = Sex.Unknown;
-                            }
-                            else if (sex_male_list.Contains(ReadSexPerson.
-                                ToLower()))
-                            {
-                                personReader.Sex = Sex.Male;
-                            }
-                            else if (sex_female_list.Contains(ReadSexPerson.
-                                ToLower()))
-                            {
-                                personReader.Sex = Sex.Female;
-                            }
-                            else
-                            {
-                                throw new ArgumentException(
-                                    "Для мужчин значения пола могут иметь " +
-                                    //TODO: duplication
-                                    "значения 'мужчина', 'м', '1', 'man', 'm'\n" +
-                                    "Для женщин значения пола могут иметь " +
-                                    //TODO: duplication
-                                    "значения 'женщина', 'ж', '0', 'woman', 'w'");
-                            }
-                            }),
+                    //TODO: RSDN +
+                    () =>
+                    {
+                        string readSexPerson = Console.ReadLine();
+                        //TODO: duplication +
+                        personReader.Sex = ParseSex(readSexPerson);
+                    }),
 
             };
 
@@ -364,8 +370,7 @@ namespace IO
                         }
                     ),
             };
-            //TODO: duplication
-            if (child.Age < 6)
+            if (child.Age < ModelPerson.Child.MinSchoolAge)
             {
                 actionList.RemoveAt(1);
             }
@@ -398,7 +403,7 @@ namespace IO
                     personAction.Invoke();
                     break;
                 }
-                //TODO: RSDN
+                //TODO: RSDN +
                 catch (Exception ex)
                 {
                     if (personTypes.Contains(ex.GetType()))
@@ -408,7 +413,7 @@ namespace IO
                         continue;
                     }
 
-                    throw ex;
+                    throw;
                 }
             }
         }

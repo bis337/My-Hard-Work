@@ -174,16 +174,17 @@ namespace ModelPerson
 
         }
 
-        //TODO: redo
+        //TODO: redo +
         /// <summary>
         /// Поныть
         /// </summary>
-        public void ToWhine()
+        /// <returns>Строка с текстом нытья.</returns>
+        public string ToWhine()
         {
-            Console.WriteLine("Опять счета, опять аврал, (-_-#)");
-            Console.WriteLine("А кофе стынет – я устал… (Х_х)");
-            Console.WriteLine("Когда же отпуск, где мой рай? (T_T)");
-            Console.WriteLine("Откройте дверь, я просто поныть! (u_u)");
+            return "Опять счета, опять аврал, (-_-#)\n" +
+                "А кофе стынет – я устал… (Х_х)\n" +
+                "Когда же отпуск, где мой рай? (T_T)\n" +
+                "Откройте дверь, я просто поныть! (u_u)";
         }
 
         /// <summary>

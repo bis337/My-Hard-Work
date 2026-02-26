@@ -39,6 +39,11 @@
         private new const int MaxAge = 17;
 
         /// <summary>
+        /// Минимальный возраст для школы.
+        /// </summary>
+        public const int MinSchoolAge = 6;
+
+        /// <summary>
         /// Отец ребенка.
         /// </summary>
         public Adult? Father
@@ -72,11 +77,11 @@
             get => _school;
             set
             {
-                //TODO: magic (to const)
-                if (!(string.IsNullOrWhiteSpace(value)) && Age < 6) 
+                //TODO: magic (to const) +
+                if (!(string.IsNullOrWhiteSpace(value)) && Age < MinSchoolAge)
                 {
                     throw new ArgumentException("Ребенок младше " +
-                        "6 лет не может ходить в школу.");
+                        $"{MinSchoolAge} лет не может ходить в школу.");
                 }
                 _school = value;
             }
@@ -90,11 +95,11 @@
             get => _kinderGarten;
             set
             {
-                //TODO: magic (to const)
-                if (!(string.IsNullOrWhiteSpace(value)) && Age >= 6)
+                //TODO: magic (to const) +
+                if (!(string.IsNullOrWhiteSpace(value)) && Age >= MinSchoolAge)
                 {
                     throw new ArgumentException("Ребенок старше " +
-                        "6 лет не может ходить в детский сад.");
+                        $"{MinSchoolAge} лет не может ходить в детский сад.");
                 }
                 _kinderGarten = value;
             }
@@ -164,12 +169,12 @@
             child.Surname = faker.Person.LastName;
             child.Age = faker.Random.Int(ModelPerson.Child.MinAge,
                 ModelPerson.Child.MaxAge);
-            child.Sex = (Sex)Enum.Parse(typeof(Sex), 
+            child.Sex = (Sex)Enum.Parse(typeof(Sex),
                 faker.Person.Gender.ToString());
-            //TODO: magic (to const)
-            if (child.Age < 6)
+            //TODO: magic (to const) +
+            if (child.Age < MinSchoolAge)
             {
-                child.KinderGarten = Locale.FieldLocale[language]["KinderGarten"] 
+                child.KinderGarten = Locale.FieldLocale[language]["KinderGarten"]
                     + " #" + faker.Random.Int(1, 100);
             }
             else
@@ -218,22 +223,22 @@
         public override string GetInfo()
         {
             var language = LanguageDetect(Name);
-            //TODO: RSDN
+            //TODO: RSDN+
             var loc = Locale.FieldLocale[language];
 
-            var fatherStatus = Father != null
+            string fatherStatus = Father != null
                 ? $"{loc["Father"]}: {Father.GetPersonNameSurname()}"
                 : $"{loc["Father"]}: {loc["NoParent"]}";
 
-            var motherStatus = Mother != null
+            string motherStatus = Mother != null
                 ? $"{loc["Mother"]}: {Mother.GetPersonNameSurname()}"
                 : $"{loc["Mother"]}: {loc["NoParent"]}";
 
-            var kinderGarndenStatus = !string.IsNullOrEmpty(School)
+            string kinderGarndenStatus = !string.IsNullOrEmpty(School)
                 ? $"{loc["Studying"]}: {School}"
                 : $"{loc["NotStudying"]}";
 
-            var schoolStatus = !string.IsNullOrEmpty(KinderGarten)
+            string schoolStatus = !string.IsNullOrEmpty(KinderGarten)
                 ? $"{loc["GoesInKD"]}: {School}"
                 : $"{loc["NotGoesInKD"]}";
 
@@ -241,12 +246,14 @@
                 $"{motherStatus}; {kinderGarndenStatus}; {schoolStatus}\n";
         }
 
+        //TODO: redo +
         /// <summary>
         /// Радоваться
         /// </summary>
-        public void ToEnjoy()
+        /// <returns>Строка с текстом радости.</returns>
+        public string ToEnjoy()
         {
-            Console.WriteLine("Шарики! (=^.^=) Бабочки! ＼(＾▽＾)／ Единороги!");
+            return "Шарики! (=^.^=) Бабочки! ＼(＾▽＾)／ Единороги!";
         }
 
         /// <summary>

@@ -47,7 +47,6 @@ namespace ConsoleAppLab1
                 ConsoleColor.Green);
 
             //TODO: polymorphism
-            //TODO: magic (to const)
             Console.WriteLine(list1.personList[3].GetType());
             Console.WriteLine(list1.personList[3].GetInfo());
 
@@ -55,12 +54,12 @@ namespace ConsoleAppLab1
             {
                 case Adult adult:
                 {
-                    adult.ToWhine();
+                    Console.WriteLine(adult.ToWhine());
                     break;
                 }
                 case Child child:
                 {
-                    child.ToEnjoy();
+                    Console.WriteLine(child.ToEnjoy());
                     break;
                 }
                 default:

@@ -102,17 +102,12 @@ namespace IO
         }
 
         /// <summary>
-        /// Преобразует строку в тип перечисления "Пол" или возвращает Unknown.
+        /// Преобразует строку в тип перечисления "Пол".
         /// </summary>
         /// <param name="input">Введённое значение.</param>
         /// <returns>Элемент перечисления <see cref="Sex"/>.</returns>
         private static Sex ParseSex(string input)
         {
-            if (string.IsNullOrEmpty(input))
-            {
-                return Sex.Unknown;
-            }
-
             var lowerInput = input.ToLower();
             if (SexMaleList.Contains(lowerInput))
             {
@@ -125,6 +120,7 @@ namespace IO
             }
 
             throw new ArgumentException(
+                "Необходимо выбрать пол (мужской или женский).\n" +
                 "Для мужчин значения пола могут иметь " +
                 $"значения '{string.Join("', '", SexMaleList)}'\n" +
                 "Для женщин значения пола могут иметь " +

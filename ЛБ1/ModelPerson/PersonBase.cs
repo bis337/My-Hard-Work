@@ -95,7 +95,7 @@ namespace ModelPerson
         /// </summary>
         public PersonBase() : this("Unknown",
                                "Unknown",
-                               99, Sex.Unknown)
+                               99, Sex.Male)
         { }
 
         /// <summary>

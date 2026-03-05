@@ -126,7 +126,7 @@
         /// Конструктор Child по-умолчанию.
         /// </summary>
         public Child() : this("Unknown", "Unknown", 11,
-            Sex.Unknown, null, null, null)
+            Sex.Male, null, null, null)
         { }
 
         /// <summary>
@@ -206,9 +206,6 @@
                     }
                     break;
                 }
-                case Sex.Unknown:
-                default:
-                    break;
             }
             return child;
         }

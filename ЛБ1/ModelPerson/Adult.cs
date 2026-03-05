@@ -68,7 +68,7 @@ namespace ModelPerson
         /// Конструктор по-умолчанию.
         /// </summary>
         public Adult() : this("Unknown", "Unknown", 19,
-            Sex.Unknown, new Passport(), spouse: null, employer: null)
+            Sex.Male, new Passport(), spouse: null, employer: null)
         { }
         
 
@@ -120,7 +120,7 @@ namespace ModelPerson
         {
             ModelPerson.Adult adult = new ModelPerson.Adult();
 
-            while (this.Sex == adult.Sex || adult.Sex == Sex.Unknown)
+            while (this.Sex == adult.Sex)
             {
                 var faker = language == Language.Ru
                     ? new Faker("ru")
@@ -130,11 +130,11 @@ namespace ModelPerson
 
                 adult.Age = faker.Random.Int(ModelPerson.Adult.MinAge + 1,
                     ModelPerson.Adult.MaxAge - 1);
-                adult.Sex = (Sex)Enum.Parse(typeof(Sex), 
+                adult.Sex = (Sex)Enum.Parse(typeof(Sex),
                     faker.Person.Gender.ToString());
 
                 var passportSeries = faker.Random.Int(
-                    Passport.PassportSeriesLowBound + 1, 
+                    Passport.PassportSeriesLowBound + 1,
                     Passport.PassportSeriesHighBound - 1);
                 var passportNumber = faker.Random.Int(
                     Passport.PassportNumberLowBound + 1,

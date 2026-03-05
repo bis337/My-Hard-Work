@@ -150,11 +150,11 @@ namespace ModelPerson
             }
             else if (hasLatin && hasCyrillic)
             {
-                return Language.Unknown;  // Смешанный язык
+                return Language.Unknown;  
             }
             else
             {
-                return Language.Unknown;  // Нет букв (цифры, символы)
+                return Language.Unknown;  
             }
         }
 
@@ -199,7 +199,6 @@ namespace ModelPerson
                     $"Свойство {argumentName} должно быть заполнено.");
             }
 
-            // Проверяем, что есть хотя бы одна буква (кириллица или латиница)
             if (!_latinSymbols.IsMatch(name)
                 && !_cyrillicSymbols.IsMatch(name))
             {

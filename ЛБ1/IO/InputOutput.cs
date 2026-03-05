@@ -101,6 +101,7 @@ namespace IO
             }
         }
 
+        //TODO: remove
         /// <summary>
         /// Преобразует строку в тип перечисления "Пол".
         /// </summary>
@@ -108,7 +109,6 @@ namespace IO
         /// <returns>Элемент перечисления <see cref="Sex"/>.</returns>
         public static Sex StringToSex(string strSex)
         {
-            //TODO: duplication +
             return ParseSex(strSex);
         }
 
@@ -137,10 +137,8 @@ namespace IO
 
             throw new ArgumentException(
                 "Для мужчин значения пола могут иметь " +
-                //TODO: duplication +
                 $"значения '{string.Join("', '", SexMaleList)}'\n" +
                 "Для женщин значения пола могут иметь " +
-                //TODO: duplication +
                 $"значения '{string.Join("', '", SexFemaleList)}'");
         }
         
@@ -172,7 +170,6 @@ namespace IO
         /// <returns>Случайная персона.</returns>
         private static PersonBase GetRandomPerson(Language language, Random random)
         {
-            //TODO: refactor +
             return random.Next(2) == 0
                 ? Adult.GetRandomAdult(language)
                 : Child.GetRandomChild(language);
@@ -228,11 +225,9 @@ namespace IO
                         {
                            typeof(ArgumentException),
                         },
-                    //TODO: RSDN +
                     () =>
                     {
                         string readSexPerson = Console.ReadLine();
-                        //TODO: duplication +
                         personReader.Sex = ParseSex(readSexPerson);
                     }),
 
@@ -403,7 +398,6 @@ namespace IO
                     personAction.Invoke();
                     break;
                 }
-                //TODO: RSDN +
                 catch (Exception ex)
                 {
                     if (personTypes.Contains(ex.GetType()))

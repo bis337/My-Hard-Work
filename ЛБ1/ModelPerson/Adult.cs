@@ -174,7 +174,6 @@ namespace ModelPerson
 
         }
 
-        //TODO: redo +
         /// <summary>
         /// Поныть
         /// </summary>

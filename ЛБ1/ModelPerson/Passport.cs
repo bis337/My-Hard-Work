@@ -23,6 +23,7 @@
             get { return _series; }
             set
             {
+                //TODO: rewrite
                 CheckPassportSeries(value);
                 _series = value;
             }
@@ -36,6 +37,7 @@
             get { return _number; }
             set
             {
+                //TODO: rewrite
                 CheckPassportNumber(value);
                 _number = value;
             }
@@ -80,7 +82,7 @@
             Number = number;
         }
 
-        //TODO: duplication +
+        //TODO: remove
         /// <summary>
         /// Проверить серию паспорта человека.
         /// </summary>
@@ -94,7 +96,7 @@
                 "Серия паспорта");
         }
 
-        //TODO: duplication +
+        //TODO: remove
         /// <summary>
         /// Проверить номер паспорта человека.
         /// </summary>

@@ -77,7 +77,6 @@
             get => _school;
             set
             {
-                //TODO: magic (to const) +
                 if (!(string.IsNullOrWhiteSpace(value)) && Age < MinSchoolAge)
                 {
                     throw new ArgumentException("Ребенок младше " +
@@ -95,7 +94,6 @@
             get => _kinderGarten;
             set
             {
-                //TODO: magic (to const) +
                 if (!(string.IsNullOrWhiteSpace(value)) && Age >= MinSchoolAge)
                 {
                     throw new ArgumentException("Ребенок старше " +
@@ -171,7 +169,6 @@
                 ModelPerson.Child.MaxAge);
             child.Sex = (Sex)Enum.Parse(typeof(Sex),
                 faker.Person.Gender.ToString());
-            //TODO: magic (to const) +
             if (child.Age < MinSchoolAge)
             {
                 child.KinderGarten = Locale.FieldLocale[language]["KinderGarten"]
@@ -223,7 +220,7 @@
         public override string GetInfo()
         {
             var language = LanguageDetect(Name);
-            //TODO: RSDN+
+            //TODO: RSDN
             var loc = Locale.FieldLocale[language];
 
             string fatherStatus = Father != null
@@ -246,7 +243,6 @@
                 $"{motherStatus}; {kinderGarndenStatus}; {schoolStatus}\n";
         }
 
-        //TODO: redo +
         /// <summary>
         /// Радоваться
         /// </summary>

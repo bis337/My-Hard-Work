@@ -261,21 +261,21 @@ namespace IO
                     () => adult.Employer = Console.ReadLine()),
                 new PropertyHandlerDTO(
                     "серию паспорта",
-                    //TODO: отступы
+                    //TODO: отступы +
                     new List<Type>
-                            {
-                               typeof(ArgumentException),
-                               typeof(FormatException),
-                            },
+                    {
+                        typeof(ArgumentException),
+                        typeof(FormatException),
+                    },
                     () => { adult.Passport.Series = IntParse("Серия паспорта"); }),
                 new PropertyHandlerDTO(
                     "номер паспорта",
-                    //TODO: отступы
+                    //TODO: отступы +
                     new List<Type>
-                            {
-                               typeof(ArgumentException),
-                               typeof(FormatException),
-                            },
+                    {
+                        typeof(ArgumentException),
+                        typeof(FormatException),
+                    },
                     () => { adult.Passport.Number = IntParse("Номер паспорта"); }),
                 new PropertyHandlerDTO(
                     "данные супруга. Нажмите любую клавишу чтобы продолжить " +
@@ -308,51 +308,47 @@ namespace IO
             var actionList = new List<PropertyHandlerDTO>
             {
                 new PropertyHandlerDTO(
-                        "детский сад",
-                        new List<Type> { typeof(ArgumentException) },
-                        () => child.KinderGarten = Console.ReadLine()
-                    ),
+                    "детский сад",
+                    new List<Type> { typeof(ArgumentException) },
+                    () => child.KinderGarten = Console.ReadLine()),
                 new PropertyHandlerDTO(
-                        "школу",
-                        new List<Type> { typeof(ArgumentException) },
-                        () => child.School = Console.ReadLine()
-                    ),
-                //TODO: отступы
+                    "школу",
+                    new List<Type> { typeof(ArgumentException) },
+                    () => child.School = Console.ReadLine()),
+                //TODO: отступы +
                 new PropertyHandlerDTO(
-                        "данные отца. Нажмите enter, чтобы пропустить",
-                        new List<Type> { typeof(ArgumentException) },
-                        () =>
+                    "данные отца. Нажмите enter, чтобы пропустить",
+                    new List<Type> { typeof(ArgumentException) },
+                    () =>
+                    {
+                        string input = Console.ReadLine();
+                        if (!string.IsNullOrEmpty(input))
                         {
-                            string input = Console.ReadLine();
-                            if (!string.IsNullOrEmpty(input))
+                            Adult father = new Adult();
+                            child.Father = ReadProperties(father);
+                            if (father.Spouse is not null)
                             {
-                                Adult father = new Adult();
-                                child.Father = ReadProperties(father);
-                                if (father.Spouse is not null)
-                                {
-                                    father.Spouse.Spouse = father;
-                                }
+                                father.Spouse.Spouse = father;
                             }
                         }
-                    ),
-                //TODO: отступы
+                    }),
+                //TODO: отступы +
                 new PropertyHandlerDTO(
-                        "данные матери. Нажмите enter, чтобы пропустить",
-                        new List<Type> { typeof(ArgumentException) },
-                        () =>
+                    "данные матери. Нажмите enter, чтобы пропустить",
+                    new List<Type> { typeof(ArgumentException) },
+                    () =>
+                    {
+                        string input = Console.ReadLine();
+                        if (!string.IsNullOrEmpty(input))
                         {
-                            string input = Console.ReadLine();
-                            if (!string.IsNullOrEmpty(input))
+                            Adult mother = new Adult();
+                            child.Mother = ReadProperties(mother);
+                            if (mother.Spouse is not null)
                             {
-                                Adult mother = new Adult();
-                                child.Mother = ReadProperties(mother);
-                                if (mother.Spouse is not null)
-                                {
-                                    mother.Spouse.Spouse = mother;
-                                }
+                                mother.Spouse.Spouse = mother;
                             }
                         }
-                    ),
+                    }),
             };
             if (child.Age < ModelPerson.Child.MinSchoolAge)
             {

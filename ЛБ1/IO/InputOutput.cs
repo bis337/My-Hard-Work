@@ -261,7 +261,6 @@ namespace IO
                     () => adult.Employer = Console.ReadLine()),
                 new PropertyHandlerDTO(
                     "серию паспорта",
-                    //TODO: отступы +
                     new List<Type>
                     {
                         typeof(ArgumentException),
@@ -270,7 +269,6 @@ namespace IO
                     () => { adult.Passport.Series = IntParse("Серия паспорта"); }),
                 new PropertyHandlerDTO(
                     "номер паспорта",
-                    //TODO: отступы +
                     new List<Type>
                     {
                         typeof(ArgumentException),
@@ -315,7 +313,6 @@ namespace IO
                     "школу",
                     new List<Type> { typeof(ArgumentException) },
                     () => child.School = Console.ReadLine()),
-                //TODO: отступы +
                 new PropertyHandlerDTO(
                     "данные отца. Нажмите enter, чтобы пропустить",
                     new List<Type> { typeof(ArgumentException) },
@@ -332,7 +329,6 @@ namespace IO
                             }
                         }
                     }),
-                //TODO: отступы +
                 new PropertyHandlerDTO(
                     "данные матери. Нажмите enter, чтобы пропустить",
                     new List<Type> { typeof(ArgumentException) },

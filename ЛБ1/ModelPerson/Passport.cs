@@ -23,7 +23,6 @@
             get { return _series; }
             set
             {
-                //TODO: rewrite +
                 CheckPassportValue(
                     value,
                     PassportSeriesLowBound,
@@ -41,7 +40,6 @@
             get { return _number; }
             set
             {
-                //TODO: rewrite +
                 CheckPassportValue(
                     value,
                     PassportNumberLowBound,

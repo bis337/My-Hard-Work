@@ -220,7 +220,6 @@
         public override string GetInfo()
         {
             var language = LanguageDetect(Name);
-            //TODO: RSDN +
             var locale = Locale.FieldLocale[language];
 
             string fatherStatus = Father != null

@@ -23,8 +23,12 @@
             get { return _series; }
             set
             {
-                //TODO: rewrite
-                CheckPassportSeries(value);
+                //TODO: rewrite +
+                CheckPassportValue(
+                    value,
+                    PassportSeriesLowBound,
+                    PassportSeriesHighBound,
+                    "Серия паспорта");
                 _series = value;
             }
         }
@@ -37,8 +41,12 @@
             get { return _number; }
             set
             {
-                //TODO: rewrite
-                CheckPassportNumber(value);
+                //TODO: rewrite +
+                CheckPassportValue(
+                    value,
+                    PassportNumberLowBound,
+                    PassportNumberHighBound,
+                    "Номер паспорта");
                 _number = value;
             }
         }
@@ -80,34 +88,6 @@
         {
             Series = series;
             Number = number;
-        }
-
-        //TODO: remove
-        /// <summary>
-        /// Проверить серию паспорта человека.
-        /// </summary>
-        /// <param name="passportSeries">Серия паспорта человека.</param>
-        private static void CheckPassportSeries(int passportSeries)
-        {
-            CheckPassportValue(
-                passportSeries,
-                PassportSeriesLowBound,
-                PassportSeriesHighBound,
-                "Серия паспорта");
-        }
-
-        //TODO: remove
-        /// <summary>
-        /// Проверить номер паспорта человека.
-        /// </summary>
-        /// <param name="passportNumber">Номер паспорта человека.</param>
-        private static void CheckPassportNumber(int passportNumber)
-        {
-            CheckPassportValue(
-                passportNumber,
-                PassportNumberLowBound,
-                PassportNumberHighBound,
-                "Номер паспорта");
         }
 
         /// <summary>

@@ -115,14 +115,14 @@ namespace ModelPerson
         }
 
         /// <summary>
-        /// Регулярное выражение для определения латиницы
+        /// Регулярное выражение для определения латиницы (только буквы и дефис).
         /// </summary>
-        private static readonly Regex _latinSymbols = new Regex(@"[A-z]+");
+        private static readonly Regex _latinSymbols = new Regex(@"^[A-Za-z]+(?:-[A-Za-z]+)*$");
 
         /// <summary>
-        /// Регулярное выражение для определения кириллицы
+        /// Регулярное выражение для определения кириллицы (только буквы и дефис).
         /// </summary>
-        private static readonly Regex _cyrillicSymbols = new Regex(@"[А-я]+");
+        private static readonly Regex _cyrillicSymbols = new Regex(@"^[А-Яа-яЁё]+(?:-[А-Яа-яЁё]+)*$");
 
         /// <summary>
         /// Метод для определения языка на основе имени

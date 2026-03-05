@@ -101,17 +101,6 @@ namespace IO
             }
         }
 
-        //TODO: remove
-        /// <summary>
-        /// Преобразует строку в тип перечисления "Пол".
-        /// </summary>
-        /// <param name="strSex"> - пол в формате строки.</param>
-        /// <returns>Элемент перечисления <see cref="Sex"/>.</returns>
-        public static Sex StringToSex(string strSex)
-        {
-            return ParseSex(strSex);
-        }
-
         /// <summary>
         /// Преобразует строку в тип перечисления "Пол" или возвращает Unknown.
         /// </summary>

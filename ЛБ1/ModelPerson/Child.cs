@@ -220,24 +220,24 @@
         public override string GetInfo()
         {
             var language = LanguageDetect(Name);
-            //TODO: RSDN
-            var loc = Locale.FieldLocale[language];
+            //TODO: RSDN +
+            var locale = Locale.FieldLocale[language];
 
             string fatherStatus = Father != null
-                ? $"{loc["Father"]}: {Father.GetPersonNameSurname()}"
-                : $"{loc["Father"]}: {loc["NoParent"]}";
+                ? $"{locale["Father"]}: {Father.GetPersonNameSurname()}"
+                : $"{locale["Father"]}: {locale["NoParent"]}";
 
             string motherStatus = Mother != null
-                ? $"{loc["Mother"]}: {Mother.GetPersonNameSurname()}"
-                : $"{loc["Mother"]}: {loc["NoParent"]}";
+                ? $"{locale["Mother"]}: {Mother.GetPersonNameSurname()}"
+                : $"{locale["Mother"]}: {locale["NoParent"]}";
 
             string kinderGarndenStatus = !string.IsNullOrEmpty(School)
-                ? $"{loc["Studying"]}: {School}"
-                : $"{loc["NotStudying"]}";
+                ? $"{locale["Studying"]}: {School}"
+                : $"{locale["NotStudying"]}";
 
             string schoolStatus = !string.IsNullOrEmpty(KinderGarten)
-                ? $"{loc["GoesInKD"]}: {School}"
-                : $"{loc["NotGoesInKD"]}";
+                ? $"{locale["GoesInKD"]}: {School}"
+                : $"{locale["NotGoesInKD"]}";
 
             return $"{GetPersonInfo()};\n {fatherStatus}; " +
                 $"{motherStatus}; {kinderGarndenStatus}; {schoolStatus}\n";

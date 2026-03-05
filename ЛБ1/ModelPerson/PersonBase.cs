@@ -115,41 +115,47 @@ namespace ModelPerson
         }
 
         /// <summary>
-        /// Регулярное выражение для определения латиницы (только буквы и дефис).
+        /// Регулярное выражение для определения латиницы (содержит латинские буквы).
         /// </summary>
-        private static readonly Regex _latinSymbols = new Regex(@"^[A-Za-z]+(?:-[A-Za-z]+)*$");
+        private static readonly Regex _latinSymbols = new Regex(@"[A-Za-z]");
 
         /// <summary>
-        /// Регулярное выражение для определения кириллицы (только буквы и дефис).
+        /// Регулярное выражение для определения кириллицы (содержит кириллические буквы).
         /// </summary>
-        private static readonly Regex _cyrillicSymbols = new Regex(@"^[А-Яа-яЁё]+(?:-[А-Яа-яЁё]+)*$");
+        private static readonly Regex _cyrillicSymbols = new Regex(@"[А-Яа-яЁё]");
 
         /// <summary>
         /// Метод для определения языка на основе имени
         /// </summary>
         /// <param name="name">Имя для анализа.</param>
-        /// <returns>Код языка ("ru-RU", "en-EN", 
+        /// <returns>Код языка ("ru-RU", "en-EN",
         /// "mix" или "неизвестный язык").</returns>
         public static Language LanguageDetect(string name)
         {
-            if (!string.IsNullOrEmpty(name))
+            if (string.IsNullOrWhiteSpace(name))
             {
-                if (_latinSymbols.IsMatch(name))
-                {
-                    return Language.En;
-                }
-                else if (_cyrillicSymbols.IsMatch(name))
-                {
-                    return Language.Ru;
-                }
-                else
-                {
-                    throw new ArgumentException($"Некорректный ввод." +
-                        $" Пожалуйста, попробуйте снова!");
-                }
+                return Language.Unknown;
             }
 
-            return Language.Unknown;
+            bool hasLatin = _latinSymbols.IsMatch(name);
+            bool hasCyrillic = _cyrillicSymbols.IsMatch(name);
+
+            if (hasLatin && !hasCyrillic)
+            {
+                return Language.En;
+            }
+            else if (hasCyrillic && !hasLatin)
+            {
+                return Language.Ru;
+            }
+            else if (hasLatin && hasCyrillic)
+            {
+                return Language.Unknown;  // Смешанный язык
+            }
+            else
+            {
+                return Language.Unknown;  // Нет букв (цифры, символы)
+            }
         }
 
         /// <summary>
@@ -193,12 +199,12 @@ namespace ModelPerson
                     $"Свойство {argumentName} должно быть заполнено.");
             }
 
-            if (!_latinSymbols.IsMatch(name) 
+            // Проверяем, что есть хотя бы одна буква (кириллица или латиница)
+            if (!_latinSymbols.IsMatch(name)
                 && !_cyrillicSymbols.IsMatch(name))
             {
                 throw new FormatException(
-                    $"Свойство {argumentName} должно быть только на кириллице," +
-                    $" либо только на латинице.");
+                    $"Свойство {argumentName} должно содержать хотя бы одну букву.");
             }
         }
 

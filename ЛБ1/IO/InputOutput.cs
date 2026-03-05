@@ -28,19 +28,19 @@ namespace IO
             switch (person)
             {
                 case Adult adult:
-                {
-                    WriteTextColorful("Ввод данных о взрослом", ConsoleColor.Cyan);
-                    ReadBaseProperties(adult);
-                    ReadAdultProperties(adult);
-                    break;
-                }
+                    {
+                        WriteTextColorful("Ввод данных о взрослом", ConsoleColor.Cyan);
+                        ReadBaseProperties(adult);
+                        ReadAdultProperties(adult);
+                        break;
+                    }
                 case Child child:
-                {
-                    WriteTextColorful("Ввод данных о ребенке", ConsoleColor.Cyan);
-                    ReadBaseProperties(child);
-                    ReadChildProperties(child);
-                    break;
-                }
+                    {
+                        WriteTextColorful("Ввод данных о ребенке", ConsoleColor.Cyan);
+                        ReadBaseProperties(child);
+                        ReadChildProperties(child);
+                        break;
+                    }
             }
         }
 
@@ -130,7 +130,7 @@ namespace IO
                 "Для женщин значения пола могут иметь " +
                 $"значения '{string.Join("', '", SexFemaleList)}'");
         }
-        
+
         /// <summary>
         /// Создает список случайных персон.
         /// </summary>
@@ -190,6 +190,7 @@ namespace IO
                         {
                            typeof(ArgumentNullException),
                            typeof(FormatException),
+                           typeof(ArgumentException),
                         },
                     () => { personReader.Name = Console.ReadLine(); }),
                 new PropertyHandlerDTO(
@@ -198,6 +199,7 @@ namespace IO
                         {
                            typeof(ArgumentNullException),
                            typeof(FormatException),
+                           typeof(ArgumentException),
                         },
                     () => { personReader.Surname = Console.ReadLine(); }),
                 new PropertyHandlerDTO(
@@ -359,6 +361,7 @@ namespace IO
             {
                 PersonPropertiesHandler(action);
             }
+
         }
 
         /// <summary>

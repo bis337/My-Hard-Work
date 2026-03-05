@@ -28,6 +28,7 @@ namespace ConsoleAppLab1
                 "и детей в случайном порядке",
                 ConsoleColor.Green);
             Language langauageList1 = Language.Ru;
+            Console.ReadKey();
 
             (string listName, PersonList personList) list1 =
                 InputOutput.GetRandomPersonList("list1", langauageList1, 7);

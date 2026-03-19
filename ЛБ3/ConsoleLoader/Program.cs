@@ -113,7 +113,7 @@ namespace ConsoleLoader
                 Console.WriteLine(
                     $"Перехвачено исключение: {ex.Message}");
             }
-
+             
             Console.WriteLine();
             Console.WriteLine("Нажмите любую клавишу для выхода...");
             Console.Read();

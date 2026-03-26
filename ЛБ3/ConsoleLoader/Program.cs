@@ -19,72 +19,49 @@ namespace ConsoleLoader
             Console.WriteLine();
 
             IShape shape;
-            //TODO: duplication
-            try
-            {
-                Console.WriteLine("--- Круг ---");
-                Console.Write(
-                    "Введите радиус круга (положительное число): ");
-                double radius = ReadDoubleFromConsole();
-                shape = new Circle(radius);
-                DisplayShapeInfo(shape);
-            }
-            //TODO: Specify exception
-            catch (Exception ex)
-            {
-                Console.WriteLine(
-                    $"Ошибка при создании круга: {ex.Message}");
-            }
+            //TODO: duplication +
+            CreateAndDisplayShape(
+                "--- Круг ---",
+                "Введите радиус круга (положительное число): ",
+                () =>
+                {
+                    double radius = ReadDoubleFromConsole();
+                    return new Circle(radius);
+                });
 
             Console.WriteLine();
-            //TODO: duplication
-            try
-            {
-                Console.WriteLine("--- Прямоугольник ---");
-                Console.Write(
-                    "Введите ширину прямоугольника " +
-                    "(положительное число): ");
-                double width = ReadDoubleFromConsole();
-                Console.Write(
-                    "Введите высоту прямоугольника " +
-                    "(положительное число): ");
-                double height = ReadDoubleFromConsole();
-                shape = new Rectangle(width, height);
-                DisplayShapeInfo(shape);
-            }
-            //TODO: Specify exception
-            catch (Exception ex)
-            {
-                Console.WriteLine(
-                    $"Ошибка при создании прямоугольника: {ex.Message}");
-            }
+            //TODO: duplication +
+            CreateAndDisplayShape(
+                "--- Прямоугольник ---",
+                "Введите ширину прямоугольника (положительное число): ",
+                () =>
+                {
+                    double width = ReadDoubleFromConsole();
+                    Console.Write(
+                        "Введите высоту прямоугольника " +
+                        "(положительное число): ");
+                    double height = ReadDoubleFromConsole();
+                    return new Rectangle(width, height);
+                });
 
             Console.WriteLine();
-            //TODO: duplication
-            try
-            {
-                Console.WriteLine("--- Треугольник ---");
-                Console.Write(
-                    "Введите длину первой стороны " +
-                    "(положительное число): ");
-                double a = ReadDoubleFromConsole();
-                Console.Write(
-                    "Введите длину второй стороны " +
-                    "(положительное число): ");
-                double b = ReadDoubleFromConsole();
-                Console.Write(
-                    "Введите длину третьей стороны " +
-                    "(положительное число): ");
-                double c = ReadDoubleFromConsole();
-                shape = new Triangle(a, b, c);
-                DisplayShapeInfo(shape);
-            }
-            //TODO: Specify exception
-            catch (Exception ex)
-            {
-                Console.WriteLine(
-                    $"Ошибка при создании треугольника: {ex.Message}");
-            }
+            //TODO: duplication +
+            CreateAndDisplayShape(
+                "--- Треугольник ---",
+                "Введите длину первой стороны (положительное число): ",
+                () =>
+                {
+                    double a = ReadDoubleFromConsole();
+                    Console.Write(
+                        "Введите длину второй стороны " +
+                        "(положительное число): ");
+                    double b = ReadDoubleFromConsole();
+                    Console.Write(
+                        "Введите длину третьей стороны " +
+                        "(положительное число): ");
+                    double c = ReadDoubleFromConsole();
+                    return new Triangle(a, b, c);
+                });
 
             Console.WriteLine();
             Console.WriteLine(
@@ -120,6 +97,31 @@ namespace ConsoleLoader
             Console.WriteLine();
             Console.WriteLine("Нажмите любую клавишу для выхода...");
             Console.Read();
+        }
+
+        /// <summary>
+        /// Создаёт фигуру и отображает информацию о ней.
+        /// </summary>
+        /// <param name="title">Заголовок фигуры.</param>
+        /// <param name="prompt">Запрос для ввода данных.</param>
+        /// <param name="factory">Фабричный метод создания фигуры.</param>
+        private static void CreateAndDisplayShape(
+            string title,
+            string prompt,
+            Func<IShape> factory)
+        {
+            Console.WriteLine(title);
+            Console.Write(prompt);
+            try
+            {
+                IShape shape = factory();
+                DisplayShapeInfo(shape);
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(
+                    $"Ошибка при создании фигуры: {ex.Message}");
+            }
         }
 
         /// <summary>

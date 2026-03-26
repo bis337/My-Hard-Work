@@ -7,7 +7,10 @@ namespace Model
     /// </summary>
     public class Circle : IShape
     {
-        //TODO: XML
+        //TODO: XML + 
+        /// <summary>
+        /// Радиус круга.
+        /// </summary>
         private readonly double _radius;
 
         /// <summary>
@@ -19,16 +22,11 @@ namespace Model
         public double Radius
         {
             get => _radius;
-            //TODO: WTF?
+            //TODO: WTF? +
             init
             {
-                //TODO: duplication
-                if (value <= 0)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(value),
-                        "Радиус круга должен быть положительным числом.");
-                }
+                //TODO: duplication +
+                ValidateRadius(value);
                 _radius = value;
             }
         }
@@ -75,6 +73,24 @@ namespace Model
         public override string ToString()
         {
             return $"{Name} с радиусом {_radius:F2}";
+        }
+
+        /// <summary>
+        /// Проверяет корректность значения радиуса.
+        /// </summary>
+        /// <param name="value">Значение радиуса.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Генерируется, если радиус меньше или равен нулю.
+        /// </exception>
+        private static void ValidateRadius(double value)
+        {
+            if (value <= 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    "Радиус круга должен быть " +
+                    "положительным числом.");
+            }
         }
     }
 }

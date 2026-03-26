@@ -7,26 +7,39 @@ namespace Model
     /// </summary>
     public class Triangle : IShape
     {
-        //TODO: XML
-        //TODO: RSDN
-        private readonly double _a;
-        private readonly double _b;
-        private readonly double _c;
+        /// <summary>
+        /// Длина первой стороны треугольника.
+        /// </summary>
+        //TODO: XML +
+        //TODO: RSDN +
+        private readonly double _sideA;
+        /// <summary>
+        /// Длина второй стороны треугольника.
+        /// </summary>
+        //TODO: XML +
+        //TODO: RSDN +
+        private readonly double _sideB;
+        /// <summary>
+        /// Длина третьей стороны треугольника.
+        /// </summary>
+        //TODO: XML +
+        //TODO: RSDN +
+        private readonly double _sideC;
 
         /// <summary>
         /// Получает длину первой стороны.
         /// </summary>
-        public double SideA => _a;
+        public double SideA => _sideA;
 
         /// <summary>
         /// Получает длину второй стороны.
         /// </summary>
-        public double SideB => _b;
+        public double SideB => _sideB;
 
         /// <summary>
         /// Получает длину третьей стороны.
         /// </summary>
-        public double SideC => _c;
+        public double SideC => _sideC;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса
@@ -42,37 +55,19 @@ namespace Model
         /// Генерируется, если треугольник с такими сторонами
         /// не существует.
         /// </exception>
-        /// //TODO: RSDN
-        public Triangle(double a, double b, double c)
+        //TODO: RSDN +
+        public Triangle(double sideA, double sideB, double sideC)
         {
-            //TODO: duplication
-            if (a <= 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    nameof(a),
-                    "Длина стороны должна быть " +
-                    "положительным числом.");
-            }
-            //TODO: duplication
-            if (b <= 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    nameof(b),
-                    "Длина стороны должна быть " +
-                    "положительным числом.");
-            }
-            //TODO: duplication
-            if (c <= 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    nameof(c),
-                    "Длина стороны должна быть " +
-                    "положительным числом.");
-            }
+            //TODO: duplication +
+            ValidateSide(sideA, nameof(sideA));
+            //TODO: duplication +
+            ValidateSide(sideB, nameof(sideB));
+            //TODO: duplication +
+            ValidateSide(sideC, nameof(sideC));
 
-            _a = a;
-            _b = b;
-            _c = c;
+            _sideA = sideA;
+            _sideB = sideB;
+            _sideC = sideC;
 
             ValidateTriangle();
         }
@@ -90,12 +85,32 @@ namespace Model
         /// </exception>
         private void ValidateTriangle()
         {
-            if (_a + _b <= _c || _a + _c <= _b || _b + _c <= _a)
+            if (_sideA + _sideB <= _sideC || _sideA + _sideC <= _sideB
+                || _sideB + _sideC <= _sideA)
             {
                 throw new ArgumentException(
-                    $"Треугольник со сторонами {_a}, {_b}, {_c} " +
-                    "не существует. Сумма любых двух сторон " +
-                    "должна быть больше третьей.");
+                    $"Треугольник со сторонами {_sideA}, {_sideB}, " +
+                    $"{_sideC} не существует. Сумма любых двух " +
+                    "сторон должна быть больше третьей.");
+            }
+        }
+
+        /// <summary>
+        /// Проверяет корректность значения стороны.
+        /// </summary>
+        /// <param name="value">Значение стороны.</param>
+        /// <param name="paramName">Имя параметра.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Генерируется, если сторона меньше или равна нулю.
+        /// </exception>
+        private static void ValidateSide(double value, string paramName)
+        {
+            if (value <= 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    paramName,
+                    "Длина стороны должна быть " +
+                    "положительным числом.");
             }
         }
 
@@ -105,8 +120,9 @@ namespace Model
         /// <returns>Площадь треугольника.</returns>
         public double CalculateArea()
         {
-            double p = (_a + _b + _c) / 2;
-            return Math.Sqrt(p * (p - _a) * (p - _b) * (p - _c));
+            double p = (_sideA + _sideB + _sideC) / 2;
+            return Math.Sqrt(p * (p - _sideA) * (p - _sideB)
+                * (p - _sideC));
         }
 
         /// <summary>
@@ -115,7 +131,7 @@ namespace Model
         /// <returns>Периметр треугольника.</returns>
         public double CalculatePerimeter()
         {
-            return _a + _b + _c;
+            return _sideA + _sideB + _sideC;
         }
 
         /// <summary>
@@ -124,7 +140,8 @@ namespace Model
         /// <returns>Строка с описанием треугольника.</returns>
         public override string ToString()
         {
-            return $"{Name} со сторонами {_a:F2}, {_b:F2}, {_c:F2}";
+            return $"{Name} со сторонами {_sideA:F2}, {_sideB:F2}, " +
+                $"{_sideC:F2}";
         }
     }
 }

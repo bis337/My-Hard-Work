@@ -7,8 +7,15 @@ namespace Model
     /// </summary>
     public class Rectangle : IShape
     {
-        //TODO: XML
+        /// <summary>
+        /// Ширина прямоугольника.
+        /// </summary>
+        //TODO: XML +
         private readonly double _width;
+        /// <summary>
+        /// Высота прямоугольника.
+        /// </summary>
+        //TODO: XML +
         private readonly double _height;
 
         /// <summary>
@@ -20,17 +27,11 @@ namespace Model
         public double Width
         {
             get => _width;
-            //TODO: WTF?
+            //TODO: WTF? +
             init
             {
-                //TODO: duplication
-                if (value <= 0)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(value),
-                        "Ширина прямоугольника должна быть " +
-                        "положительным числом.");
-                }
+                //TODO: duplication +
+                ValidateWidth(value);
                 _width = value;
             }
         }
@@ -46,14 +47,8 @@ namespace Model
             get => _height;
             init
             {
-                //TODO: duplication
-                if (value <= 0)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(value),
-                        "Высота прямоугольника должна быть " +
-                        "положительным числом.");
-                }
+                //TODO: duplication +
+                ValidateHeight(value);
                 _height = value;
             }
         }
@@ -104,6 +99,42 @@ namespace Model
         public override string ToString()
         {
             return $"{Name} с шириной {_width:F2} и высотой {_height:F2}";
+        }
+
+        /// <summary>
+        /// Проверяет корректность значения ширины.
+        /// </summary>
+        /// <param name="value">Значение ширины.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Генерируется, если ширина меньше или равна нулю.
+        /// </exception>
+        private static void ValidateWidth(double value)
+        {
+            if (value <= 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    "Ширина прямоугольника должна быть " +
+                    "положительным числом.");
+            }
+        }
+
+        /// <summary>
+        /// Проверяет корректность значения высоты.
+        /// </summary>
+        /// <param name="value">Значение высоты.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Генерируется, если высота меньше или равна нулю.
+        /// </exception>
+        private static void ValidateHeight(double value)
+        {
+            if (value <= 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    "Высота прямоугольника должна быть " +
+                    "положительным числом.");
+            }
         }
     }
 }

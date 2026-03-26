@@ -19,7 +19,7 @@ namespace ConsoleLoader
             Console.WriteLine();
 
             IShape shape;
-
+            //TODO: duplication
             try
             {
                 Console.WriteLine("--- Круг ---");
@@ -29,6 +29,7 @@ namespace ConsoleLoader
                 shape = new Circle(radius);
                 DisplayShapeInfo(shape);
             }
+            //TODO: Specify exception
             catch (Exception ex)
             {
                 Console.WriteLine(
@@ -36,7 +37,7 @@ namespace ConsoleLoader
             }
 
             Console.WriteLine();
-
+            //TODO: duplication
             try
             {
                 Console.WriteLine("--- Прямоугольник ---");
@@ -51,6 +52,7 @@ namespace ConsoleLoader
                 shape = new Rectangle(width, height);
                 DisplayShapeInfo(shape);
             }
+            //TODO: Specify exception
             catch (Exception ex)
             {
                 Console.WriteLine(
@@ -58,7 +60,7 @@ namespace ConsoleLoader
             }
 
             Console.WriteLine();
-
+            //TODO: duplication
             try
             {
                 Console.WriteLine("--- Треугольник ---");
@@ -77,6 +79,7 @@ namespace ConsoleLoader
                 shape = new Triangle(a, b, c);
                 DisplayShapeInfo(shape);
             }
+            //TODO: Specify exception
             catch (Exception ex)
             {
                 Console.WriteLine(

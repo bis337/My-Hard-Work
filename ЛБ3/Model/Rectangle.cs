@@ -7,6 +7,7 @@ namespace Model
     /// </summary>
     public class Rectangle : IShape
     {
+        //TODO: XML
         private readonly double _width;
         private readonly double _height;
 
@@ -19,8 +20,10 @@ namespace Model
         public double Width
         {
             get => _width;
+            //TODO: WTF?
             init
             {
+                //TODO: duplication
                 if (value <= 0)
                 {
                     throw new ArgumentOutOfRangeException(
@@ -43,6 +46,7 @@ namespace Model
             get => _height;
             init
             {
+                //TODO: duplication
                 if (value <= 0)
                 {
                     throw new ArgumentOutOfRangeException(

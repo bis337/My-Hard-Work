@@ -7,6 +7,8 @@ namespace Model
     /// </summary>
     public class Triangle : IShape
     {
+        //TODO: XML
+        //TODO: RSDN
         private readonly double _a;
         private readonly double _b;
         private readonly double _c;
@@ -40,8 +42,10 @@ namespace Model
         /// Генерируется, если треугольник с такими сторонами
         /// не существует.
         /// </exception>
+        /// //TODO: RSDN
         public Triangle(double a, double b, double c)
         {
+            //TODO: duplication
             if (a <= 0)
             {
                 throw new ArgumentOutOfRangeException(
@@ -49,6 +53,7 @@ namespace Model
                     "Длина стороны должна быть " +
                     "положительным числом.");
             }
+            //TODO: duplication
             if (b <= 0)
             {
                 throw new ArgumentOutOfRangeException(
@@ -56,6 +61,7 @@ namespace Model
                     "Длина стороны должна быть " +
                     "положительным числом.");
             }
+            //TODO: duplication
             if (c <= 0)
             {
                 throw new ArgumentOutOfRangeException(

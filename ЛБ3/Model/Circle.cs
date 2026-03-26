@@ -7,6 +7,7 @@ namespace Model
     /// </summary>
     public class Circle : IShape
     {
+        //TODO: XML
         private readonly double _radius;
 
         /// <summary>
@@ -18,8 +19,10 @@ namespace Model
         public double Radius
         {
             get => _radius;
+            //TODO: WTF?
             init
             {
+                //TODO: duplication
                 if (value <= 0)
                 {
                     throw new ArgumentOutOfRangeException(

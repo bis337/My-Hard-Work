@@ -18,8 +18,6 @@ namespace ConsoleLoader
                 "=== Лабораторная работа №3: Геометрические фигуры ===");
             Console.WriteLine();
 
-            //TODO: RSDN
-            IShape shape;
             CreateAndDisplayShape(
                 "--- Круг ---",
                 "Введите радиус круга (положительное число): ",
@@ -70,7 +68,8 @@ namespace ConsoleLoader
             {
                 Console.WriteLine(
                     "Попытка создать круг с отрицательным радиусом...");
-                shape = new Circle(-5);
+                //TODO: RSDN +
+                IShape shape = new Circle(-5);
             }
             catch (ArgumentOutOfRangeException ex)
             {
@@ -84,7 +83,8 @@ namespace ConsoleLoader
             {
                 Console.WriteLine(
                     "Попытка создать треугольник со сторонами (1, 2, 10)...");
-                shape = new Triangle(1, 2, 10);
+                //TODO: RSDN +
+                IShape shape = new Triangle(1, 2, 10);
             }
             catch (ArgumentException ex)
             {

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace Model
 {
@@ -53,9 +54,9 @@ namespace Model
         /// </exception>
         public Triangle(double sideA, double sideB, double sideC)
         {
-            ValidateSide(sideA, nameof(sideA));
-            ValidateSide(sideB, nameof(sideB));
-            ValidateSide(sideC, nameof(sideC));
+            Validator.ValidateSide(sideA, nameof(sideA));
+            Validator.ValidateSide(sideB, nameof(sideB));
+            Validator.ValidateSide(sideC, nameof(sideC));
 
             _sideA = sideA;
             _sideB = sideB;
@@ -87,37 +88,18 @@ namespace Model
             }
         }
 
-        //TODO: duplication
-        /// <summary>
-        /// Проверяет корректность значения стороны.
-        /// </summary>
-        /// <param name="value">Значение стороны.</param>
-        /// <param name="paramName">Имя параметра.</param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Генерируется, если сторона меньше или равна нулю.
-        /// </exception>
-        private static void ValidateSide(double value, string paramName)
-        {
-            if (value <= 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    paramName,
-                    "Длина стороны должна быть " +
-                    "положительным числом.");
-            }
-        }
-
         /// <summary>
         /// Вычисляет площадь треугольника по формуле Герона.
         /// </summary>
         /// <returns>Площадь треугольника.</returns>
         public double CalculateArea()
         {
-            //TODO: RSDN
-            //TODO: duplication
-            double p = (_sideA + _sideB + _sideC) / 2;
-            return Math.Sqrt(p * (p - _sideA) * (p - _sideB)
-                * (p - _sideC));
+            //TODO: RSDN +
+            //TODO: duplication +
+            double perimeter = CalculatePerimeter();
+            double semiPerimeter = perimeter / 2;
+            return Math.Sqrt(semiPerimeter * (semiPerimeter - _sideA)
+                * (semiPerimeter - _sideB) * (semiPerimeter - _sideC));
         }
 
         /// <summary>
@@ -135,9 +117,29 @@ namespace Model
         /// <returns>Строка с описанием треугольника.</returns>
         public override string ToString()
         {
-            //TODO: duplication
-            return $"{Name} со сторонами {_sideA:F2}, {_sideB:F2}, " +
-                $"{_sideC:F2}";
+            //TODO: duplication +
+            return FormatToString(
+                Name,
+                "сторонами",
+                _sideA,
+                _sideB,
+                _sideC);
+        }
+
+        /// <summary>
+        /// Форматирует строковое представление фигуры.
+        /// </summary>
+        /// <param name="name">Название фигуры.</param>
+        /// <param name="paramName">Название параметров.</param>
+        /// <param name="values">Значения параметров.</param>
+        /// <returns>Отформатированная строка.</returns>
+        private static string FormatToString(
+            string name,
+            string paramName,
+            params double[] values)
+        {
+            var formattedValues = string.Join(", ", values.Select(v => $"{v:F2}"));
+            return $"{name} с {paramName.ToLower()} {formattedValues}";
         }
     }
 }

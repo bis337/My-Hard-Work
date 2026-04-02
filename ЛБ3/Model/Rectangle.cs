@@ -27,7 +27,11 @@ namespace Model
             get => _width;
             init
             {
-                ValidateWidth(value);
+                Validator.ValidatePositive(
+                    value,
+                    nameof(value),
+                    "Ширина прямоугольника должна быть " +
+                    "положительным числом.");
                 _width = value;
             }
         }
@@ -43,7 +47,11 @@ namespace Model
             get => _height;
             init
             {
-                ValidateHeight(value);
+                Validator.ValidatePositive(
+                    value,
+                    nameof(value),
+                    "Высота прямоугольника должна быть " +
+                    "положительным числом.");
                 _height = value;
             }
         }
@@ -93,46 +101,7 @@ namespace Model
         /// <returns>Строка с описанием прямоугольника.</returns>
         public override string ToString()
         {
-            //TODO: duplication
             return $"{Name} с шириной {_width:F2} и высотой {_height:F2}";
-        }
-
-        //TODO: duplication
-        /// <summary>
-        /// Проверяет корректность значения ширины.
-        /// </summary>
-        /// <param name="value">Значение ширины.</param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Генерируется, если ширина меньше или равна нулю.
-        /// </exception>
-        private static void ValidateWidth(double value)
-        {
-            if (value <= 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    nameof(value),
-                    "Ширина прямоугольника должна быть " +
-                    "положительным числом.");
-            }
-        }
-
-        //TODO: duplication
-        /// <summary>
-        /// Проверяет корректность значения высоты.
-        /// </summary>
-        /// <param name="value">Значение высоты.</param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Генерируется, если высота меньше или равна нулю.
-        /// </exception>
-        private static void ValidateHeight(double value)
-        {
-            if (value <= 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    nameof(value),
-                    "Высота прямоугольника должна быть " +
-                    "положительным числом.");
-            }
         }
     }
 }

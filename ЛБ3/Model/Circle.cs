@@ -7,7 +7,6 @@ namespace Model
     /// </summary>
     public class Circle : IShape
     {
-        //TODO: XML + 
         /// <summary>
         /// Радиус круга.
         /// </summary>
@@ -22,10 +21,8 @@ namespace Model
         public double Radius
         {
             get => _radius;
-            //TODO: WTF? +
             init
             {
-                //TODO: duplication +
                 ValidateRadius(value);
                 _radius = value;
             }
@@ -72,9 +69,11 @@ namespace Model
         /// <returns>Строка с описанием круга.</returns>
         public override string ToString()
         {
+            //TODO: duplication
             return $"{Name} с радиусом {_radius:F2}";
         }
 
+        //TODO: duplication
         /// <summary>
         /// Проверяет корректность значения радиуса.
         /// </summary>

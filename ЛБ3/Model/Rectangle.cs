@@ -10,12 +10,10 @@ namespace Model
         /// <summary>
         /// Ширина прямоугольника.
         /// </summary>
-        //TODO: XML +
         private readonly double _width;
         /// <summary>
         /// Высота прямоугольника.
         /// </summary>
-        //TODO: XML +
         private readonly double _height;
 
         /// <summary>
@@ -27,10 +25,8 @@ namespace Model
         public double Width
         {
             get => _width;
-            //TODO: WTF? +
             init
             {
-                //TODO: duplication +
                 ValidateWidth(value);
                 _width = value;
             }
@@ -47,7 +43,6 @@ namespace Model
             get => _height;
             init
             {
-                //TODO: duplication +
                 ValidateHeight(value);
                 _height = value;
             }
@@ -98,9 +93,11 @@ namespace Model
         /// <returns>Строка с описанием прямоугольника.</returns>
         public override string ToString()
         {
+            //TODO: duplication
             return $"{Name} с шириной {_width:F2} и высотой {_height:F2}";
         }
 
+        //TODO: duplication
         /// <summary>
         /// Проверяет корректность значения ширины.
         /// </summary>
@@ -119,6 +116,7 @@ namespace Model
             }
         }
 
+        //TODO: duplication
         /// <summary>
         /// Проверяет корректность значения высоты.
         /// </summary>

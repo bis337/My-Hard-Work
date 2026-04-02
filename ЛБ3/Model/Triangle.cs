@@ -10,20 +10,16 @@ namespace Model
         /// <summary>
         /// Длина первой стороны треугольника.
         /// </summary>
-        //TODO: XML +
-        //TODO: RSDN +
         private readonly double _sideA;
+
         /// <summary>
         /// Длина второй стороны треугольника.
         /// </summary>
-        //TODO: XML +
-        //TODO: RSDN +
         private readonly double _sideB;
+
         /// <summary>
         /// Длина третьей стороны треугольника.
         /// </summary>
-        //TODO: XML +
-        //TODO: RSDN +
         private readonly double _sideC;
 
         /// <summary>
@@ -55,14 +51,10 @@ namespace Model
         /// Генерируется, если треугольник с такими сторонами
         /// не существует.
         /// </exception>
-        //TODO: RSDN +
         public Triangle(double sideA, double sideB, double sideC)
         {
-            //TODO: duplication +
             ValidateSide(sideA, nameof(sideA));
-            //TODO: duplication +
             ValidateSide(sideB, nameof(sideB));
-            //TODO: duplication +
             ValidateSide(sideC, nameof(sideC));
 
             _sideA = sideA;
@@ -95,6 +87,7 @@ namespace Model
             }
         }
 
+        //TODO: duplication
         /// <summary>
         /// Проверяет корректность значения стороны.
         /// </summary>
@@ -120,6 +113,8 @@ namespace Model
         /// <returns>Площадь треугольника.</returns>
         public double CalculateArea()
         {
+            //TODO: RSDN
+            //TODO: duplication
             double p = (_sideA + _sideB + _sideC) / 2;
             return Math.Sqrt(p * (p - _sideA) * (p - _sideB)
                 * (p - _sideC));
@@ -140,6 +135,7 @@ namespace Model
         /// <returns>Строка с описанием треугольника.</returns>
         public override string ToString()
         {
+            //TODO: duplication
             return $"{Name} со сторонами {_sideA:F2}, {_sideB:F2}, " +
                 $"{_sideC:F2}";
         }

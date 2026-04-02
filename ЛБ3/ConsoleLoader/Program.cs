@@ -18,8 +18,8 @@ namespace ConsoleLoader
                 "=== Лабораторная работа №3: Геометрические фигуры ===");
             Console.WriteLine();
 
+            //TODO: RSDN
             IShape shape;
-            //TODO: duplication +
             CreateAndDisplayShape(
                 "--- Круг ---",
                 "Введите радиус круга (положительное число): ",
@@ -30,7 +30,6 @@ namespace ConsoleLoader
                 });
 
             Console.WriteLine();
-            //TODO: duplication +
             CreateAndDisplayShape(
                 "--- Прямоугольник ---",
                 "Введите ширину прямоугольника (положительное число): ",
@@ -45,7 +44,6 @@ namespace ConsoleLoader
                 });
 
             Console.WriteLine();
-            //TODO: duplication +
             CreateAndDisplayShape(
                 "--- Треугольник ---",
                 "Введите длину первой стороны (положительное число): ",

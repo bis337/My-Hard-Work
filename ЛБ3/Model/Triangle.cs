@@ -94,8 +94,6 @@ namespace Model
         /// <returns>Площадь треугольника.</returns>
         public double CalculateArea()
         {
-            //TODO: RSDN +
-            //TODO: duplication +
             double perimeter = CalculatePerimeter();
             double semiPerimeter = perimeter / 2;
             return Math.Sqrt(semiPerimeter * (semiPerimeter - _sideA)
@@ -117,7 +115,6 @@ namespace Model
         /// <returns>Строка с описанием треугольника.</returns>
         public override string ToString()
         {
-            //TODO: duplication +
             return FormatToString(
                 Name,
                 "сторонами",
@@ -138,6 +135,7 @@ namespace Model
             string paramName,
             params double[] values)
         {
+            //TODO: duplication
             var formattedValues = string.Join(", ", values.Select(v => $"{v:F2}"));
             return $"{name} с {paramName.ToLower()} {formattedValues}";
         }

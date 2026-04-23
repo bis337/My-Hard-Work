@@ -101,6 +101,7 @@ namespace Model
         /// <returns>Строка с описанием прямоугольника.</returns>
         public override string ToString()
         {
+            //TODO: duplication
             return $"{Name} с шириной {_width:F2} и высотой {_height:F2}";
         }
     }

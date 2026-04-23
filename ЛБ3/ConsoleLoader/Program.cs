@@ -68,7 +68,6 @@ namespace ConsoleLoader
             {
                 Console.WriteLine(
                     "Попытка создать круг с отрицательным радиусом...");
-                //TODO: RSDN +
                 IShape shape = new Circle(-5);
             }
             catch (ArgumentOutOfRangeException ex)
@@ -83,7 +82,6 @@ namespace ConsoleLoader
             {
                 Console.WriteLine(
                     "Попытка создать треугольник со сторонами (1, 2, 10)...");
-                //TODO: RSDN +
                 IShape shape = new Triangle(1, 2, 10);
             }
             catch (ArgumentException ex)

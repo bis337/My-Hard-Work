@@ -7,7 +7,7 @@ namespace Model
     /// </summary>
     internal static class Validator
     {
-        //TODO: refactor
+        //TODO: refactor+
         /// <summary>
         /// Сообщение об ошибке для положительного числа.
         /// </summary>
@@ -34,7 +34,7 @@ namespace Model
             }
         }
 
-        //TODO: refactor
+        //TODO: refactor+
         /// <summary>
         /// Проверяет, что значение стороны является положительным числом.
         /// </summary>
@@ -48,6 +48,25 @@ namespace Model
             string paramName)
         {
             ValidatePositive(value, paramName, GetSideMessage(paramName));
+        }
+
+        /// <summary>
+        /// Проверяет, что значение радиуса является положительным числом.
+        /// </summary>
+        /// <param name="value">Проверяемое значение.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Генерируется, если значение меньше или равно нулю.
+        /// </exception>
+        public static void ValidateRadiusForCircle(
+            double value)
+        {
+            if (value <= 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    "Радиус круга должен быть " +
+                    "положительным числом.");
+            }
         }
 
         /// <summary>

@@ -9,6 +9,11 @@ namespace Model
     public class Triangle : IShape
     {
         /// <summary>
+        /// Формат для округления вещественных чисел при выводе.
+        /// </summary>
+        private const string FormatPrecision = "F2";
+
+        /// <summary>
         /// Длина первой стороны треугольника.
         /// </summary>
         private readonly double _sideA;
@@ -54,6 +59,8 @@ namespace Model
         /// </exception>
         public Triangle(double sideA, double sideB, double sideC)
         {
+            // Используем метод ValidateSide из Validator
+            // Передаём имя переменной (не свойства), так как они ещё не инициализированы
             Validator.ValidateSide(sideA, nameof(sideA));
             Validator.ValidateSide(sideB, nameof(sideB));
             Validator.ValidateSide(sideC, nameof(sideC));
@@ -135,8 +142,8 @@ namespace Model
             string paramName,
             params double[] values)
         {
-            //TODO: duplication
-            var formattedValues = string.Join(", ", values.Select(v => $"{v:F2}"));
+            //TODO: duplication+
+            var formattedValues = string.Join(", ", values.Select(v => v.ToString(FormatPrecision)));
             return $"{name} с {paramName.ToLower()} {formattedValues}";
         }
     }

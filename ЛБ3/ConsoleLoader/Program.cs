@@ -23,8 +23,8 @@ namespace ConsoleLoader
                 "Введите радиус круга (положительное число): ",
                 () =>
                 {
-                    double radius = ReadDoubleFromConsole();
-                    return new Circle(radius);
+                    double radius = ReadPositiveDoubleFromConsole("радиус");
+                    return new Circle(radius); 
                 });
 
             Console.WriteLine();
@@ -33,12 +33,12 @@ namespace ConsoleLoader
                 "Введите ширину прямоугольника (положительное число): ",
                 () =>
                 {
-                    double width = ReadDoubleFromConsole();
+                    double width = ReadPositiveDoubleFromConsole("ширину");
                     Console.Write(
                         "Введите высоту прямоугольника " +
                         "(положительное число): ");
-                    double height = ReadDoubleFromConsole();
-                    return new Rectangle(width, height);
+                    double height = ReadPositiveDoubleFromConsole("высоту");
+                    return new Rectangle(width, height); 
                 });
 
             Console.WriteLine();
@@ -47,16 +47,27 @@ namespace ConsoleLoader
                 "Введите длину первой стороны (положительное число): ",
                 () =>
                 {
-                    double a = ReadDoubleFromConsole();
+                    double a = ReadPositiveDoubleFromConsole("первую сторону");
                     Console.Write(
                         "Введите длину второй стороны " +
                         "(положительное число): ");
-                    double b = ReadDoubleFromConsole();
+                    double b = ReadPositiveDoubleFromConsole("вторую сторону");
                     Console.Write(
                         "Введите длину третьей стороны " +
                         "(положительное число): ");
-                    double c = ReadDoubleFromConsole();
-                    return new Triangle(a, b, c);
+                    double c = ReadPositiveDoubleFromConsole("третью сторону");
+                  
+                    try
+                    {
+                       
+                        new Triangle(a, b, c);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        
+                        throw ex; 
+                    }
+                    return new Triangle(a, b, c); 
                 });
 
             Console.WriteLine();
@@ -81,15 +92,15 @@ namespace ConsoleLoader
             try
             {
                 Console.WriteLine(
-                    "Попытка создать треугольник со сторонами (1, 2, 10)...");
+                    "Попытка создать треугольник со сторонами (1, 2, 10)..."); 
                 IShape shape = new Triangle(1, 2, 10);
             }
-            catch (ArgumentException ex)
+            catch (ArgumentException ex) 
             {
                 Console.WriteLine(
                     $"Перехвачено исключение: {ex.Message}");
             }
-             
+
             Console.WriteLine();
             Console.WriteLine("Нажмите любую клавишу для выхода...");
             Console.Read();
@@ -110,10 +121,15 @@ namespace ConsoleLoader
             Console.Write(prompt);
             try
             {
-                IShape shape = factory();
+                IShape shape = factory(); 
                 DisplayShapeInfo(shape);
             }
-            catch (ArgumentException ex)
+            catch (ArgumentOutOfRangeException ex) 
+            {
+                Console.WriteLine(
+                    $"Ошибка при создании фигуры: {ex.Message}");
+            }
+            catch (ArgumentException ex) 
             {
                 Console.WriteLine(
                     $"Ошибка при создании фигуры: {ex.Message}");
@@ -121,20 +137,34 @@ namespace ConsoleLoader
         }
 
         /// <summary>
-        /// Читает число типа double из консоли.
+        /// Читает положительное число типа double из консоли.
         /// </summary>
-        /// <returns>Введенное число.</returns>
-        private static double ReadDoubleFromConsole()
+        /// <param name="paramName">Название параметра для сообщения об ошибке.</param>
+        /// <returns>Введенное положительное число.</returns>
+        private static double ReadPositiveDoubleFromConsole(string paramName)
         {
             while (true)
             {
                 string? input = Console.ReadLine();
                 if (double.TryParse(input, out double result))
                 {
-                    return result;
+               
+                    if (result > 0)
+                    {
+                        return result; 
+                    }
+                    else
+                    {
+                 
+                        Console.Write(
+                            $"Значение для {paramName} должно быть положительным числом. Повторите ввод: ");
+                    }
                 }
-                Console.Write(
-                    "Некорректный ввод. Введите число: ");
+                else
+                {
+                    Console.Write(
+                        $"Некорректный ввод. Введите число: ");
+                }
             }
         }
 

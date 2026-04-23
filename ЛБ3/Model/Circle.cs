@@ -8,6 +8,11 @@ namespace Model
     public class Circle : IShape
     {
         /// <summary>
+        /// Формат для округления вещественных чисел при выводе.
+        /// </summary>
+        private const string FormatPrecision = "F2";
+
+        /// <summary>
         /// Радиус круга.
         /// </summary>
         private readonly double _radius;
@@ -23,7 +28,8 @@ namespace Model
             get => _radius;
             init
             {
-                ValidateRadius(value);
+                // Вызов валидации из Validator
+                Validator.ValidateRadiusForCircle(value);
                 _radius = value;
             }
         }
@@ -69,27 +75,10 @@ namespace Model
         /// <returns>Строка с описанием круга.</returns>
         public override string ToString()
         {
-            //TODO: duplication
-            return $"{Name} с радиусом {_radius:F2}";
+            //TODO: duplication+
+            return $"{Name} с радиусом {_radius.ToString(FormatPrecision)}";
         }
 
-        //TODO: duplication
-        /// <summary>
-        /// Проверяет корректность значения радиуса.
-        /// </summary>
-        /// <param name="value">Значение радиуса.</param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Генерируется, если радиус меньше или равен нулю.
-        /// </exception>
-        private static void ValidateRadius(double value)
-        {
-            if (value <= 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    nameof(value),
-                    "Радиус круга должен быть " +
-                    "положительным числом.");
-            }
-        }
+        // Валидация перемещена в Validator.cs
     }
 }

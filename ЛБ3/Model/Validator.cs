@@ -7,7 +7,6 @@ namespace Model
     /// </summary>
     internal static class Validator
     {
-        //TODO: refactor+
         /// <summary>
         /// Сообщение об ошибке для положительного числа.
         /// </summary>
@@ -34,7 +33,6 @@ namespace Model
             }
         }
 
-        //TODO: refactor+
         /// <summary>
         /// Проверяет, что значение стороны является положительным числом.
         /// </summary>

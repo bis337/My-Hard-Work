@@ -8,6 +8,7 @@ namespace Model
     /// </summary>
     public class Triangle : IShape
     {
+        //TODO: duplication
         /// <summary>
         /// Формат для округления вещественных чисел при выводе.
         /// </summary>
@@ -85,7 +86,8 @@ namespace Model
         /// </exception>
         private void ValidateTriangle()
         {
-            if (_sideA + _sideB <= _sideC || _sideA + _sideC <= _sideB
+            if (_sideA + _sideB <= _sideC 
+                || _sideA + _sideC <= _sideB
                 || _sideB + _sideC <= _sideA)
             {
                 throw new ArgumentException(
@@ -139,10 +141,11 @@ namespace Model
         /// <returns>Отформатированная строка.</returns>
         private static string FormatToString(
             string name,
+            //TODO: RSDN
             string paramName,
             params double[] values)
         {
-            //TODO: duplication+
+            //TODO: RSDN
             var formattedValues = string.Join(", ", values.Select(v => v.ToString(FormatPrecision)));
             return $"{name} с {paramName.ToLower()} {formattedValues}";
         }

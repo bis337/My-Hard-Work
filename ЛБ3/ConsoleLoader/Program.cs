@@ -148,7 +148,6 @@ namespace ConsoleLoader
                 string? input = Console.ReadLine();
                 if (double.TryParse(input, out double result))
                 {
-               
                     if (result > 0)
                     {
                         return result; 
@@ -157,6 +156,7 @@ namespace ConsoleLoader
                     {
                  
                         Console.Write(
+                            //TODO: RSDN
                             $"Значение для {paramName} должно быть положительным числом. Повторите ввод: ");
                     }
                 }

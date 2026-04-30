@@ -7,6 +7,7 @@ namespace Model
     /// </summary>
     public class Circle : IShape
     {
+        //TODO: duplication
         /// <summary>
         /// Формат для округления вещественных чисел при выводе.
         /// </summary>
@@ -28,7 +29,6 @@ namespace Model
             get => _radius;
             init
             {
-                // Вызов валидации из Validator
                 Validator.ValidateRadiusForCircle(value);
                 _radius = value;
             }
@@ -75,10 +75,7 @@ namespace Model
         /// <returns>Строка с описанием круга.</returns>
         public override string ToString()
         {
-            //TODO: duplication+
             return $"{Name} с радиусом {_radius.ToString(FormatPrecision)}";
         }
-
-        // Валидация перемещена в Validator.cs
     }
 }

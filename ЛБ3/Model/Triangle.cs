@@ -8,12 +8,6 @@ namespace Model
     /// </summary>
     public class Triangle : IShape
     {
-        //TODO: duplication
-        /// <summary>
-        /// Формат для округления вещественных чисел при выводе.
-        /// </summary>
-        private const string FormatPrecision = "F2";
-
         /// <summary>
         /// Длина первой стороны треугольника.
         /// </summary>
@@ -48,9 +42,9 @@ namespace Model
         /// Инициализирует новый экземпляр класса
         /// <see cref="Triangle"/>.
         /// </summary>
-        /// <param name="a">Длина первой стороны.</param>
-        /// <param name="b">Длина второй стороны.</param>
-        /// <param name="c">Длина третьей стороны.</param>
+        /// <param name="sideA">Длина первой стороны.</param>
+        /// <param name="sideB">Длина второй стороны.</param>
+        /// <param name="sideC">Длина третьей стороны.</param>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Генерируется, если сторона меньше или равна нулю.
         /// </exception>
@@ -60,8 +54,6 @@ namespace Model
         /// </exception>
         public Triangle(double sideA, double sideB, double sideC)
         {
-            // Используем метод ValidateSide из Validator
-            // Передаём имя переменной (не свойства), так как они ещё не инициализированы
             Validator.ValidateSide(sideA, nameof(sideA));
             Validator.ValidateSide(sideB, nameof(sideB));
             Validator.ValidateSide(sideC, nameof(sideC));
@@ -86,7 +78,7 @@ namespace Model
         /// </exception>
         private void ValidateTriangle()
         {
-            if (_sideA + _sideB <= _sideC 
+            if (_sideA + _sideB <= _sideC
                 || _sideA + _sideC <= _sideB
                 || _sideB + _sideC <= _sideA)
             {
@@ -136,18 +128,18 @@ namespace Model
         /// Форматирует строковое представление фигуры.
         /// </summary>
         /// <param name="name">Название фигуры.</param>
-        /// <param name="paramName">Название параметров.</param>
+        /// <param name="parameterName">Название параметров.</param>
         /// <param name="values">Значения параметров.</param>
         /// <returns>Отформатированная строка.</returns>
         private static string FormatToString(
             string name,
-            //TODO: RSDN
-            string paramName,
+            string parameterName,
             params double[] values)
         {
-            //TODO: RSDN
-            var formattedValues = string.Join(", ", values.Select(v => v.ToString(FormatPrecision)));
-            return $"{name} с {paramName.ToLower()} {formattedValues}";
+            //TODO: duplication+
+            var formattedValues = string.Join(", ",
+                values.Select(v => v.ToString(Constants.FormatPrecision)));
+            return $"{name} с {parameterName.ToLower()} {formattedValues}";
         }
     }
 }

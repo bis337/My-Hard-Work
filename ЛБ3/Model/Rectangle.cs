@@ -7,12 +7,6 @@ namespace Model
     /// </summary>
     public class Rectangle : IShape
     {
-        //TODO: duplication
-        /// <summary>
-        /// Формат для округления вещественных чисел при выводе.
-        /// </summary>
-        private const string FormatPrecision = "F2";
-
         /// <summary>
         /// Ширина прямоугольника.
         /// </summary>
@@ -107,8 +101,9 @@ namespace Model
         /// <returns>Строка с описанием прямоугольника.</returns>
         public override string ToString()
         {
-            //TODO: RSDN
-            return $"{Name} с шириной {_width.ToString(FormatPrecision)} и высотой {_height.ToString(FormatPrecision)}";
+            //TODO: duplication+
+            return $"{Name} с шириной {_width.ToString(Constants.FormatPrecision)} " +
+                $"и высотой {_height.ToString(Constants.FormatPrecision)}";
         }
     }
 }

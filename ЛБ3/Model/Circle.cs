@@ -7,12 +7,6 @@ namespace Model
     /// </summary>
     public class Circle : IShape
     {
-        //TODO: duplication
-        /// <summary>
-        /// Формат для округления вещественных чисел при выводе.
-        /// </summary>
-        private const string FormatPrecision = "F2";
-
         /// <summary>
         /// Радиус круга.
         /// </summary>
@@ -75,7 +69,8 @@ namespace Model
         /// <returns>Строка с описанием круга.</returns>
         public override string ToString()
         {
-            return $"{Name} с радиусом {_radius.ToString(FormatPrecision)}";
+            //TODO: duplication+
+            return $"{Name} с радиусом {_radius.ToString(Constants.FormatPrecision)}";
         }
     }
 }

@@ -156,7 +156,6 @@ namespace ConsoleLoader
                     {
                  
                         Console.Write(
-                            //TODO: RSDN +
                             $"Значение для {paramName} должно быть положительным числом." +
                             $" " +$"Повторите ввод: ");
                     }

@@ -69,7 +69,6 @@ namespace Model
         /// <returns>Строка с описанием круга.</returns>
         public override string ToString()
         {
-            //TODO: duplication+
             return $"{Name} с радиусом {_radius.ToString(Constants.FormatPrecision)}";
         }
     }

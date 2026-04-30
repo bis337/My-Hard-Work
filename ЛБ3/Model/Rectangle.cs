@@ -11,6 +11,7 @@ namespace Model
         /// Ширина прямоугольника.
         /// </summary>
         private readonly double _width;
+
         /// <summary>
         /// Высота прямоугольника.
         /// </summary>
@@ -101,7 +102,6 @@ namespace Model
         /// <returns>Строка с описанием прямоугольника.</returns>
         public override string ToString()
         {
-            //TODO: duplication+
             return $"{Name} с шириной {_width.ToString(Constants.FormatPrecision)} " +
                 $"и высотой {_height.ToString(Constants.FormatPrecision)}";
         }

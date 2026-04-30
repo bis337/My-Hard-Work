@@ -136,7 +136,6 @@ namespace Model
             string parameterName,
             params double[] values)
         {
-            //TODO: duplication+
             var formattedValues = string.Join(", ",
                 values.Select(v => v.ToString(Constants.FormatPrecision)));
             return $"{name} с {parameterName.ToLower()} {formattedValues}";

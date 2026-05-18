@@ -58,7 +58,8 @@ namespace View
                 {
                     if (string.IsNullOrWhiteSpace(Value1TextBox.Text) ||
                         string.IsNullOrWhiteSpace(Value2TextBox.Text))
-                        throw new ArgumentException("Введите ширину и высоту прямоугольника.");
+                        throw new ArgumentException
+                            ("Введите ширину и высоту прямоугольника.");
 
                     Shape = new Model.Rectangle(
                         Convert.ToDouble(Value1TextBox.Text),
@@ -69,7 +70,8 @@ namespace View
                     if (string.IsNullOrWhiteSpace(Value1TextBox.Text) ||
                         string.IsNullOrWhiteSpace(Value2TextBox.Text) ||
                         string.IsNullOrWhiteSpace(Value3TextBox.Text))
-                        throw new ArgumentException("Введите все три стороны треугольника.");
+                        throw new ArgumentException
+                            ("Введите все три стороны треугольника.");
 
                     Shape = new Triangle(
                         Convert.ToDouble(Value1TextBox.Text),
@@ -115,7 +117,8 @@ namespace View
         /// <summary>
         /// Меняет доступность полей в зависимости от типа фигуры.
         /// </summary>
-        private void ShapeTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void ShapeTypeComboBox_SelectedIndexChanged
+            (object sender, EventArgs e)
         {
             string type = ShapeTypeComboBox.Text;
 

@@ -39,7 +39,8 @@
             LoadButton = new System.Windows.Forms.Button();
             SearchButton = new System.Windows.Forms.Button();
 
-            ((System.ComponentModel.ISupportInitialize)(ShapesGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)
+                (ShapesGridView)).BeginInit();
             SuspendLayout();
 
             // Таблица для отображения фигур
@@ -95,7 +96,8 @@
             Name = "MainForm";
             Text = "Фигуры";
 
-            ((System.ComponentModel.ISupportInitialize)(ShapesGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)
+                (ShapesGridView)).EndInit();
             ResumeLayout(false);
         }
     }

@@ -46,7 +46,8 @@
             // Комбобокс для выбора типа фигуры
             ShapeTypeComboBox.Location = new System.Drawing.Point(20, 20);
             ShapeTypeComboBox.Size = new System.Drawing.Size(200, 23);
-            ShapeTypeComboBox.SelectedIndexChanged += ShapeTypeComboBox_SelectedIndexChanged;
+            ShapeTypeComboBox.SelectedIndexChanged 
+                += ShapeTypeComboBox_SelectedIndexChanged;
 
             // Поле ввода первого значения фигуры (радиус/сторона)
             Value1TextBox.Location = new System.Drawing.Point(20, 60);

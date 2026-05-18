@@ -81,7 +81,8 @@ namespace View
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                List<ShapeDto> dto = ShapeFileManager.LoadFromFile(dialog.FileName);
+                List<ShapeDto> dto = 
+                    ShapeFileManager.LoadFromFile(dialog.FileName);
                 _shapes.Clear();
 
                 foreach (ShapeDto item in dto)

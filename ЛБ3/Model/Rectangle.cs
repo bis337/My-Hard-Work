@@ -18,59 +18,45 @@ namespace Model
         private readonly double _height;
 
         /// <summary>
-        /// Получает или задает ширину прямоугольника.
+        /// Получает ширину прямоугольника.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Генерируется, если ширина меньше или равна нулю.
-        /// </exception>
-        public double Width
-        {
-            get => _width;
-            init
-            {
-                Validator.ValidatePositive(
-                    value,
-                    nameof(value),
-                    "Ширина прямоугольника должна быть " +
-                    "положительным числом.");
-                _width = value;
-            }
-        }
+        public double Width => _width;
 
         /// <summary>
-        /// Получает или задает высоту прямоугольника.
+        /// Получает высоту прямоугольника.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Генерируется, если высота меньше или равна нулю.
-        /// </exception>
-        public double Height
-        {
-            get => _height;
-            init
-            {
-                Validator.ValidatePositive(
-                    value,
-                    nameof(value),
-                    "Высота прямоугольника должна быть " +
-                    "положительным числом.");
-                _height = value;
-            }
-        }
+        public double Height => _height;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса
         /// <see cref="Rectangle"/>.
         /// </summary>
-        /// <param name="width">Ширина прямоугольника.</param>
-        /// <param name="height">Высота прямоугольника.</param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Генерируется, если ширина или высота меньше или
-        /// равны нулю.
+        /// <param name="width">
+        /// Ширина прямоугольника.
+        /// </param>
+        /// <param name="height">
+        /// Высота прямоугольника.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Генерируется, если ширина или высота меньше
+        /// или равны нулю.
         /// </exception>
         public Rectangle(double width, double height)
         {
-            Width = width;
-            Height = height;
+            if (width <= 0)
+            {
+                throw new ArgumentException(
+                    "Width must be greater than zero.");
+            }
+
+            if (height <= 0)
+            {
+                throw new ArgumentException(
+                    "Height must be greater than zero.");
+            }
+
+            _width = width;
+            _height = height;
         }
 
         /// <summary>
@@ -81,7 +67,9 @@ namespace Model
         /// <summary>
         /// Вычисляет площадь прямоугольника.
         /// </summary>
-        /// <returns>Площадь прямоугольника.</returns>
+        /// <returns>
+        /// Площадь прямоугольника.
+        /// </returns>
         public double CalculateArea()
         {
             return _width * _height;
@@ -90,20 +78,25 @@ namespace Model
         /// <summary>
         /// Вычисляет периметр прямоугольника.
         /// </summary>
-        /// <returns>Периметр прямоугольника.</returns>
+        /// <returns>
+        /// Периметр прямоугольника.
+        /// </returns>
         public double CalculatePerimeter()
         {
             return 2 * (_width + _height);
         }
 
         /// <summary>
-        /// Возвращает строковое представление прямоугольника.
+        /// Возвращает строковое представление
+        /// прямоугольника.
         /// </summary>
-        /// <returns>Строка с описанием прямоугольника.</returns>
+        /// <returns>
+        /// Строка с описанием прямоугольника.
+        /// </returns>
         public override string ToString()
         {
-            return $"{Name} с шириной {_width.ToString(Constants.FormatPrecision)} " +
-                $"и высотой {_height.ToString(Constants.FormatPrecision)}";
+            return $"{Name}: Width = {_width}, " +
+                   $"Height = {_height}";
         }
     }
 }

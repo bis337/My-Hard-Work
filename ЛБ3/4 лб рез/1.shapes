@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfShapeDto xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ShapeDto>
+    <Type>Прямоугольник</Type>
+    <Value1>16</Value1>
+    <Value2>19</Value2>
+    <Value3>0</Value3>
+  </ShapeDto>
+</ArrayOfShapeDto>

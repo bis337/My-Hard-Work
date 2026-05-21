@@ -26,6 +26,7 @@ namespace View
         {
             InitializeComponent();
 
+            //TODO: duplication
             ShapeTypeComboBox.Items.Add("Круг");
             ShapeTypeComboBox.Items.Add("Прямоугольник");
             ShapeTypeComboBox.Items.Add("Треугольник");
@@ -46,8 +47,11 @@ namespace View
             {
                 string type = ShapeTypeComboBox.Text;
 
+                //TODO: duplication
+                //TODO: switch-case
                 if (type == "Круг")
                 {
+                    //TODO: {}
                     if (string.IsNullOrWhiteSpace(Value1TextBox.Text))
                         throw new ArgumentException("Введите радиус круга.");
 
@@ -56,6 +60,7 @@ namespace View
                 }
                 else if (type == "Прямоугольник")
                 {
+                    //TODO: {}
                     if (string.IsNullOrWhiteSpace(Value1TextBox.Text) ||
                         string.IsNullOrWhiteSpace(Value2TextBox.Text))
                         throw new ArgumentException
@@ -67,6 +72,7 @@ namespace View
                 }
                 else if (type == "Треугольник")
                 {
+                    //TODO: {}
                     if (string.IsNullOrWhiteSpace(Value1TextBox.Text) ||
                         string.IsNullOrWhiteSpace(Value2TextBox.Text) ||
                         string.IsNullOrWhiteSpace(Value3TextBox.Text))
@@ -122,6 +128,7 @@ namespace View
         {
             string type = ShapeTypeComboBox.Text;
 
+            //TODO: duplication
             Value2TextBox.Enabled = type != "Круг";
             Value3TextBox.Enabled = type == "Треугольник";
         }

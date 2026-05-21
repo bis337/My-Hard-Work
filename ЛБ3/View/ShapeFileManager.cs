@@ -9,6 +9,7 @@ namespace Model
     /// </summary>
     public static class ShapeFileManager
     {
+        //TODO: XML
         public static void SaveToFile(List<ShapeDto> shapes, string path)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<ShapeDto>));

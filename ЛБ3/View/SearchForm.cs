@@ -11,6 +11,7 @@ namespace View
     /// </summary>
     public partial class SearchForm : Form
     {
+        //TODO: XML
         private readonly List<IShape> _shapes;
 
         public SearchForm(List<IShape> shapes)

@@ -1,5 +1,6 @@
 ﻿namespace Model
 {
+    //TODO: WTF?
     /// <summary>
     /// Представляет DTO-объект фигуры. (объекты для передачи данных)
     /// </summary>

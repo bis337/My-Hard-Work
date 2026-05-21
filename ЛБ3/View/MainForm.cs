@@ -11,6 +11,7 @@ namespace View
     /// </summary>
     public partial class MainForm : Form
     {
+        //TODO: XML
         private readonly List<IShape> _shapes = new List<IShape>();
 
         public MainForm()
@@ -105,6 +106,7 @@ namespace View
             {
                 ShapesGridView.Rows.Add(
                     shape.Name,
+                    //TODO: to const
                     shape.CalculateArea().ToString("F2"),
                     shape.CalculatePerimeter().ToString("F2"),
                     shape.ToString());

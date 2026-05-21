@@ -55,10 +55,13 @@
         /// </summary>
         private System.Windows.Forms.Button CancelButton;
 
+#if DEBUG
+        //TODO: if endif +
         /// <summary>
         /// Кнопка генерации случайных значений.
         /// </summary>
         private System.Windows.Forms.Button RandomButton;
+#endif
 
         /// <summary>
         /// Освобождает ресурсы.
@@ -90,7 +93,11 @@
             Value3TextBox = new System.Windows.Forms.TextBox();
             OkButton = new System.Windows.Forms.Button();
             CancelButton = new System.Windows.Forms.Button();
+
+#if DEBUG
+            //TODO: if endif +
             RandomButton = new System.Windows.Forms.Button();
+#endif
 
             SuspendLayout();
 
@@ -154,7 +161,8 @@
             CancelButton.Text = "Отмена";
             CancelButton.Click += CancelButton_Click;
 
-            //TODO: if endif
+#if DEBUG
+            //TODO: if endif +
             RandomButton.Anchor =
                 System.Windows.Forms.AnchorStyles.Bottom |
                 System.Windows.Forms.AnchorStyles.Left;
@@ -162,6 +170,7 @@
             RandomButton.Size = new System.Drawing.Size(90, 30);
             RandomButton.Text = "Случайно";
             RandomButton.Click += RandomButton_Click;
+#endif
 
             ClientSize = new System.Drawing.Size(340, 250);
             MinimumSize = new System.Drawing.Size(340, 250);
@@ -175,7 +184,11 @@
             Controls.Add(Value3TextBox);
             Controls.Add(OkButton);
             Controls.Add(CancelButton);
+
+#if DEBUG
+            //TODO: if endif +
             Controls.Add(RandomButton);
+#endif
 
             Text = "Добавление фигуры";
 

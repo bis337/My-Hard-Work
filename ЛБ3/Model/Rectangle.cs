@@ -31,12 +31,8 @@ namespace Model
         /// Инициализирует новый экземпляр класса
         /// <see cref="Rectangle"/>.
         /// </summary>
-        /// <param name="width">
-        /// Ширина прямоугольника.
-        /// </param>
-        /// <param name="height">
-        /// Высота прямоугольника.
-        /// </param>
+        /// <param name="width">Ширина прямоугольника.</param>
+        /// <param name="height">Высота прямоугольника.</param>
         /// <exception cref="ArgumentException">
         /// Генерируется, если ширина или высота меньше
         /// или равны нулю.
@@ -46,13 +42,13 @@ namespace Model
             if (width <= 0)
             {
                 throw new ArgumentException(
-                    "Width must be greater than zero.");
+                    "Ширина должна быть больше нуля.");
             }
 
             if (height <= 0)
             {
                 throw new ArgumentException(
-                    "Height must be greater than zero.");
+                    "Высота должна быть больше нуля.");
             }
 
             _width = width;
@@ -67,9 +63,7 @@ namespace Model
         /// <summary>
         /// Вычисляет площадь прямоугольника.
         /// </summary>
-        /// <returns>
-        /// Площадь прямоугольника.
-        /// </returns>
+        /// <returns>Площадь прямоугольника.</returns>
         public double CalculateArea()
         {
             return _width * _height;
@@ -78,9 +72,7 @@ namespace Model
         /// <summary>
         /// Вычисляет периметр прямоугольника.
         /// </summary>
-        /// <returns>
-        /// Периметр прямоугольника.
-        /// </returns>
+        /// <returns>Периметр прямоугольника.</returns>
         public double CalculatePerimeter()
         {
             return 2 * (_width + _height);
@@ -90,13 +82,12 @@ namespace Model
         /// Возвращает строковое представление
         /// прямоугольника.
         /// </summary>
-        /// <returns>
-        /// Строка с описанием прямоугольника.
-        /// </returns>
+        /// <returns>Строка с описанием прямоугольника.</returns>
         public override string ToString()
         {
-            return $"{Name}: Width = {_width}, " +
-                   $"Height = {_height}";
+            return $"{Name} с шириной " +
+                $"{_width.ToString(Constants.FormatPrecision)} " +
+                $"и высотой {_height.ToString(Constants.FormatPrecision)}";
         }
     }
 }

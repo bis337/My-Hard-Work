@@ -15,10 +15,13 @@ namespace View
         /// </summary>
         public IShape Shape { get; private set; }
 
+#if DEBUG
+        //TODO: if endif +
         /// <summary>
         /// Генератор случайных чисел.
         /// </summary>
         private readonly Random _random = new Random();
+#endif
 
         /// <summary>
         /// Инициализирует форму добавления фигуры.
@@ -32,10 +35,6 @@ namespace View
             ShapeTypeComboBox.Items.Add(ShapeTypes.Triangle);
 
             ShapeTypeComboBox.SelectedIndex = 0;
-
-#if !DEBUG
-            RandomButton.Visible = false;
-#endif
         }
 
         /// <summary>
@@ -51,38 +50,46 @@ namespace View
 
                 switch (type)
                 {
-                    //TODO: {}
+                    //TODO: {} +
                     case ShapeTypes.Circle:
-                        Shape = new Circle(ParseValue(
-                            Value1TextBox,
-                            "Введите радиус круга числом."));
-                        break;
+                        {
+                            Shape = new Circle(ParseValue(
+                                Value1TextBox,
+                                "Введите радиус круга числом."));
+                            break;
+                        }
 
                     case ShapeTypes.Rectangle:
-                        Shape = new Model.Rectangle(
-                            ParseValue(
-                                Value1TextBox,
-                                "Введите ширину прямоугольника числом."),
-                            ParseValue(
-                                Value2TextBox,
-                                "Введите высоту прямоугольника числом."));
-                        break;
+                        {
+                            Shape = new Model.Rectangle(
+                                ParseValue(
+                                    Value1TextBox,
+                                    "Введите ширину прямоугольника числом."),
+                                ParseValue(
+                                    Value2TextBox,
+                                    "Введите высоту прямоугольника числом."));
+                            break;
+                        }
 
                     case ShapeTypes.Triangle:
-                        Shape = new Triangle(
-                            ParseValue(
-                                Value1TextBox,
-                                "Введите первую сторону треугольника числом."),
-                            ParseValue(
-                                Value2TextBox,
-                                "Введите вторую сторону треугольника числом."),
-                            ParseValue(
-                                Value3TextBox,
-                                "Введите третью сторону треугольника числом."));
-                        break;
+                        {
+                            Shape = new Triangle(
+                                ParseValue(
+                                    Value1TextBox,
+                                    "Введите первую сторону треугольника числом."),
+                                ParseValue(
+                                    Value2TextBox,
+                                    "Введите вторую сторону треугольника числом."),
+                                ParseValue(
+                                    Value3TextBox,
+                                    "Введите третью сторону треугольника числом."));
+                            break;
+                        }
 
                     default:
-                        throw new ArgumentException("Неизвестный тип фигуры.");
+                        {
+                            throw new ArgumentException("Неизвестный тип фигуры.");
+                        }
                 }
 
                 DialogResult = DialogResult.OK;
@@ -141,7 +148,8 @@ namespace View
             Close();
         }
 
-        //TODO: if endif
+#if DEBUG
+        //TODO: if endif +
         /// <summary>
         /// Генерирует случайные значения фигуры.
         /// </summary>
@@ -154,23 +162,28 @@ namespace View
 
             switch (ShapeTypeComboBox.Text)
             {
-                //TODO: {}
+                //TODO: {} +
                 case ShapeTypes.Circle:
-                    Value1TextBox.Text = _random.Next(1, 20).ToString();
-                    break;
+                    {
+                        Value1TextBox.Text = _random.Next(1, 20).ToString();
+                        break;
+                    }
 
                 case ShapeTypes.Rectangle:
-                    Value1TextBox.Text = _random.Next(1, 20).ToString();
-                    Value2TextBox.Text = _random.Next(1, 20).ToString();
-                    break;
+                    {
+                        Value1TextBox.Text = _random.Next(1, 20).ToString();
+                        Value2TextBox.Text = _random.Next(1, 20).ToString();
+                        break;
+                    }
 
                 case ShapeTypes.Triangle:
-                    GenerateTriangleValues();
-                    break;
+                    {
+                        GenerateTriangleValues();
+                        break;
+                    }
             }
         }
 
-        //TODO: if endif
         /// <summary>
         /// Генерирует корректные стороны треугольника.
         /// </summary>
@@ -186,6 +199,7 @@ namespace View
             Value2TextBox.Text = sideB.ToString();
             Value3TextBox.Text = sideC.ToString();
         }
+#endif
 
         /// <summary>
         /// Меняет видимость полей в зависимости от типа фигуры.
@@ -209,21 +223,27 @@ namespace View
 
             switch (type)
             {
-                //TODO: {}
+                //TODO: {} +
                 case ShapeTypes.Circle:
-                    Value1Label.Text = "Радиус:";
-                    break;
+                    {
+                        Value1Label.Text = "Радиус:";
+                        break;
+                    }
 
                 case ShapeTypes.Rectangle:
-                    Value1Label.Text = "Ширина:";
-                    Value2Label.Text = "Высота:";
-                    break;
+                    {
+                        Value1Label.Text = "Ширина:";
+                        Value2Label.Text = "Высота:";
+                        break;
+                    }
 
                 case ShapeTypes.Triangle:
-                    Value1Label.Text = "Сторона A:";
-                    Value2Label.Text = "Сторона B:";
-                    Value3Label.Text = "Сторона C:";
-                    break;
+                    {
+                        Value1Label.Text = "Сторона A:";
+                        Value2Label.Text = "Сторона B:";
+                        Value3Label.Text = "Сторона C:";
+                        break;
+                    }
             }
         }
     }

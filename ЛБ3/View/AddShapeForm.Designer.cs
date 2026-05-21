@@ -154,6 +154,7 @@
             CancelButton.Text = "Отмена";
             CancelButton.Click += CancelButton_Click;
 
+            //TODO: if endif
             RandomButton.Anchor =
                 System.Windows.Forms.AnchorStyles.Bottom |
                 System.Windows.Forms.AnchorStyles.Left;

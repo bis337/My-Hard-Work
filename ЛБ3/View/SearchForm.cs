@@ -11,7 +11,6 @@ namespace View
     /// </summary>
     public partial class SearchForm : Form
     {
-        //TODO: XML +
         /// <summary>
         /// Список фигур для поиска.
         /// </summary>

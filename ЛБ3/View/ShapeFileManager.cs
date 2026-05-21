@@ -9,7 +9,6 @@ namespace Model
     /// </summary>
     public static class ShapeFileManager
     {
-        //TODO: XML +
         /// <summary>
         /// Сохраняет данные фигур в файл.
         /// </summary>

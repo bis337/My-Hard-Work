@@ -27,7 +27,6 @@ namespace View
         {
             InitializeComponent();
 
-            //TODO: duplication +
             ShapeTypeComboBox.Items.Add(ShapeTypes.Circle);
             ShapeTypeComboBox.Items.Add(ShapeTypes.Rectangle);
             ShapeTypeComboBox.Items.Add(ShapeTypes.Triangle);
@@ -50,10 +49,9 @@ namespace View
             {
                 string type = ShapeTypeComboBox.Text;
 
-                //TODO: duplication +
-                //TODO: switch-case +
                 switch (type)
                 {
+                    //TODO: {}
                     case ShapeTypes.Circle:
                         Shape = new Circle(ParseValue(
                             Value1TextBox,
@@ -113,7 +111,6 @@ namespace View
             TextBox textBox,
             string errorMessage)
         {
-            //TODO: {} +
             if (string.IsNullOrWhiteSpace(textBox.Text))
             {
                 throw new ArgumentException(errorMessage);
@@ -144,6 +141,7 @@ namespace View
             Close();
         }
 
+        //TODO: if endif
         /// <summary>
         /// Генерирует случайные значения фигуры.
         /// </summary>
@@ -156,6 +154,7 @@ namespace View
 
             switch (ShapeTypeComboBox.Text)
             {
+                //TODO: {}
                 case ShapeTypes.Circle:
                     Value1TextBox.Text = _random.Next(1, 20).ToString();
                     break;
@@ -171,6 +170,7 @@ namespace View
             }
         }
 
+        //TODO: if endif
         /// <summary>
         /// Генерирует корректные стороны треугольника.
         /// </summary>
@@ -198,7 +198,6 @@ namespace View
         {
             string type = ShapeTypeComboBox.Text;
 
-            //TODO: duplication +
             Value1TextBox.Visible = true;
             Value1Label.Visible = true;
 
@@ -210,6 +209,7 @@ namespace View
 
             switch (type)
             {
+                //TODO: {}
                 case ShapeTypes.Circle:
                     Value1Label.Text = "Радиус:";
                     break;

@@ -1,6 +1,5 @@
 ﻿namespace Model
 {
-    //TODO: WTF? 
     /// <summary>
     /// Представляет данные фигуры для сохранения и загрузки.
     /// </summary>

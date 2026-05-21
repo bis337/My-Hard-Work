@@ -11,7 +11,6 @@ namespace View
     /// </summary>
     public partial class MainForm : Form
     {
-        //TODO: XML +
         /// <summary>
         /// Список фигур.
         /// </summary>
@@ -194,7 +193,6 @@ namespace View
             {
                 ShapesGridView.Rows.Add(
                     shape.Name,
-                    //TODO: to const +
                     shape.CalculateArea().ToString(Constants.FormatPrecision),
                     shape.CalculatePerimeter().ToString(
                         Constants.FormatPrecision),

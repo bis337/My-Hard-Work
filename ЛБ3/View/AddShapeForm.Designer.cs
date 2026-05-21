@@ -56,7 +56,6 @@
         private System.Windows.Forms.Button CancelButton;
 
 #if DEBUG
-        //TODO: if endif +
         /// <summary>
         /// Кнопка генерации случайных значений.
         /// </summary>
@@ -95,7 +94,6 @@
             CancelButton = new System.Windows.Forms.Button();
 
 #if DEBUG
-            //TODO: if endif +
             RandomButton = new System.Windows.Forms.Button();
 #endif
 
@@ -162,7 +160,6 @@
             CancelButton.Click += CancelButton_Click;
 
 #if DEBUG
-            //TODO: if endif +
             RandomButton.Anchor =
                 System.Windows.Forms.AnchorStyles.Bottom |
                 System.Windows.Forms.AnchorStyles.Left;
@@ -186,7 +183,6 @@
             Controls.Add(CancelButton);
 
 #if DEBUG
-            //TODO: if endif +
             Controls.Add(RandomButton);
 #endif
 

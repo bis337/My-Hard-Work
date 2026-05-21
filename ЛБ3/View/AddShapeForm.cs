@@ -16,7 +16,6 @@ namespace View
         public IShape Shape { get; private set; }
 
 #if DEBUG
-        //TODO: if endif +
         /// <summary>
         /// Генератор случайных чисел.
         /// </summary>
@@ -50,7 +49,7 @@ namespace View
 
                 switch (type)
                 {
-                    //TODO: {} +
+                    //TODO: отступы
                     case ShapeTypes.Circle:
                         {
                             Shape = new Circle(ParseValue(
@@ -149,7 +148,6 @@ namespace View
         }
 
 #if DEBUG
-        //TODO: if endif +
         /// <summary>
         /// Генерирует случайные значения фигуры.
         /// </summary>
@@ -162,7 +160,7 @@ namespace View
 
             switch (ShapeTypeComboBox.Text)
             {
-                //TODO: {} +
+                //TODO: отступы
                 case ShapeTypes.Circle:
                     {
                         Value1TextBox.Text = _random.Next(1, 20).ToString();
@@ -223,7 +221,7 @@ namespace View
 
             switch (type)
             {
-                //TODO: {} +
+                //TODO: отступы
                 case ShapeTypes.Circle:
                     {
                         Value1Label.Text = "Радиус:";

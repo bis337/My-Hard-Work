@@ -68,7 +68,7 @@ namespace View
             }
 
             List<IShape> results = _shapes
-                .Where(shape => shape.Name.ToLower().Contains(search))
+                .Where(shape => IsShapeMatchesSearch(shape, search))
                 .ToList();
 
             foreach (IShape shape in results)
@@ -89,6 +89,49 @@ namespace View
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
+        }
+
+        /// <summary>
+        /// Проверяет, соответствует ли фигура поисковому запросу.
+        /// </summary>
+        /// <param name="shape">Фигура.</param>
+        /// <param name="search">Поисковый запрос.</param>
+        /// <returns>
+        /// Возвращает true, если фигура соответствует запросу.
+        /// </returns>
+        private static bool IsShapeMatchesSearch(IShape shape, string search)
+        {
+            return shape.Name.ToLower().Contains(search)
+                || shape.ToString().ToLower().Contains(search)
+                || GetShapeParameters(shape).Contains(search);
+        }
+
+        /// <summary>
+        /// Получает строку с параметрами фигуры.
+        /// </summary>
+        /// <param name="shape">Фигура.</param>
+        /// <returns>Строка с параметрами фигуры.</returns>
+        private static string GetShapeParameters(IShape shape)
+        {
+            if (shape is Circle circle)
+            {
+                return circle.Radius.ToString(Constants.FormatPrecision);
+            }
+
+            if (shape is Model.Rectangle rectangle)
+            {
+                return $"{rectangle.Width.ToString(Constants.FormatPrecision)} " +
+                    $"{rectangle.Height.ToString(Constants.FormatPrecision)}";
+            }
+
+            if (shape is Triangle triangle)
+            {
+                return $"{triangle.SideA.ToString(Constants.FormatPrecision)} " +
+                    $"{triangle.SideB.ToString(Constants.FormatPrecision)} " +
+                    $"{triangle.SideC.ToString(Constants.FormatPrecision)}";
+            }
+
+            return string.Empty;
         }
     }
 }

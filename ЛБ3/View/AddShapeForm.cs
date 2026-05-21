@@ -49,46 +49,46 @@ namespace View
 
                 switch (type)
                 {
-                    //TODO: отступы
+                    //TODO: отступы +
                     case ShapeTypes.Circle:
-                        {
-                            Shape = new Circle(ParseValue(
-                                Value1TextBox,
-                                "Введите радиус круга числом."));
-                            break;
-                        }
+                    {
+                        Shape = new Circle(ParseValue(
+                            Value1TextBox,
+                            "Введите радиус круга числом."));
+                        break;
+                    }
 
                     case ShapeTypes.Rectangle:
-                        {
-                            Shape = new Model.Rectangle(
-                                ParseValue(
-                                    Value1TextBox,
-                                    "Введите ширину прямоугольника числом."),
-                                ParseValue(
-                                    Value2TextBox,
-                                    "Введите высоту прямоугольника числом."));
-                            break;
-                        }
+                    {
+                        Shape = new Model.Rectangle(
+                            ParseValue(
+                                Value1TextBox,
+                                "Введите ширину прямоугольника числом."),
+                            ParseValue(
+                                Value2TextBox,
+                                "Введите высоту прямоугольника числом."));
+                        break;
+                    }
 
                     case ShapeTypes.Triangle:
-                        {
-                            Shape = new Triangle(
-                                ParseValue(
-                                    Value1TextBox,
-                                    "Введите первую сторону треугольника числом."),
-                                ParseValue(
-                                    Value2TextBox,
-                                    "Введите вторую сторону треугольника числом."),
-                                ParseValue(
-                                    Value3TextBox,
-                                    "Введите третью сторону треугольника числом."));
-                            break;
-                        }
+                    {
+                        Shape = new Triangle(
+                            ParseValue(
+                                Value1TextBox,
+                                "Введите первую сторону треугольника числом."),
+                            ParseValue(
+                                Value2TextBox,
+                                "Введите вторую сторону треугольника числом."),
+                            ParseValue(
+                                Value3TextBox,
+                                "Введите третью сторону треугольника числом."));
+                        break;
+                    }
 
                     default:
-                        {
-                            throw new ArgumentException("Неизвестный тип фигуры.");
-                        }
+                    {
+                        throw new ArgumentException("Неизвестный тип фигуры.");
+                    }
                 }
 
                 DialogResult = DialogResult.OK;
@@ -160,25 +160,25 @@ namespace View
 
             switch (ShapeTypeComboBox.Text)
             {
-                //TODO: отступы
+                //TODO: отступы +
                 case ShapeTypes.Circle:
-                    {
-                        Value1TextBox.Text = _random.Next(1, 20).ToString();
-                        break;
-                    }
+                {
+                    Value1TextBox.Text = _random.Next(1, 20).ToString();
+                    break;
+                }
 
                 case ShapeTypes.Rectangle:
-                    {
-                        Value1TextBox.Text = _random.Next(1, 20).ToString();
-                        Value2TextBox.Text = _random.Next(1, 20).ToString();
-                        break;
-                    }
+                {
+                    Value1TextBox.Text = _random.Next(1, 20).ToString();
+                    Value2TextBox.Text = _random.Next(1, 20).ToString();
+                    break;
+                }
 
                 case ShapeTypes.Triangle:
-                    {
-                        GenerateTriangleValues();
-                        break;
-                    }
+                {
+                    GenerateTriangleValues();
+                    break;
+                }
             }
         }
 
@@ -221,27 +221,27 @@ namespace View
 
             switch (type)
             {
-                //TODO: отступы
+                //TODO: отступы +
                 case ShapeTypes.Circle:
-                    {
-                        Value1Label.Text = "Радиус:";
-                        break;
-                    }
+                {
+                    Value1Label.Text = "Радиус:";
+                    break;
+                }
 
                 case ShapeTypes.Rectangle:
-                    {
-                        Value1Label.Text = "Ширина:";
-                        Value2Label.Text = "Высота:";
-                        break;
-                    }
+                {
+                    Value1Label.Text = "Ширина:";
+                    Value2Label.Text = "Высота:";
+                    break;
+                }
 
                 case ShapeTypes.Triangle:
-                    {
-                        Value1Label.Text = "Сторона A:";
-                        Value2Label.Text = "Сторона B:";
-                        Value3Label.Text = "Сторона C:";
-                        break;
-                    }
+                {
+                    Value1Label.Text = "Сторона A:";
+                    Value2Label.Text = "Сторона B:";
+                    Value3Label.Text = "Сторона C:";
+                    break;
+                }
             }
         }
     }

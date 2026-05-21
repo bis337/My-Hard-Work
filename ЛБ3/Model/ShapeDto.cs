@@ -1,10 +1,10 @@
 ﻿namespace Model
 {
-    //TODO: WTF?
+    //TODO: WTF? 
     /// <summary>
-    /// Представляет DTO-объект фигуры. (объекты для передачи данных)
+    /// Представляет данные фигуры для сохранения и загрузки.
     /// </summary>
-    public class ShapeDto
+    public class ShapeData
     {
         /// <summary>
         /// Получает или задает тип фигуры.

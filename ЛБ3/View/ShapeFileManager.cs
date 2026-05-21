@@ -9,19 +9,31 @@ namespace Model
     /// </summary>
     public static class ShapeFileManager
     {
-        //TODO: XML
-        public static void SaveToFile(List<ShapeDto> shapes, string path)
+        //TODO: XML +
+        /// <summary>
+        /// Сохраняет данные фигур в файл.
+        /// </summary>
+        /// <param name="shapes">Список данных фигур.</param>
+        /// <param name="path">Путь к файлу.</param>
+        public static void SaveToFile(List<ShapeData> shapes, string path)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<ShapeDto>));
+            XmlSerializer serializer =
+                new XmlSerializer(typeof(List<ShapeData>));
             using FileStream stream = new FileStream(path, FileMode.Create);
             serializer.Serialize(stream, shapes);
         }
 
-        public static List<ShapeDto> LoadFromFile(string path)
+        /// <summary>
+        /// Загружает данные фигур из файла.
+        /// </summary>
+        /// <param name="path">Путь к файлу.</param>
+        /// <returns>Список данных фигур.</returns>
+        public static List<ShapeData> LoadFromFile(string path)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<ShapeDto>));
+            XmlSerializer serializer =
+                new XmlSerializer(typeof(List<ShapeData>));
             using FileStream stream = new FileStream(path, FileMode.Open);
-            return (List<ShapeDto>)serializer.Deserialize(stream);
+            return (List<ShapeData>)serializer.Deserialize(stream);
         }
     }
 }

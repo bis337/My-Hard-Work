@@ -1,5 +1,6 @@
 ﻿using Model;
 using System;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace View
@@ -26,10 +27,10 @@ namespace View
         {
             InitializeComponent();
 
-            //TODO: duplication
-            ShapeTypeComboBox.Items.Add("Круг");
-            ShapeTypeComboBox.Items.Add("Прямоугольник");
-            ShapeTypeComboBox.Items.Add("Треугольник");
+            //TODO: duplication +
+            ShapeTypeComboBox.Items.Add(ShapeTypes.Circle);
+            ShapeTypeComboBox.Items.Add(ShapeTypes.Rectangle);
+            ShapeTypeComboBox.Items.Add(ShapeTypes.Triangle);
 
             ShapeTypeComboBox.SelectedIndex = 0;
 
@@ -41,48 +42,49 @@ namespace View
         /// <summary>
         /// Обрабатывает нажатие кнопки добавления фигуры.
         /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Аргументы события.</param>
         private void OkButton_Click(object sender, EventArgs e)
         {
             try
             {
                 string type = ShapeTypeComboBox.Text;
 
-                //TODO: duplication
-                //TODO: switch-case
-                if (type == "Круг")
+                //TODO: duplication +
+                //TODO: switch-case +
+                switch (type)
                 {
-                    //TODO: {}
-                    if (string.IsNullOrWhiteSpace(Value1TextBox.Text))
-                        throw new ArgumentException("Введите радиус круга.");
+                    case ShapeTypes.Circle:
+                        Shape = new Circle(ParseValue(
+                            Value1TextBox,
+                            "Введите радиус круга числом."));
+                        break;
 
-                    Shape = new Circle(
-                        Convert.ToDouble(Value1TextBox.Text));
-                }
-                else if (type == "Прямоугольник")
-                {
-                    //TODO: {}
-                    if (string.IsNullOrWhiteSpace(Value1TextBox.Text) ||
-                        string.IsNullOrWhiteSpace(Value2TextBox.Text))
-                        throw new ArgumentException
-                            ("Введите ширину и высоту прямоугольника.");
+                    case ShapeTypes.Rectangle:
+                        Shape = new Model.Rectangle(
+                            ParseValue(
+                                Value1TextBox,
+                                "Введите ширину прямоугольника числом."),
+                            ParseValue(
+                                Value2TextBox,
+                                "Введите высоту прямоугольника числом."));
+                        break;
 
-                    Shape = new Model.Rectangle(
-                        Convert.ToDouble(Value1TextBox.Text),
-                        Convert.ToDouble(Value2TextBox.Text));
-                }
-                else if (type == "Треугольник")
-                {
-                    //TODO: {}
-                    if (string.IsNullOrWhiteSpace(Value1TextBox.Text) ||
-                        string.IsNullOrWhiteSpace(Value2TextBox.Text) ||
-                        string.IsNullOrWhiteSpace(Value3TextBox.Text))
-                        throw new ArgumentException
-                            ("Введите все три стороны треугольника.");
+                    case ShapeTypes.Triangle:
+                        Shape = new Triangle(
+                            ParseValue(
+                                Value1TextBox,
+                                "Введите первую сторону треугольника числом."),
+                            ParseValue(
+                                Value2TextBox,
+                                "Введите вторую сторону треугольника числом."),
+                            ParseValue(
+                                Value3TextBox,
+                                "Введите третью сторону треугольника числом."));
+                        break;
 
-                    Shape = new Triangle(
-                        Convert.ToDouble(Value1TextBox.Text),
-                        Convert.ToDouble(Value2TextBox.Text),
-                        Convert.ToDouble(Value3TextBox.Text));
+                    default:
+                        throw new ArgumentException("Неизвестный тип фигуры.");
                 }
 
                 DialogResult = DialogResult.OK;
@@ -99,8 +101,43 @@ namespace View
         }
 
         /// <summary>
+        /// Преобразует значение текстового поля в число.
+        /// </summary>
+        /// <param name="textBox">Текстовое поле.</param>
+        /// <param name="errorMessage">Сообщение об ошибке.</param>
+        /// <returns>Числовое значение.</returns>
+        /// <exception cref="ArgumentException">
+        /// Генерируется, если значение пустое или не является числом.
+        /// </exception>
+        private static double ParseValue(
+            TextBox textBox,
+            string errorMessage)
+        {
+            //TODO: {} +
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                throw new ArgumentException(errorMessage);
+            }
+
+            string value = textBox.Text.Replace(',', '.');
+
+            if (!double.TryParse(
+                    value,
+                    NumberStyles.Float,
+                    CultureInfo.InvariantCulture,
+                    out double result))
+            {
+                throw new ArgumentException(errorMessage);
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Обрабатывает нажатие кнопки отмены.
         /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Аргументы события.</param>
         private void CancelButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
@@ -110,27 +147,84 @@ namespace View
         /// <summary>
         /// Генерирует случайные значения фигуры.
         /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Аргументы события.</param>
         private void RandomButton_Click(object sender, EventArgs e)
         {
             int type = _random.Next(0, 3);
             ShapeTypeComboBox.SelectedIndex = type;
 
-            Value1TextBox.Text = _random.Next(1, 20).ToString();
-            Value2TextBox.Text = _random.Next(1, 20).ToString();
-            Value3TextBox.Text = _random.Next(1, 20).ToString();
+            switch (ShapeTypeComboBox.Text)
+            {
+                case ShapeTypes.Circle:
+                    Value1TextBox.Text = _random.Next(1, 20).ToString();
+                    break;
+
+                case ShapeTypes.Rectangle:
+                    Value1TextBox.Text = _random.Next(1, 20).ToString();
+                    Value2TextBox.Text = _random.Next(1, 20).ToString();
+                    break;
+
+                case ShapeTypes.Triangle:
+                    GenerateTriangleValues();
+                    break;
+            }
         }
 
         /// <summary>
-        /// Меняет доступность полей в зависимости от типа фигуры.
+        /// Генерирует корректные стороны треугольника.
         /// </summary>
-        private void ShapeTypeComboBox_SelectedIndexChanged
-            (object sender, EventArgs e)
+        private void GenerateTriangleValues()
+        {
+            int sideA = _random.Next(1, 20);
+            int sideB = _random.Next(1, 20);
+            int minSideC = Math.Abs(sideA - sideB) + 1;
+            int maxSideC = sideA + sideB - 1;
+            int sideC = _random.Next(minSideC, maxSideC + 1);
+
+            Value1TextBox.Text = sideA.ToString();
+            Value2TextBox.Text = sideB.ToString();
+            Value3TextBox.Text = sideC.ToString();
+        }
+
+        /// <summary>
+        /// Меняет видимость полей в зависимости от типа фигуры.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Аргументы события.</param>
+        private void ShapeTypeComboBox_SelectedIndexChanged(
+            object sender,
+            EventArgs e)
         {
             string type = ShapeTypeComboBox.Text;
 
-            //TODO: duplication
-            Value2TextBox.Enabled = type != "Круг";
-            Value3TextBox.Enabled = type == "Треугольник";
+            //TODO: duplication +
+            Value1TextBox.Visible = true;
+            Value1Label.Visible = true;
+
+            Value2TextBox.Visible = type != ShapeTypes.Circle;
+            Value2Label.Visible = type != ShapeTypes.Circle;
+
+            Value3TextBox.Visible = type == ShapeTypes.Triangle;
+            Value3Label.Visible = type == ShapeTypes.Triangle;
+
+            switch (type)
+            {
+                case ShapeTypes.Circle:
+                    Value1Label.Text = "Радиус:";
+                    break;
+
+                case ShapeTypes.Rectangle:
+                    Value1Label.Text = "Ширина:";
+                    Value2Label.Text = "Высота:";
+                    break;
+
+                case ShapeTypes.Triangle:
+                    Value1Label.Text = "Сторона A:";
+                    Value2Label.Text = "Сторона B:";
+                    Value3Label.Text = "Сторона C:";
+                    break;
+            }
         }
     }
 }

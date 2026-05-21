@@ -11,20 +11,53 @@ namespace View
     /// </summary>
     public partial class SearchForm : Form
     {
-        //TODO: XML
+        //TODO: XML +
+        /// <summary>
+        /// Список фигур для поиска.
+        /// </summary>
         private readonly List<IShape> _shapes;
 
+        /// <summary>
+        /// Инициализирует форму поиска фигур.
+        /// </summary>
+        /// <param name="shapes">Список фигур для поиска.</param>
         public SearchForm(List<IShape> shapes)
         {
             InitializeComponent();
             _shapes = shapes;
+
+            InitializeResultsGrid();
         }
 
+        /// <summary>
+        /// Инициализирует таблицу результатов поиска.
+        /// </summary>
+        private void InitializeResultsGrid()
+        {
+            ResultsGridView.ReadOnly = true;
+            ResultsGridView.AllowUserToAddRows = false;
+            ResultsGridView.AllowUserToDeleteRows = false;
+            ResultsGridView.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.Fill;
+
+            ResultsGridView.Columns.Clear();
+            ResultsGridView.Columns.Add("Type", "Тип");
+            ResultsGridView.Columns.Add("Area", "Площадь");
+            ResultsGridView.Columns.Add("Perimeter", "Периметр");
+            ResultsGridView.Columns.Add("Description", "Описание");
+        }
+
+        /// <summary>
+        /// Обрабатывает нажатие кнопки поиска.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Аргументы события.</param>
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            ResultsListBox.Items.Clear();
+            ResultsGridView.Rows.Clear();
 
             string search = SearchTextBox.Text.ToLower();
+
             if (string.IsNullOrWhiteSpace(search))
             {
                 MessageBox.Show(
@@ -40,7 +73,14 @@ namespace View
                 .ToList();
 
             foreach (IShape shape in results)
-                ResultsListBox.Items.Add(shape.ToString());
+            {
+                ResultsGridView.Rows.Add(
+                    shape.Name,
+                    shape.CalculateArea().ToString(Constants.FormatPrecision),
+                    shape.CalculatePerimeter().ToString(
+                        Constants.FormatPrecision),
+                    shape.ToString());
+            }
 
             if (results.Count == 0)
             {

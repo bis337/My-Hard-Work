@@ -3,7 +3,7 @@
     /// <summary>
     /// Класс, содержащий общие константы.
     /// </summary>
-    internal static class Constants
+    public static class Constants
     {
         /// <summary>
         /// Формат для округления вещественных чисел при выводе.

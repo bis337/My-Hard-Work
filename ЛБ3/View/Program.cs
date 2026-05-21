@@ -12,7 +12,7 @@ namespace View
         /// Главная функция приложения.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.EnableVisualStyles();
 

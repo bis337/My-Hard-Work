@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace View
 {
+    //TODO: XML
     public partial class MainForm : Form
     {
         private readonly List<IShape> _shapes = new List<IShape>();
@@ -93,6 +94,7 @@ namespace View
             {
                 try
                 {
+                    //TODO: RSDN
                     List<IShape> loadedShapes = ShapeFileManager.LoadFromFile(dialog.FileName);
                     _shapes.Clear();
                     _shapes.AddRange(loadedShapes);

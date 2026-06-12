@@ -1,28 +1,52 @@
-﻿namespace Model
+﻿using System;
+
+namespace Model
 {
     /// <summary>
-    /// Представляет данные фигуры для сохранения и загрузки.
+    /// Представляет данные круга для сохранения и загрузки.
     /// </summary>
-    public class ShapeData
+    public class CircleData
     {
         /// <summary>
-        /// Получает или задает тип фигуры.
+        /// Радиус круга.
         /// </summary>
-        public string Type { get; set; } = string.Empty;
+        public double Radius { get; set; }
+    }
+
+    /// <summary>
+    /// Представляет данные прямоугольника для сохранения и загрузки.
+    /// </summary>
+    public class RectangleData
+    {
+        /// <summary>
+        /// Ширина прямоугольника.
+        /// </summary>
+        public double Width { get; set; }
 
         /// <summary>
-        /// Получает или задает первое значение фигуры.
+        /// Высота прямоугольника.
         /// </summary>
-        public double Value1 { get; set; }
+        public double Height { get; set; }
+    }
+
+    /// <summary>
+    /// Представляет данные треугольника для сохранения и загрузки.
+    /// </summary>
+    public class TriangleData
+    {
+        /// <summary>
+        /// Первая сторона треугольника.
+        /// </summary>
+        public double SideA { get; set; }
 
         /// <summary>
-        /// Получает или задает второе значение фигуры.
+        /// Вторая сторона треугольника.
         /// </summary>
-        public double Value2 { get; set; }
+        public double SideB { get; set; }
 
         /// <summary>
-        /// Получает или задает третье значение фигуры.
+        /// Третья сторона треугольника.
         /// </summary>
-        public double Value3 { get; set; }
+        public double SideC { get; set; }
     }
 }

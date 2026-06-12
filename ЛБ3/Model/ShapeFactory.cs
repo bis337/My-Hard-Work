@@ -8,72 +8,45 @@ namespace Model
     public static class ShapeFactory
     {
         /// <summary>
-        /// Создает фигуру на основе объекта данных.
+        /// Создает фигуру на основе DTO.
         /// </summary>
-        /// <param name="data">Данные фигуры.</param>
-        /// <returns>Созданная фигура.</returns>
-        /// <exception cref="ArgumentException">
-        /// Генерируется, если тип фигуры неизвестен.
-        /// </exception>
-        public static IShape CreateShape(ShapeData data)
+        public static IShape CreateShape(object data)
         {
-            switch (data.Type)
+            return data switch
             {
-                case ShapeTypes.Circle:
-                    return new Circle(data.Value1);
-                case ShapeTypes.Rectangle:
-                    return new Rectangle(data.Value1, data.Value2);
-                case ShapeTypes.Triangle:
-                    return new Triangle(
-                        data.Value1,
-                        data.Value2,
-                        data.Value3);
-                default:
-                    throw new ArgumentException("Неизвестный тип фигуры");
-            }
+                CircleData circleData => new Circle(circleData.Radius),
+                RectangleData rectangleData => new Rectangle(
+                    rectangleData.Width,
+                    rectangleData.Height),
+                TriangleData triangleData => new Triangle(
+                    triangleData.SideA,
+                    triangleData.SideB,
+                    triangleData.SideC),
+                _ => throw new ArgumentException("Неизвестный тип фигуры")
+            };
         }
 
         /// <summary>
-        /// Преобразует фигуру в объект данных.
+        /// Преобразует фигуру в DTO.
         /// </summary>
-        /// <param name="shape">Фигура.</param>
-        /// <returns>Объект данных фигуры.</returns>
-        /// <exception cref="ArgumentException">
-        /// Генерируется, если тип фигуры неизвестен.
-        /// </exception>
-        public static ShapeData ConvertToData(IShape shape)
+        public static object ConvertToData(IShape shape)
         {
-            if (shape is Circle circle)
+            return shape switch
             {
-                return new ShapeData
+                Circle c => new CircleData { Radius = c.Radius },
+                Rectangle r => new RectangleData
                 {
-                    Type = ShapeTypes.Circle,
-                    Value1 = circle.Radius
-                };
-            }
-
-            if (shape is Rectangle rectangle)
-            {
-                return new ShapeData
+                    Width = r.Width,
+                    Height = r.Height
+                },
+                Triangle t => new TriangleData
                 {
-                    Type = ShapeTypes.Rectangle,
-                    Value1 = rectangle.Width,
-                    Value2 = rectangle.Height
-                };
-            }
-
-            if (shape is Triangle triangle)
-            {
-                return new ShapeData
-                {
-                    Type = ShapeTypes.Triangle,
-                    Value1 = triangle.SideA,
-                    Value2 = triangle.SideB,
-                    Value3 = triangle.SideC
-                };
-            }
-
-            throw new ArgumentException("Неизвестный тип фигуры");
+                    SideA = t.SideA,
+                    SideB = t.SideB,
+                    SideC = t.SideC
+                },
+                _ => throw new ArgumentException("Неизвестный тип фигуры")
+            };
         }
     }
 }

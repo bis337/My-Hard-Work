@@ -49,7 +49,6 @@ namespace View
 
                 switch (type)
                 {
-                    //TODO: отступы +
                     case ShapeTypes.Circle:
                     {
                         Shape = new Circle(ParseValue(
@@ -160,7 +159,6 @@ namespace View
 
             switch (ShapeTypeComboBox.Text)
             {
-                //TODO: отступы +
                 case ShapeTypes.Circle:
                 {
                     Value1TextBox.Text = _random.Next(1, 20).ToString();
@@ -221,7 +219,6 @@ namespace View
 
             switch (type)
             {
-                //TODO: отступы +
                 case ShapeTypes.Circle:
                 {
                     Value1Label.Text = "Радиус:";

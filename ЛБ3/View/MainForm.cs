@@ -55,6 +55,7 @@ namespace View
         /// <param name="e">Аргументы события.</param>
         private void AddButton_Click(object sender, EventArgs e)
         {
+            //TODO: rename
             AddShapeForm form = new AddShapeForm();
 
             if (form.ShowDialog() == DialogResult.OK)
@@ -114,6 +115,7 @@ namespace View
         /// <param name="e">Аргументы события.</param>
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            //TODO: rename
             SaveFileDialog dialog = new SaveFileDialog
             {
                 Filter = "Файл фигур (*.shapes)|*.shapes"
@@ -136,6 +138,7 @@ namespace View
         /// <param name="e">Аргументы события.</param>
         private void LoadButton_Click(object sender, EventArgs e)
         {
+            //TODO: rename
             OpenFileDialog dialog = new OpenFileDialog
             {
                 Filter = "Файл фигур (*.shapes)|*.shapes"
@@ -178,6 +181,7 @@ namespace View
         /// <param name="e">Аргументы события.</param>
         private void SearchButton_Click(object sender, EventArgs e)
         {
+            //TODO: rename
             SearchForm form = new SearchForm(_shapes);
             form.ShowDialog();
         }

@@ -115,6 +115,7 @@ namespace View
             form.ShowDialog();
         }
 
+
         private void UpdateGrid()
         {
             ShapesGridView.Rows.Clear();

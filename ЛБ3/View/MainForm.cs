@@ -6,11 +6,19 @@ using System.Windows.Forms;
 
 namespace View
 {
-    //TODO: XML
+    /// <summary>
+    /// Главная форма приложения для работы с фигурами.
+    /// </summary>
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Список фигур в приложении.
+        /// </summary>
         private readonly List<IShape> _shapes = new List<IShape>();
 
+        /// <summary>
+        /// Инициализирует главную форму.
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -24,6 +32,9 @@ namespace View
             InitializeGrid();
         }
 
+        /// <summary>
+        /// Инициализация таблицы отображения фигур.
+        /// </summary>
         private void InitializeGrid()
         {
             ShapesGridView.Columns.Clear();
@@ -31,9 +42,13 @@ namespace View
             ShapesGridView.Columns.Add("Area", "Площадь");
             ShapesGridView.Columns.Add("Perimeter", "Периметр");
             ShapesGridView.Columns.Add("Description", "Описание");
-            ShapesGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            ShapesGridView.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        /// <summary>
+        /// Обработчик кнопки добавления фигуры.
+        /// </summary>
         private void AddButton_Click(object sender, EventArgs e)
         {
             AddShapeForm form = new AddShapeForm();
@@ -44,11 +59,17 @@ namespace View
             }
         }
 
+        /// <summary>
+        /// Обработчик кнопки удаления фигуры.
+        /// </summary>
         private void RemoveButton_Click(object sender, EventArgs e)
         {
             RemoveSelectedShape();
         }
 
+        /// <summary>
+        /// Обработчик нажатия клавиши Delete в таблице.
+        /// </summary>
         private void ShapesGridView_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
@@ -58,6 +79,9 @@ namespace View
             }
         }
 
+        /// <summary>
+        /// Удаляет выбранную фигуру из списка.
+        /// </summary>
         private void RemoveSelectedShape()
         {
             if (ShapesGridView.CurrentRow == null) return;
@@ -70,6 +94,9 @@ namespace View
             }
         }
 
+        /// <summary>
+        /// Обработчик кнопки сохранения фигур.
+        /// </summary>
         private void SaveButton_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog
@@ -83,6 +110,10 @@ namespace View
             }
         }
 
+        /// <summary>
+        /// Обработчик кнопки загрузки фигур.
+        /// Проверяет корректность данных: при ошибках выдаёт сообщение и не загружает файл.
+        /// </summary>
         private void LoadButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog
@@ -94,8 +125,8 @@ namespace View
             {
                 try
                 {
-                    //TODO: RSDN
-                    List<IShape> loadedShapes = ShapeFileManager.LoadFromFile(dialog.FileName);
+                    List<IShape> loadedShapes =
+                        ShapeFileManager.LoadFromFile(dialog.FileName);
                     _shapes.Clear();
                     _shapes.AddRange(loadedShapes);
                     UpdateGrid();
@@ -111,13 +142,18 @@ namespace View
             }
         }
 
+        /// <summary>
+        /// Обработчик кнопки поиска фигур.
+        /// </summary>
         private void SearchButton_Click(object sender, EventArgs e)
         {
             SearchForm form = new SearchForm(_shapes);
             form.ShowDialog();
         }
 
-
+        /// <summary>
+        /// Обновляет таблицу отображения фигур.
+        /// </summary>
         private void UpdateGrid()
         {
             ShapesGridView.Rows.Clear();

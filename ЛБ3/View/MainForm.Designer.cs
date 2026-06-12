@@ -57,7 +57,7 @@
         }
 
         /// <summary>
-        /// Инициализация элементов формы.
+        /// Инициализация элементов главной формы.
         /// </summary>
         private void InitializeComponent()
         {
@@ -72,6 +72,9 @@
                 (ShapesGridView)).BeginInit();
             SuspendLayout();
 
+            // 
+            // ShapesGridView
+            // 
             ShapesGridView.Anchor =
                 System.Windows.Forms.AnchorStyles.Top |
                 System.Windows.Forms.AnchorStyles.Bottom |
@@ -85,6 +88,9 @@
             ShapesGridView.Size = new System.Drawing.Size(760, 350);
             ShapesGridView.KeyDown += ShapesGridView_KeyDown;
 
+            // 
+            // AddButton
+            // 
             AddButton.Anchor =
                 System.Windows.Forms.AnchorStyles.Bottom |
                 System.Windows.Forms.AnchorStyles.Left;
@@ -93,6 +99,9 @@
             AddButton.Text = "Добавить";
             AddButton.Click += AddButton_Click;
 
+            // 
+            // RemoveButton
+            // 
             RemoveButton.Anchor =
                 System.Windows.Forms.AnchorStyles.Bottom |
                 System.Windows.Forms.AnchorStyles.Left;
@@ -101,6 +110,9 @@
             RemoveButton.Text = "Удалить";
             RemoveButton.Click += RemoveButton_Click;
 
+            // 
+            // SaveButton
+            // 
             SaveButton.Anchor =
                 System.Windows.Forms.AnchorStyles.Bottom |
                 System.Windows.Forms.AnchorStyles.Left;
@@ -109,6 +121,9 @@
             SaveButton.Text = "Сохранить";
             SaveButton.Click += SaveButton_Click;
 
+            // 
+            // LoadButton
+            // 
             LoadButton.Anchor =
                 System.Windows.Forms.AnchorStyles.Bottom |
                 System.Windows.Forms.AnchorStyles.Left;
@@ -117,6 +132,9 @@
             LoadButton.Text = "Загрузить";
             LoadButton.Click += LoadButton_Click;
 
+            // 
+            // SearchButton
+            // 
             SearchButton.Anchor =
                 System.Windows.Forms.AnchorStyles.Bottom |
                 System.Windows.Forms.AnchorStyles.Left;
@@ -125,6 +143,9 @@
             SearchButton.Text = "Поиск";
             SearchButton.Click += SearchButton_Click;
 
+            // 
+            // MainForm
+            // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(784, 450);

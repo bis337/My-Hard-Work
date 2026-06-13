@@ -10,8 +10,6 @@ namespace UnitTests.Model
     [TestFixture]
     public class CircleTest
     {
-        #region Constructor / Radius
-
         [TestCase(1.0,
             TestName = "Создание круга с радиусом 1.")]
         [TestCase(0.001,
@@ -44,20 +42,12 @@ namespace UnitTests.Model
             Assert.Throws<ArgumentOutOfRangeException>(() => new Circle(radius));
         }
 
-        #endregion
-
-        #region Name
-
         [Test]
         public void Name_Always_ReturnsКруг()
         {
             var circle = new Circle(1.0);
             Assert.That(circle.Name, Is.EqualTo("Круг"));
         }
-
-        #endregion
-
-        #region CalculateArea
 
         [TestCase(1.0,
             TestName = "Площадь круга с радиусом 1.")]
@@ -76,10 +66,6 @@ namespace UnitTests.Model
             Assert.That(circle.CalculateArea(),
                 Is.EqualTo(expected).Within(1e-10));
         }
-
-        #endregion
-
-        #region CalculatePerimeter
 
         [TestCase(1.0,
             TestName = "Периметр круга с радиусом 1.")]
@@ -100,10 +86,6 @@ namespace UnitTests.Model
                 Is.EqualTo(expected).Within(1e-10));
         }
 
-        #endregion
-
-        #region ToString
-
         [TestCase(1.0,
             TestName = "ToString для круга с радиусом 1.")]
         [TestCase(2.5,
@@ -121,7 +103,5 @@ namespace UnitTests.Model
                 $"{radius.ToString(Constants.FormatPrecision)}";
             Assert.That(circle.ToString(), Is.EqualTo(expected));
         }
-
-        #endregion
     }
 }

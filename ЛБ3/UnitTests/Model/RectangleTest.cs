@@ -10,8 +10,6 @@ namespace UnitTests.Model
     [TestFixture]
     public class RectangleTest
     {
-        #region Constructor
-
         [TestCase(1.0, 1.0,
             TestName = "Создание прямоугольника 1x1.")]
         [TestCase(3.0, 4.0,
@@ -62,20 +60,12 @@ namespace UnitTests.Model
             Assert.Throws<ArgumentException>(() => new Rectangle(width, height));
         }
 
-        #endregion
-
-        #region Name
-
         [Test]
         public void Name_Always_ReturnsПрямоугольник()
         {
             var rect = new Rectangle(1.0, 1.0);
             Assert.That(rect.Name, Is.EqualTo("Прямоугольник"));
         }
-
-        #endregion
-
-        #region CalculateArea
 
         [TestCase(3.0, 4.0,
             TestName = "Площадь прямоугольника 3x4.")]
@@ -95,10 +85,6 @@ namespace UnitTests.Model
                 Is.EqualTo(width * height).Within(1e-10));
         }
 
-        #endregion
-
-        #region CalculatePerimeter
-
         [TestCase(3.0, 4.0,
             TestName = "Периметр прямоугольника 3x4.")]
         [TestCase(1.0, 1.0,
@@ -116,10 +102,6 @@ namespace UnitTests.Model
             Assert.That(rect.CalculatePerimeter(),
                 Is.EqualTo(2 * (width + height)).Within(1e-10));
         }
-
-        #endregion
-
-        #region ToString
 
         [TestCase(3.0, 4.0,
             TestName = "ToString для прямоугольника 3x4.")]
@@ -140,7 +122,5 @@ namespace UnitTests.Model
                 $"и высотой {height.ToString(Constants.FormatPrecision)}";
             Assert.That(rect.ToString(), Is.EqualTo(expected));
         }
-
-        #endregion
     }
 }

@@ -10,8 +10,6 @@ namespace UnitTests.Model
     [TestFixture]
     public class TriangleTest
     {
-        #region Constructor - valid
-
         [TestCase(3.0, 4.0, 5.0,
             TestName = "Создание прямоугольного треугольника 3-4-5.")]
         [TestCase(1.0, 1.0, 1.0,
@@ -30,10 +28,6 @@ namespace UnitTests.Model
             Assert.That(triangle.SideB, Is.EqualTo(sideB));
             Assert.That(triangle.SideC, Is.EqualTo(sideC));
         }
-
-        #endregion
-
-        #region Constructor - non-positive sides
 
         [TestCase(0.0, 1.0, 1.0,
             TestName = "Сторона A = 0 вызывает ArgumentOutOfRangeException.")]
@@ -56,10 +50,6 @@ namespace UnitTests.Model
                 () => new Triangle(sideA, sideB, sideC));
         }
 
-        #endregion
-
-        #region Constructor - triangle inequality violated
-
         [TestCase(1.0, 1.0, 3.0,
             TestName = "A+B<=C: треугольник не существует (1,1,3).")]
         [TestCase(1.0, 3.0, 1.0,
@@ -77,20 +67,12 @@ namespace UnitTests.Model
                 () => new Triangle(sideA, sideB, sideC));
         }
 
-        #endregion
-
-        #region Name
-
         [Test]
         public void Name_Always_ReturnsТреугольник()
         {
             var triangle = new Triangle(3.0, 4.0, 5.0);
             Assert.That(triangle.Name, Is.EqualTo("Треугольник"));
         }
-
-        #endregion
-
-        #region CalculateArea
 
         [TestCase(3.0, 4.0, 5.0, 6.0,
             TestName = "Площадь прямоугольного треугольника 3-4-5 = 6.")]
@@ -110,10 +92,6 @@ namespace UnitTests.Model
                 Is.EqualTo(expectedArea).Within(1e-10));
         }
 
-        #endregion
-
-        #region CalculatePerimeter
-
         [TestCase(3.0, 4.0, 5.0, 12.0,
             TestName = "Периметр треугольника 3-4-5 = 12.")]
         [TestCase(1.0, 1.0, 1.0, 3.0,
@@ -131,10 +109,6 @@ namespace UnitTests.Model
             Assert.That(triangle.CalculatePerimeter(),
                 Is.EqualTo(expectedPerimeter).Within(1e-10));
         }
-
-        #endregion
-
-        #region ToString
 
         [TestCase(3.0, 4.0, 5.0,
             TestName = "ToString для треугольника 3-4-5.")]
@@ -156,7 +130,5 @@ namespace UnitTests.Model
             string expected = $"Треугольник с сторонами {a}, {b}, {c}";
             Assert.That(triangle.ToString(), Is.EqualTo(expected));
         }
-
-        #endregion
     }
 }

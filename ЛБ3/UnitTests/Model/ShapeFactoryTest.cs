@@ -10,8 +10,6 @@ namespace UnitTests.Model
     [TestFixture]
     public class ShapeFactoryTest
     {
-        #region CreateShape
-
         [Test]
         public void CreateShape_CircleData_ReturnsCircleWithCorrectRadius()
         {
@@ -56,10 +54,6 @@ namespace UnitTests.Model
                 () => ShapeFactory.CreateShape(null!));
         }
 
-        #endregion
-
-        #region ConvertToData
-
         [Test]
         public void ConvertToData_Circle_ReturnsCircleDataWithCorrectRadius()
         {
@@ -91,22 +85,18 @@ namespace UnitTests.Model
         }
 
         [Test]
-        public void ConvertToData_AnotherCircle_ReturnsCircleDataWithCorrectRadius()
-        {
-            var circle = new Circle(10.0);
-            var data = ShapeFactory.ConvertToData(circle);
-            Assert.That(data, Is.InstanceOf<CircleData>());
-            Assert.That(((CircleData)data).Radius, Is.EqualTo(10.0));
-        }
-
-        [Test]
         public void ConvertToData_UnknownShape_ThrowsArgumentException()
         {
             Assert.Throws<ArgumentException>(
                 () => ShapeFactory.ConvertToData(new UnknownShape()));
         }
 
-        #endregion
+        [Test]
+        public void ConvertToData_NullShape_ThrowsArgumentException()
+        {
+            Assert.Throws<ArgumentException>(
+                () => ShapeFactory.ConvertToData(null!));
+        }
 
         /// <summary>
         /// Вспомогательная реализация IShape для тестирования

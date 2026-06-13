@@ -10,7 +10,10 @@ namespace View
     /// </summary>
     public partial class MainForm : Form
     {
-        //TODO: XML
+        /// <summary>
+        /// Список фигур, отображаемых в таблице.
+        /// </summary>
+        //TODO: XML +
         private readonly List<IShape> _shapes =
             new List<IShape>();
 

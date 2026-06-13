@@ -74,28 +74,34 @@ namespace Model
         {
             if (dto is CircleData c)
             {
-                //TODO: {}
+                //TODO: {}+
                 if (!IsValid(c.Radius))
+                {
                     throw new InvalidDataException(
                         "Некорректный радиус.");
+                }
             }
 
             if (dto is RectangleData r)
             {
-                //TODO: {}
+                //TODO: {}+
                 if (!IsValid(r.Width) || !IsValid(r.Height))
+                {
                     throw new InvalidDataException(
                         "Некорректный прямоугольник.");
+                }
             }
 
             if (dto is TriangleData t)
             {
-                //TODO: {}
+                //TODO: {}+
                 if (!IsValid(t.SideA) ||
                     !IsValid(t.SideB) ||
                     !IsValid(t.SideC))
+                {
                     throw new InvalidDataException(
                         "Некорректный треугольник.");
+                }
             }
         }
 

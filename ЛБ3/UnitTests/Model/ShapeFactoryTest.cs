@@ -87,8 +87,12 @@ namespace UnitTests.Model
         [Test]
         public void ConvertToData_UnknownShape_ThrowsArgumentException()
         {
+            var shape = new UnknownShape();
+            Assert.That(shape.Name, Is.EqualTo("Unknown"));
+            Assert.That(shape.CalculateArea(), Is.EqualTo(0.0));
+            Assert.That(shape.CalculatePerimeter(), Is.EqualTo(0.0));
             Assert.Throws<ArgumentException>(
-                () => ShapeFactory.ConvertToData(new UnknownShape()));
+                () => ShapeFactory.ConvertToData(shape));
         }
 
         [Test]

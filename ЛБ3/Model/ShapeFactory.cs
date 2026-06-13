@@ -21,8 +21,10 @@ namespace Model
             {
                 CircleData circleData => new Circle(circleData.Radius),
                 //TODO: RSDN
-                RectangleData rectangleData => new Rectangle(rectangleData.Width, rectangleData.Height),
-                TriangleData triangleData => new Triangle(triangleData.SideA, triangleData.SideB, triangleData.SideC),
+                RectangleData rectangleData => new Rectangle(rectangleData.Width, 
+                rectangleData.Height),
+                TriangleData triangleData => new Triangle(triangleData.SideA, 
+                triangleData.SideB, triangleData.SideC),
                 _ => throw new ArgumentException("Неизвестный тип фигуры")
             };
         }
@@ -38,9 +40,11 @@ namespace Model
             {
                 Circle c => new CircleData { Radius = c.Radius },
                 //TODO: RSDN
-                Rectangle r => new RectangleData { Width = r.Width, Height = r.Height },
+                Rectangle r => new RectangleData { Width = r.Width, 
+                    Height = r.Height },
                 //TODO: RSDN
-                Triangle t => new TriangleData { SideA = t.SideA, SideB = t.SideB, SideC = t.SideC },
+                Triangle t => new TriangleData { SideA = t.SideA, SideB = t.SideB, 
+                    SideC = t.SideC },
                 _ => throw new ArgumentException("Неизвестный тип фигуры")
             };
         }

@@ -10,6 +10,7 @@ namespace View
     /// </summary>
     public partial class MainForm : Form
     {
+        //TODO: XML
         private readonly List<IShape> _shapes =
             new List<IShape>();
 

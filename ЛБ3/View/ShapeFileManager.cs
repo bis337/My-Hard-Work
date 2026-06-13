@@ -50,7 +50,7 @@ namespace Model
                     typeof(RectangleData),
                     typeof(TriangleData)
                 });
-
+             
             using FileStream stream =
                 new FileStream(path, FileMode.Open);
 

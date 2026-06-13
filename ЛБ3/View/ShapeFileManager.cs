@@ -74,7 +74,6 @@ namespace Model
         {
             if (dto is CircleData c)
             {
-                //TODO: {}+
                 if (!IsValid(c.Radius))
                 {
                     throw new InvalidDataException(
@@ -84,7 +83,6 @@ namespace Model
 
             if (dto is RectangleData r)
             {
-                //TODO: {}+
                 if (!IsValid(r.Width) || !IsValid(r.Height))
                 {
                     throw new InvalidDataException(
@@ -94,7 +92,6 @@ namespace Model
 
             if (dto is TriangleData t)
             {
-                //TODO: {}+
                 if (!IsValid(t.SideA) ||
                     !IsValid(t.SideB) ||
                     !IsValid(t.SideC))

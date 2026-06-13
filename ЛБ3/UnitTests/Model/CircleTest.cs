@@ -36,6 +36,10 @@ namespace UnitTests.Model
             TestName = "Радиус MinValue вызывает ArgumentOutOfRangeException.")]
         [TestCase(double.NegativeInfinity,
             TestName = "Радиус NegativeInfinity вызывает ArgumentOutOfRangeException.")]
+        [TestCase(double.NaN,
+            TestName = "Радиус NaN вызывает ArgumentOutOfRangeException.")]
+        [TestCase(double.PositiveInfinity,
+            TestName = "Радиус PositiveInfinity вызывает ArgumentOutOfRangeException.")]
         public void Constructor_InvalidRadius_ThrowsArgumentOutOfRangeException(
             double radius)
         {

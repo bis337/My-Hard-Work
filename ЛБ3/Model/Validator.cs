@@ -27,7 +27,7 @@ namespace Model
             string paramName,
             string message)
         {
-            if (value <= 0)
+            if (!double.IsFinite(value) || value <= 0)
             {
                 throw new ArgumentOutOfRangeException(paramName, message);
             }
@@ -58,7 +58,7 @@ namespace Model
         public static void ValidateRadiusForCircle(
             double value)
         {
-            if (value <= 0)
+            if (!double.IsFinite(value) || value <= 0)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(value),

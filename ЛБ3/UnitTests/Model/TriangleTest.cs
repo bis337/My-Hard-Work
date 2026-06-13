@@ -43,6 +43,10 @@ namespace UnitTests.Model
             TestName = "Сторона C = 0 вызывает ArgumentOutOfRangeException.")]
         [TestCase(1.0, 1.0, -1.0,
             TestName = "Сторона C = -1 вызывает ArgumentOutOfRangeException.")]
+        [TestCase(double.NaN, 1.0, 1.0,
+            TestName = "Сторона A = NaN вызывает ArgumentOutOfRangeException.")]
+        [TestCase(1.0, double.PositiveInfinity, 1.0,
+            TestName = "Сторона B = PositiveInfinity вызывает ArgumentOutOfRangeException.")]
         public void Constructor_NonPositiveSide_ThrowsArgumentOutOfRangeException(
             double sideA, double sideB, double sideC)
         {
@@ -60,6 +64,8 @@ namespace UnitTests.Model
             TestName = "Стороны 1-2-10: треугольник не существует.")]
         [TestCase(10.0, 1.0, 1.0,
             TestName = "Стороны 10-1-1: треугольник не существует.")]
+        [TestCase(1.0, 2.0, 3.0,
+            TestName = "A+B=C: вырожденный треугольник не существует (1,2,3).")]
         public void Constructor_TriangleInequalityViolated_ThrowsArgumentException(
             double sideA, double sideB, double sideC)
         {

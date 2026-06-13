@@ -38,6 +38,10 @@ namespace UnitTests.Model
             TestName = "Ширина MinValue вызывает ArgumentException.")]
         [TestCase(double.NegativeInfinity, 1.0,
             TestName = "Ширина NegativeInfinity вызывает ArgumentException.")]
+        [TestCase(double.NaN, 1.0,
+            TestName = "Ширина NaN вызывает ArgumentException.")]
+        [TestCase(double.PositiveInfinity, 1.0,
+            TestName = "Ширина PositiveInfinity вызывает ArgumentException.")]
         public void Constructor_InvalidWidth_ThrowsArgumentException(
             double width, double height)
         {
@@ -54,6 +58,10 @@ namespace UnitTests.Model
             TestName = "Высота MinValue вызывает ArgumentException.")]
         [TestCase(1.0, double.NegativeInfinity,
             TestName = "Высота NegativeInfinity вызывает ArgumentException.")]
+        [TestCase(1.0, double.NaN,
+            TestName = "Высота NaN вызывает ArgumentException.")]
+        [TestCase(1.0, double.PositiveInfinity,
+            TestName = "Высота PositiveInfinity вызывает ArgumentException.")]
         public void Constructor_InvalidHeight_ThrowsArgumentException(
             double width, double height)
         {

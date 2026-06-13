@@ -39,13 +39,13 @@ namespace Model
         /// </exception>
         public Rectangle(double width, double height)
         {
-            if (width <= 0)
+            if (!double.IsFinite(width) || width <= 0)
             {
                 throw new ArgumentException(
                     "Ширина должна быть больше нуля.");
             }
 
-            if (height <= 0)
+            if (!double.IsFinite(height) || height <= 0)
             {
                 throw new ArgumentException(
                     "Высота должна быть больше нуля.");

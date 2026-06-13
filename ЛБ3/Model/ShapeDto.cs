@@ -2,6 +2,7 @@
 
 namespace Model
 {
+    //TODO: RSDN
     /// <summary>
     /// Представляет данные круга для сохранения и загрузки.
     /// </summary>

@@ -9,6 +9,7 @@ namespace UnitTests.Model
     [TestFixture]
     public class TriangleDataTest
     {
+        //TODO: refactor
         [Test]
         public void SideA_SetValue_GetReturnsSameValue()
         {

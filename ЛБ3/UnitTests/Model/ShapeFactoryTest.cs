@@ -108,8 +108,13 @@ namespace UnitTests.Model
         /// </summary>
         private class UnknownShape : IShape
         {
+            //TODO: XML
             public string Name => "Unknown";
+
+            //TODO: XML
             public double CalculateArea() => 0;
+
+            //TODO: XML
             public double CalculatePerimeter() => 0;
         }
     }

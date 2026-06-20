@@ -9,6 +9,7 @@ namespace UnitTests.Model
     [TestFixture]
     public class RectangleDataTest
     {
+        //TODO: refactor
         [Test]
         public void Width_SetValue_GetReturnsSameValue()
         {

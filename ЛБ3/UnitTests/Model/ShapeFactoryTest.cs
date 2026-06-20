@@ -32,8 +32,15 @@ namespace UnitTests.Model
         [Test]
         public void CreateShape_TriangleData_ReturnsTriangleWithCorrectSides()
         {
-            var data = new TriangleData { SideA = 3.0, SideB = 4.0, SideC = 5.0 };
+            var data = new TriangleData
+            {
+                SideA = 3.0,
+                SideB = 4.0,
+                SideC = 5.0
+            };
+
             var shape = ShapeFactory.CreateShape(data);
+
             Assert.That(shape, Is.InstanceOf<Triangle>());
             Assert.That(((Triangle)shape).SideA, Is.EqualTo(3.0));
             Assert.That(((Triangle)shape).SideB, Is.EqualTo(4.0));
@@ -108,13 +115,24 @@ namespace UnitTests.Model
         /// </summary>
         private class UnknownShape : IShape
         {
-            //TODO: XML
+            //TODO: XML+
+            /// <summary>
+            /// Получает название неизвестной фигуры.
+            /// </summary>
             public string Name => "Unknown";
 
-            //TODO: XML
+            //TODO: XML+
+            /// <summary>
+            /// Возвращает площадь неизвестной фигуры.
+            /// </summary>
+            /// <returns>Площадь неизвестной фигуры.</returns>
             public double CalculateArea() => 0;
 
-            //TODO: XML
+            //TODO: XML+
+            /// <summary>
+            /// Возвращает периметр неизвестной фигуры.
+            /// </summary>
+            /// <returns>Периметр неизвестной фигуры.</returns>
             public double CalculatePerimeter() => 0;
         }
     }

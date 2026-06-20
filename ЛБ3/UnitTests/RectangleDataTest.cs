@@ -4,29 +4,20 @@ using Model;
 namespace UnitTests.Model
 {
     /// <summary>
-    /// Представляет данные прямоугольника для сохранения и загрузки.
+    /// Набор тестов для класса RectangleData.
     /// </summary>
     [TestFixture]
     public class RectangleDataTest
     {
-        //TODO: refactor
-        [Test]
-        public void Width_SetValue_GetReturnsSameValue()
+        [Test(Description = "Проверяет, что свойства Width и Height сохраняют и возвращают заданные значения.")]
+        public void Properties_SetValues_GetReturnsSameValues()
         {
             var data = new RectangleData();
 
             data.Width = 3.0;
-
-            Assert.That(data.Width, Is.EqualTo(3.0));
-        }
-
-        [Test]
-        public void Height_SetValue_GetReturnsSameValue()
-        {
-            var data = new RectangleData();
-
             data.Height = 4.0;
 
+            Assert.That(data.Width, Is.EqualTo(3.0));
             Assert.That(data.Height, Is.EqualTo(4.0));
         }
     }

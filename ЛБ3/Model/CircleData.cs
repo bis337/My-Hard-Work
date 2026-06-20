@@ -4,6 +4,7 @@
     /// <summary>
     /// Представляет данные круга для сохранения и загрузки.
     /// </summary>
+    /// 
     public class CircleData
     {
         /// <summary>

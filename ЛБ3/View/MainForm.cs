@@ -10,6 +10,7 @@ namespace View
     /// </summary>
     public partial class MainForm : Form
     {
+
         /// <summary>
         /// Список фигур, отображаемых в таблице.
         /// </summary>

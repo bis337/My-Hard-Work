@@ -115,20 +115,17 @@ namespace UnitTests.Model
         /// </summary>
         private class UnknownShape : IShape
         {
-            //TODO: XML+
             /// <summary>
             /// Получает название неизвестной фигуры.
             /// </summary>
             public string Name => "Unknown";
 
-            //TODO: XML+
             /// <summary>
             /// Возвращает площадь неизвестной фигуры.
             /// </summary>
             /// <returns>Площадь неизвестной фигуры.</returns>
             public double CalculateArea() => 0;
 
-            //TODO: XML+
             /// <summary>
             /// Возвращает периметр неизвестной фигуры.
             /// </summary>

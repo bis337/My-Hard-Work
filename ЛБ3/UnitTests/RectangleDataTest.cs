@@ -9,11 +9,13 @@ namespace UnitTests.Model
     [TestFixture]
     public class RectangleDataTest
     {
+        //TODO: RSDN
         [Test(Description = "Проверяет, что свойства Width и Height сохраняют и возвращают заданные значения.")]
         public void Properties_SetValues_GetReturnsSameValues()
         {
             var data = new RectangleData();
 
+            //TODO: to const
             data.Width = 3.0;
             data.Height = 4.0;
 

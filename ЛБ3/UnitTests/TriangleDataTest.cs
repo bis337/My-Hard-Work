@@ -9,20 +9,40 @@ namespace UnitTests.Model
     [TestFixture]
     public class TriangleDataTest
     {
-        //TODO: RSDN
-        [Test(Description = "Проверяет, что свойства SideA, SideB и SideC сохраняют и возвращают заданные значения.")]
+        /// <summary>
+        /// Значение первой стороны треугольника.
+        /// </summary>
+        private const double SideA = 3.0;
+
+        /// <summary>
+        /// Значение второй стороны треугольника.
+        /// </summary>
+        private const double SideB = 4.0;
+
+        /// <summary>
+        /// Значение третьей стороны треугольника.
+        /// </summary>
+        private const double SideC = 5.0;
+
+        //TODO: RSDN +
+        /// <summary>
+        /// Проверяет, что свойства SideA, SideB и SideC сохраняют и 
+        /// возвращают заданные значения.
+        /// </summary>
+        [Test(Description = "Проверяет, что свойства SideA, SideB и SideC " +
+            "сохраняют и возвращают заданные значения.")]
         public void Properties_SetValues_GetReturnsSameValues()
         {
             var data = new TriangleData();
 
-            //TODO: to const
-            data.SideA = 3.0;
-            data.SideB = 4.0;
-            data.SideC = 5.0;
+            //TODO: to const+
+            data.SideA = SideA;
+            data.SideB = SideB;
+            data.SideC = SideC;
 
-            Assert.That(data.SideA, Is.EqualTo(3.0));
-            Assert.That(data.SideB, Is.EqualTo(4.0));
-            Assert.That(data.SideC, Is.EqualTo(5.0));
+            Assert.That(data.SideA, Is.EqualTo(SideA));
+            Assert.That(data.SideB, Is.EqualTo(SideB));
+            Assert.That(data.SideC, Is.EqualTo(SideC));
         }
     }
 }

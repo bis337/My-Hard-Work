@@ -10,23 +10,21 @@ namespace UnitTests.Model
     public class CircleDataTest
     {
         /// <summary>
-        /// Значение радиуса круга.
+        /// Проверяет, что свойство Radius сохраняет и возвращает
+        /// заданное значение.
         /// </summary>
-        private const double Radius = 5.0;
-
-        /// <summary>
-        /// Проверяет, что свойство Radius сохраняет и возвращает заданное значение.
-        /// </summary>
-        [Test(Description = "Проверяет, что свойство Radius сохраняет и" +
-            " возвращает заданное значение.")]
+        [Test(Description = "Проверяет, что свойство Radius сохраняет и " +
+            "возвращает заданное значение.")]
         public void Radius_SetValue_GetReturnsSameValue()
         {
+            //TODO: to const+
+            const double radius = 5.0;
+
             var data = new CircleData();
 
-            //TODO: to const
-            data.Radius = Radius;
+            data.Radius = radius;
 
-            Assert.That(data.Radius, Is.EqualTo(Radius));
+            Assert.That(data.Radius, Is.EqualTo(radius));
         }
     }
 }

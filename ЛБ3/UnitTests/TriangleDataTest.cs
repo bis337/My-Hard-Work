@@ -10,38 +10,27 @@ namespace UnitTests.Model
     public class TriangleDataTest
     {
         /// <summary>
-        /// Значение первой стороны треугольника.
-        /// </summary>
-        private const double SideA = 3.0;
-
-        /// <summary>
-        /// Значение второй стороны треугольника.
-        /// </summary>
-        private const double SideB = 4.0;
-
-        /// <summary>
-        /// Значение третьей стороны треугольника.
-        /// </summary>
-        private const double SideC = 5.0;
-
-        /// <summary>
-        /// Проверяет, что свойства SideA, SideB и SideC сохраняют и 
+        /// Проверяет, что свойства SideA, SideB и SideC сохраняют и
         /// возвращают заданные значения.
         /// </summary>
         [Test(Description = "Проверяет, что свойства SideA, SideB и SideC " +
             "сохраняют и возвращают заданные значения.")]
         public void Properties_SetValues_GetReturnsSameValues()
         {
+            //TODO: to const+
+            const double sideA = 3.0;
+            const double sideB = 4.0;
+            const double sideC = 5.0;
+
             var data = new TriangleData();
 
-            //TODO: to const
-            data.SideA = SideA;
-            data.SideB = SideB;
-            data.SideC = SideC;
+            data.SideA = sideA;
+            data.SideB = sideB;
+            data.SideC = sideC;
 
-            Assert.That(data.SideA, Is.EqualTo(SideA));
-            Assert.That(data.SideB, Is.EqualTo(SideB));
-            Assert.That(data.SideC, Is.EqualTo(SideC));
+            Assert.That(data.SideA, Is.EqualTo(sideA));
+            Assert.That(data.SideB, Is.EqualTo(sideB));
+            Assert.That(data.SideC, Is.EqualTo(sideC));
         }
     }
 }

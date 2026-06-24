@@ -17,7 +17,6 @@ namespace UnitTests.Model
             "сохраняют и возвращают заданные значения.")]
         public void Properties_SetValues_GetReturnsSameValues()
         {
-            //TODO: to const+
             const double sideA = 3.0;
             const double sideB = 4.0;
             const double sideC = 5.0;

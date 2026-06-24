@@ -17,7 +17,6 @@ namespace UnitTests.Model
             "возвращают заданные значения.")]
         public void Properties_SetValues_GetReturnsSameValues()
         {
-            //TODO: to const+
             const double width = 3.0;
             const double height = 4.0;
 

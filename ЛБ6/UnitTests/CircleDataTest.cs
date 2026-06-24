@@ -17,7 +17,6 @@ namespace UnitTests.Model
             "возвращает заданное значение.")]
         public void Radius_SetValue_GetReturnsSameValue()
         {
-            //TODO: to const+
             const double radius = 5.0;
 
             var data = new CircleData();

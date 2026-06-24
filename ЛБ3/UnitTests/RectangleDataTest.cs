@@ -19,7 +19,6 @@ namespace UnitTests.Model
         /// </summary>
         private const double Height = 4.0;
 
-        //TODO: RSDN +
         /// <summary>
         /// Проверяет, что свойства Width и Height сохраняют и
         /// возвращают заданные значения.
@@ -30,7 +29,7 @@ namespace UnitTests.Model
         {
             var data = new RectangleData();
 
-            //TODO: to const+
+            //TODO: to const
             data.Width = Width;
             data.Height = Height;
 

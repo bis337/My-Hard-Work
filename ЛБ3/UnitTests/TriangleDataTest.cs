@@ -24,7 +24,6 @@ namespace UnitTests.Model
         /// </summary>
         private const double SideC = 5.0;
 
-        //TODO: RSDN +
         /// <summary>
         /// Проверяет, что свойства SideA, SideB и SideC сохраняют и 
         /// возвращают заданные значения.
@@ -35,7 +34,7 @@ namespace UnitTests.Model
         {
             var data = new TriangleData();
 
-            //TODO: to const+
+            //TODO: to const
             data.SideA = SideA;
             data.SideB = SideB;
             data.SideC = SideC;

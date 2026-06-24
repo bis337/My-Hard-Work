@@ -14,7 +14,6 @@ namespace UnitTests.Model
         /// </summary>
         private const double Radius = 5.0;
 
-        //TODO: RSDN +
         /// <summary>
         /// Проверяет, что свойство Radius сохраняет и возвращает заданное значение.
         /// </summary>
@@ -24,7 +23,7 @@ namespace UnitTests.Model
         {
             var data = new CircleData();
 
-            //TODO: to const+
+            //TODO: to const
             data.Radius = Radius;
 
             Assert.That(data.Radius, Is.EqualTo(Radius));
